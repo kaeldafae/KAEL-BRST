@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿No sabes qué barco elegir? — KAEL BRST</title>
+<meta name="description" content="Responde cuatro preguntas sobre tu grupo, presupuesto y puerto de salida, y te proponemos las embarcaciones que mejor encajan.">
+<link rel="icon" href="img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="asistente">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" id="site-header"></header>
+
+<main id="main" class="container" style="padding-top:44px; padding-bottom:96px; max-width:860px;">
+  <div class="eyebrow">Asistente</div>
+  <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em; margin:6px 0 4px;">¿No sabes qué barco elegir?</h1>
+  <p style="font-size:15px; color:var(--muted); margin:0;">Cuatro preguntas rápidas y te proponemos tres embarcaciones.</p>
+
+  <div class="wizard-bars" id="wizardBars"></div>
+  <div class="wizard-card" id="wizardCard"></div>
+</main>
+
+<div id="site-footer" style="margin-top:96px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/partials.js"></script>
+<script>
+  renderHeader(document.getElementById('site-header'), 'asistente');
+  renderFooter(document.getElementById('site-footer'));
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'));
+</script>
+<script src="js/main.js"></script>
+<script src="js/wizard.js"></script>
+</body>
+</html>

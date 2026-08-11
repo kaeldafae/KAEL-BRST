@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">Empresa náutica — KAEL BRST</title>
+<link rel="icon" href="img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="empresa">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" id="site-header"></header>
+
+<main id="main" class="container" style="padding-top:28px; padding-bottom:96px; max-width:1200px;">
+  <a class="back-link" href="empresas.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    Volver a empresas
+  </a>
+  <div id="companyContent"></div>
+</main>
+
+<div id="site-footer" style="margin-top:96px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/partials.js"></script>
+<script>
+  renderHeader(document.getElementById('site-header'), 'empresas');
+  renderFooter(document.getElementById('site-footer'));
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'));
+</script>
+<script src="js/main.js"></script>
+<script>
+(function () {
+  var qs = new URLSearchParams(window.location.search);
+  var c = COMPANIES[qs.get('id')] || Object.values(COMPANIES)[0];
+  document.title = c.name + ' — Empresa náutica verificada — KAEL BRST';
+  var boats = boatsByCompany(c.id);
+
+  var boatsHtml = boats.map(function (b) {
+    return '<a class="boat-card" href="barco.html?id=' + b.id + '">' +
+      '<div class="thumb" style="height:170px;"><img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
+      '<div class="row"><div style="font-size:17px; font-weight:500;">' + b.name + '</div><div class="price tabular">desde ' + euro(b.price) + '</div></div>' +
+      '<div class="summary">' + b.pax + ' personas · ' + b.length + ' · ' + b.skipper.toLowerCase() + '</div>' +
+    '</a>';
+  }).join('');
+
+  document.getElementById('companyContent').innerHTML =
+    '<div class="card" style="padding:40px; margin-bottom:32px;">' +
+      '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">' +
+        '<div>' +
+          '<div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;"><span class="dot"></span><span style="font-size:13px; color:var(--green-deep); font-weight:500;">Empresa verificada</span></div>' +
+          '<h1 style="font-size:36px; font-weight:500; letter-spacing:-0.02em; margin:0 0 12px;">' + c.name + '</h1>' +
+          '<p class="lede" style="max-width:60ch;">' + c.about + '</p>' +
+        '</div>' +
+        '<div style="display:grid; gap:18px; min-width:200px;">' +
+          '<div><div class="eyebrow">Tiempo medio de respuesta</div><div style="font-size:22px; font-weight:500;" class="tabular">' + c.sla + '</div></div>' +
+          '<div><div class="eyebrow">Solicitudes confirmadas</div><div style="font-size:22px; font-weight:500;" class="tabular">' + c.confirmRate + '</div></div>' +
+          '<div><div class="eyebrow">Valoración de clientes</div><div style="font-size:22px; font-weight:500;" class="tabular">' + c.rating + '</div></div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:24px; margin-top:32px; padding-top:26px; border-top:1px solid var(--border);">' +
+        '<div><div class="eyebrow">Razón social</div><div style="font-size:15px; margin-top:4px;">' + c.name + '</div></div>' +
+        '<div><div class="eyebrow">CIF</div><div class="mono" style="font-size:15px; margin-top:4px;">' + c.cif + '</div></div>' +
+        '<div><div class="eyebrow">Base</div><div style="font-size:15px; margin-top:4px;">' + c.base + '</div></div>' +
+        '<div><div class="eyebrow">Actividad</div><div style="font-size:15px; margin-top:4px;">Arrendamiento náutico</div></div>' +
+      '</div>' +
+    '</div>' +
+    '<h2 style="font-size:26px; font-weight:500; letter-spacing:-0.01em; margin:0 0 20px;">Sus embarcaciones</h2>' +
+    '<div class="grid-auto" style="margin-bottom:32px;">' + boatsHtml + '</div>' +
+    '<div class="banner-info">' +
+      '<p>Las solicitudes enviadas desde KAEL BRST se remiten a ' + c.name + ', que confirma disponibilidad, horario, precio y condiciones directamente contigo. El contrato de alquiler y el cobro del servicio corresponden a la empresa náutica.</p>' +
+    '</div>';
+})();
+</script>
+</body>
+</html>

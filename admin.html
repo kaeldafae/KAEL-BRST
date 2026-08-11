@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel interno — KAEL BRST</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  table { width:100%; border-collapse: collapse; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th, td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--border); font-size:13px; vertical-align:top; }
+  th { background:#FAF8F3; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  select.status { font-size:12px; padding:4px 6px; }
+</style>
+</head>
+<body data-page="admin">
+<header class="site-header" id="site-header"></header>
+<main class="container" style="padding-top:28px; padding-bottom:96px;">
+  <h1 style="font-size:28px; font-weight:500;">Panel interno — solicitudes</h1>
+  <p style="font-size:14px; color:var(--muted); margin:6px 0 24px;">Backoffice mínimo (MVP). Requiere que el servidor de <code>server/</code> esté desplegado y ADMIN_USER/ADMIN_PASS configurados. Tu navegador te pedirá usuario y contraseña.</p>
+  <div id="statsRow" style="display:flex; gap:24px; margin-bottom:24px; flex-wrap:wrap;"></div>
+  <div style="overflow-x:auto;">
+    <table id="leadsTable">
+      <thead>
+        <tr>
+          <th>Referencia</th><th>Fecha creación</th><th>Barco(s)</th><th>Cliente</th><th>Contacto</th>
+          <th>Fecha solicitada</th><th>Personas</th><th>Estado</th><th>Importe</th>
+        </tr>
+      </thead>
+      <tbody id="leadsBody"><tr><td colspan="9">Cargando…</td></tr></tbody>
+    </table>
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/partials.js"></script>
+<script>renderHeader(document.getElementById('site-header'), '');</script>
+<script>
+(function () {
+  var base = window.KAEL_API_BASE || '/api';
+  fetch(base + '/admin/solicitudes').then(function (r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(function (leads) {
+    var body = document.getElementById('leadsBody');
+    if (!leads.length) { body.innerHTML = '<tr><td colspan="9">Todavía no hay solicitudes.</td></tr>'; return; }
+
+    var pending = leads.filter(function (l) { return l.status === 'pendiente_de_empresa'; }).length;
+    var confirmed = leads.filter(function (l) { return l.status === 'confirmada'; }).length;
+    document.getElementById('statsRow').innerHTML =
+      statCard(leads.length, 'Solicitudes totales') +
+      statCard(pending, 'Pendientes de empresa') +
+      statCard(confirmed, 'Confirmadas');
+
+    body.innerHTML = '';
+    leads.forEach(function (l) {
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td class="mono">' + l.ref + '</td>' +
+        '<td>' + new Date(l.createdAt).toLocaleString('es-ES') + '</td>' +
+        '<td>' + (l.boatIds || []).join(', ') + '</td>' +
+        '<td>' + l.nombre + '</td>' +
+        '<td>' + l.email + '<br>' + l.telefono + '</td>' +
+        '<td>' + l.fecha + '</td>' +
+        '<td>' + l.personas + '</td>' +
+        '<td>' + l.status + '</td>' +
+        '<td>' + (l.importeFinal || '—') + '</td>';
+      body.appendChild(tr);
+    });
+  }).catch(function (err) {
+    document.getElementById('leadsBody').innerHTML = '<tr><td colspan="9">No se pudo cargar (¿backend desplegado y configurado?): ' + err.message + '</td></tr>';
+  });
+
+  function statCard(n, label) {
+    return '<div class="card card-pad" style="min-width:160px;"><div style="font-size:28px; font-weight:500;">' + n + '</div><div style="font-size:13px; color:var(--muted); margin-top:4px;">' + label + '</div></div>';
+  }
+})();
+</script>
+</body>
+</html>

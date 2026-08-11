@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barcos en Ibiza y Formentera — KAEL BRST</title>
+<meta name="description" content="Filtra embarcaciones por tipo, zona y patrón. Precios orientativos, empresa gestora identificada y solicitud de disponibilidad sin pagos por adelantado.">
+<link rel="canonical" href="https://www.kaelbrst.com/barcos.html">
+<link rel="icon" href="img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="barcos">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" id="site-header"></header>
+
+<main id="main" class="container" style="padding-top:28px;">
+  <div style="display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:24px;">
+    <div>
+      <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em;">Barcos en Ibiza y Formentera</h1>
+      <p style="font-size:15px; color:var(--muted); margin-top:4px;" id="resultCount">Cargando…</p>
+    </div>
+    <div style="font-size:13px; color:var(--muted); max-width:44ch; text-align:right; line-height:1.45;">Ordenadas por relevancia, ubicación, capacidad, disponibilidad y calidad de la ficha. Las posiciones patrocinadas se identifican como «Destacado».</div>
+  </div>
+
+  <div class="results-layout">
+    <aside class="filters-panel">
+      <div class="eyebrow" style="margin-bottom:16px;">Filtros</div>
+      <div class="fgroup">
+        <div class="fgroup-title">Tipo</div>
+        <div class="chip-row" id="typeFilters"></div>
+      </div>
+      <div class="fgroup">
+        <div class="fgroup-title">Zona de salida</div>
+        <div class="chip-row" id="zoneFilters"></div>
+      </div>
+      <div class="fgroup">
+        <div class="fgroup-title">Patrón</div>
+        <div class="chip-row" id="skipperFilters"></div>
+      </div>
+      <div class="fgroup" style="padding-top:20px; border-top:1px solid var(--border);">
+        <div class="fgroup-title" style="margin-bottom:6px;">Solicitud múltiple</div>
+        <p style="font-size:13px; line-height:1.45; color:var(--ink-soft); margin:0 0 12px;">Selecciona hasta 3 barcos y envía una única solicitud a varias empresas.</p>
+        <button class="btn btn-outline btn-block" id="multiBtn" type="button">Selecciona barcos abajo</button>
+      </div>
+    </aside>
+
+    <div id="resultsList" style="display:grid; gap:16px;"></div>
+  </div>
+</main>
+
+<div id="site-footer" style="margin-top:96px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/partials.js"></script>
+<script>
+  renderHeader(document.getElementById('site-header'), 'barcos');
+  renderFooter(document.getElementById('site-footer'));
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'));
+</script>
+<script src="js/main.js"></script>
+<script src="js/catalog.js"></script>
+</body>
+</html>

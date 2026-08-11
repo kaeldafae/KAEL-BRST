@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solicitar a varias empresas — KAEL BRST</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="solicitud-multiple">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" id="site-header"></header>
+
+<main id="main" class="container" style="padding-top:28px; padding-bottom:80px; max-width:960px;">
+  <a class="back-link" href="barcos.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
+    Volver a resultados
+  </a>
+  <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em; margin:0 0 4px;">Solicitar disponibilidad a varias empresas</h1>
+  <p id="subtitle" style="font-size:15px; color:var(--muted); margin:0 0 28px;"></p>
+
+  <div id="selectedList" style="display:grid; gap:12px; margin-bottom:32px;"></div>
+
+  <form class="form-card" id="multiForm" novalidate>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px;">
+      <label class="field"><span class="flabel">Fecha</span><input name="fecha" type="date" value="2026-08-22" required></label>
+      <label class="field"><span class="flabel">Personas</span><input name="personas" type="number" min="1" value="10" required></label>
+      <label class="field"><span class="flabel">Duración</span><select name="duracion"><option>Día completo</option><option>Medio día</option></select></label>
+      <label class="field"><span class="flabel">Nombre y apellidos</span><input name="nombre" required placeholder="Juan García"></label>
+      <label class="field"><span class="flabel">Email</span><input name="email" type="email" required placeholder="juan@email.com"></label>
+      <label class="field"><span class="flabel">Teléfono</span><input name="telefono" required placeholder="+34 600 000 000"></label>
+    </div>
+    <label class="hp-field" aria-hidden="true">Empresa <input name="company_website" tabindex="-1" autocomplete="off"></label>
+    <label class="check-row" style="margin-top:24px;"><input type="checkbox" required><span>He leído y acepto la Política de Privacidad. Entiendo que mis datos se comunicarán a las empresas náuticas seleccionadas.</span></label>
+    <button type="submit" class="btn btn-primary btn-block" id="multiSubmitBtn" style="margin-top:24px; padding:15px;">Enviar solicitud</button>
+    <div class="form-status" data-form-status></div>
+    <p style="font-size:13px; color:var(--ink-soft); text-align:center; margin:12px 0 0;">Cada empresa responderá por separado. Ninguna solicitud implica pago ni reserva confirmada.</p>
+  </form>
+</main>
+
+<div id="site-footer" style="margin-top:96px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/partials.js"></script>
+<script>
+  renderHeader(document.getElementById('site-header'), 'barcos');
+  renderFooter(document.getElementById('site-footer'));
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'));
+</script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script>
+(function () {
+  var ids = [];
+  try { ids = JSON.parse(sessionStorage.getItem('kael-brst-multi') || '[]'); } catch (e) {}
+  var boats = ids.map(boatById).filter(Boolean);
+
+  if (!boats.length) {
+    document.getElementById('selectedList').innerHTML = '<div class="empty-state card">No has seleccionado ninguna embarcación todavía. <a href="barcos.html">Vuelve al listado</a> y añade hasta 3 barcos a la solicitud múltiple.</div>';
+    document.getElementById('multiForm').style.display = 'none';
+    document.getElementById('subtitle').textContent = '';
+    return;
+  }
+
+  document.getElementById('subtitle').textContent = 'Una sola solicitud, ' + boats.length + ' empresa' + (boats.length > 1 ? 's' : '') + ' náutica' + (boats.length > 1 ? 's' : '') + '. Cada una responderá con disponibilidad, precio y horario.';
+
+  var list = document.getElementById('selectedList');
+  boats.forEach(function (b) {
+    var c = companyOf(b);
+    var row = document.createElement('div');
+    row.className = 'result-mini';
+    row.innerHTML =
+      '<div class="thumb-sm"><img src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
+      '<div><div style="font-size:17px; font-weight:500;">' + b.name + '</div><div style="font-size:14px; color:var(--ink-soft); margin-top:2px;">' + b.type + ' · ' + b.pax + ' personas · ' + b.port + '</div><div style="font-size:13px; color:var(--muted); margin-top:6px;">' + c.name + ' · responde en ' + c.sla + '</div></div>' +
+      '<div style="text-align:right; font-size:16px; font-weight:500;" class="tabular">desde ' + euro(b.price) + '</div>';
+    list.appendChild(row);
+  });
+
+  document.getElementById('multiSubmitBtn').textContent = 'Enviar solicitud a ' + boats.length + ' empresa' + (boats.length > 1 ? 's' : '');
+
+  wireSolicitudForm(document.getElementById('multiForm'), {
+    boatIds: boats.map(function (b) { return b.id; }),
+    companyIds: Array.from(new Set(boats.map(function (b) { return b.companyId; })))
+  });
+
+  document.getElementById('multiForm').addEventListener('submit', function () {
+    try { sessionStorage.removeItem('kael-brst-multi'); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
