@@ -64,14 +64,29 @@
     </div>
   </div>
 
-  <!-- LA FLOTA -->
-  <section class="section">
-    <div class="container fleet-grid">
-      <div>
-        <div class="eyebrow">La flota</div>
-        <p class="lede" style="font-size:16px; margin-top:16px;">Seis embarcaciones de tres empresas náuticas verificadas en Ibiza y Formentera.</p>
+  <!-- SELECTOR 3D ("selección de personaje") -->
+  <section class="section selector3d">
+    <div class="container">
+      <div class="selector3d-head">
+        <div>
+          <div class="eyebrow">La flota</div>
+          <h2 class="h-xl" style="margin-top:12px;">Elige tu empresa y tu barco</h2>
+        </div>
+        <p style="font-size:14px; color:var(--muted); max-width:36ch;">Arrastra, usa las flechas o pulsa un barco para girar el carrusel. Fotografías reales de cada embarcación.</p>
       </div>
-      <div id="fleetList"></div>
+
+      <div class="company-tabs" id="companyTabs"></div>
+
+      <div class="carousel3d-wrap">
+        <div class="carousel3d-stage" data-c3d-stage tabindex="0" aria-label="Selector de embarcaciones en 3D. Usa las flechas del teclado para girar.">
+          <div class="carousel3d-floor"></div>
+          <div class="carousel3d-ring" data-c3d-ring></div>
+          <button class="carousel3d-nav prev" data-c3d-prev aria-label="Barco anterior" type="button">‹</button>
+          <button class="carousel3d-nav next" data-c3d-next aria-label="Barco siguiente" type="button">›</button>
+          <div class="carousel3d-hint">Arrastra para girar</div>
+        </div>
+        <aside class="selected-boat-panel" id="selectedBoatPanel"></aside>
+      </div>
     </div>
   </section>
 
@@ -236,6 +251,7 @@
   renderCookieBanner(document.querySelector('[data-cookie-banner]'));
 </script>
 <script src="js/main.js"></script>
+<script src="js/boat-selector-3d.js"></script>
 <script src="js/home.js"></script>
 </body>
 </html>

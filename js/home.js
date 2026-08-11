@@ -35,15 +35,39 @@
   });
   renderHero();
 
-  // Fleet index list
-  var fleetList = document.getElementById('fleetList');
-  BOATS.forEach(function (b) {
-    var row = document.createElement('a');
-    row.href = 'barco.html?id=' + b.id;
-    row.className = 'fleet-row';
-    row.innerHTML = '<span class="fname">' + b.name + '</span><span class="fmeta">' + b.length + '</span>';
-    fleetList.appendChild(row);
+  // 3D character-select boat carousel, grouped by company
+  var selector = createBoatSelector3D(document.querySelector('.carousel3d-wrap'), {
+    panelEl: document.getElementById('selectedBoatPanel'),
+    onOpen: function (boat) { window.location.href = 'barco.html?id=' + boat.id; }
   });
+
+  var companyTabs = document.getElementById('companyTabs');
+  var companyIds = ['all'].concat(Object.keys(COMPANIES));
+  var activeCompany = 'all';
+
+  function boatsForCompany(id) {
+    return id === 'all' ? BOATS : boatsByCompany(id);
+  }
+
+  function renderCompanyTabs() {
+    companyTabs.innerHTML = '';
+    companyIds.forEach(function (id) {
+      var label = id === 'all' ? 'Todas las empresas' : COMPANIES[id].name;
+      var count = boatsForCompany(id).length;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'company-tab' + (id === activeCompany ? ' active' : '');
+      btn.innerHTML = label + '<span class="count">' + count + '</span>';
+      btn.addEventListener('click', function () {
+        activeCompany = id;
+        renderCompanyTabs();
+        selector.setBoats(boatsForCompany(id));
+      });
+      companyTabs.appendChild(btn);
+    });
+  }
+  renderCompanyTabs();
+  selector.setBoats(boatsForCompany(activeCompany));
 
   // Boats grid (featured 6)
   var grid = document.getElementById('boatsGrid');

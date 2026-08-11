@@ -26,18 +26,43 @@ técnica para lanzar ya.
   referencia única, y si el backend está desplegado, envía email a la empresa y al
   cliente. Si el backend no está desplegado todavía, el sitio sigue siendo usable en
   "modo demo" (guarda la solicitud en el navegador) para que puedas probarlo ya.
+- **Selector 3D estilo "selección de personaje"** en la home (`js/boat-selector-3d.js`):
+  las embarcaciones giran en un carrusel 3D real (perspectiva + rotación en CSS,
+  sin librería externa) agrupadas por empresa, con arrastre, flechas y navegación
+  por teclado. Usa las fotografías reales de cada barco — no modelos 3D
+  fotorrealistas, que no es algo que se pueda generar de forma fiable sin activos
+  3D con licencia o modelado profesional.
+
+## Sobre las imágenes y los datos de empresas (leer antes de publicar)
+
+No fue posible descargar fotografías nuevas (de bancos de imágenes o de las webs
+de empresas náuticas reales) porque este entorno de desarrollo no tiene acceso
+de salida a internet para imágenes — solo para búsquedas de texto. Por eso:
+
+- Las fotos que ves son las que ya estaban disponibles en el proyecto: son
+  fotografías reales de embarcaciones (no ilustraciones ni renders), simplemente
+  no están vinculadas a ninguna empresa real todavía.
+- `docs/empresas-prospectos-ibiza.md` contiene una investigación real de 10
+  empresas náuticas que operan en Ibiza (ubicación, flota, precios públicos,
+  contacto) para que las contactes y firmes colaboración. **No están publicadas
+  en la web ni tienen ninguna relación con KAEL BRST todavía** — hacerlo sin su
+  autorización sería un problema legal (derechos de imagen, falsa verificación).
+  Una vez firmes con una empresa, sustituye sus datos y sus propias fotos en
+  `js/data.js`.
 
 ## Estructura
 
 ```
 index.html, barcos.html, barco.html, solicitud.html, solicitud-multiple.html,
 confirmacion.html, asistente.html, empresas.html, empresa.html, admin.html
-css/styles.css        — sistema de diseño
+css/styles.css        — sistema de diseño (incluye el carrusel 3D)
 js/data.js             — datos de barcos y empresas (edítalo con tu flota real)
-js/*.js                 — lógica de cada página (sin frameworks)
-img/boats/               — fotografías reales
-legal/                    — aviso legal, privacidad, cookies, condiciones, reclamaciones
-server/                    — backend Node/Express opcional pero recomendado
+js/boat-selector-3d.js  — selector 3D de la home
+js/*.js                  — lógica de cada página (sin frameworks)
+img/boats/                — fotografías reales
+legal/                      — aviso legal, privacidad, cookies, condiciones, reclamaciones
+docs/empresas-prospectos-ibiza.md — investigación de empresas reales para contactar
+server/                       — backend Node/Express opcional pero recomendado
 ```
 
 ## Poner en marcha en local
@@ -61,7 +86,8 @@ detecta automáticamente `/api/solicitudes` en el mismo dominio.
 1. **Datos reales de tu empresa** en `legal/aviso-legal.html` y `legal/privacidad.html`
    (busca las marcas `[COMPLETAR]`) — razón social, NIF, dirección, email, teléfono.
 2. **Tu flota real** en `js/data.js`: sustituye barcos, empresas, precios y fotos por
-   los tuyos (o de tus empresas colaboradoras verificadas).
+   los tuyos (o de tus empresas colaboradoras verificadas). Empieza contactando a las
+   empresas de `docs/empresas-prospectos-ibiza.md`.
 3. **Revisión legal**: haz revisar el aviso legal, la política de privacidad, cookies
    y las condiciones de intermediación con un abogado en Baleares antes de publicar
    (ver la nota al final de cada documento legal).

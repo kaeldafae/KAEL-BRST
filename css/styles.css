@@ -424,3 +424,86 @@ h1.h-hero, .h-hero { font-size: clamp(40px, 7vw, 84px); line-height: 0.95; lette
 .text-right { text-align: right; }
 .empty-state { text-align: center; padding: 64px 24px; color: var(--ink-soft); }
 .spinner-btn[data-loading="true"] { opacity: .7; pointer-events: none; }
+
+/* ==========================================================================
+   3D character-select boat carousel
+   Real CSS 3D transforms (perspective + rotateY/translateZ) — no external
+   3D library, no photorealistic boat meshes (not something we can produce);
+   real boat photography mounted on cards moving through genuine 3D space.
+   ========================================================================== */
+.selector3d { padding: 96px 0 0; }
+.selector3d-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+
+.company-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+.company-tab {
+  border: 1px solid var(--border); background: var(--white); color: var(--ink-soft);
+  font-size: 14px; font-weight: 500; padding: 12px 20px; border-radius: 999px; cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, transform .15s;
+}
+.company-tab:hover { transform: translateY(-1px); }
+.company-tab.active { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.company-tab .count { opacity: .65; font-size: 12px; margin-left: 6px; }
+
+.carousel3d-wrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(280px, 360px); gap: 40px; align-items: center; }
+@media (max-width: 900px) { .carousel3d-wrap { grid-template-columns: 1fr; } }
+
+.carousel3d-stage {
+  position: relative; height: 460px; perspective: 1500px; perspective-origin: 50% 45%;
+  outline: none; touch-action: pan-y;
+}
+.carousel3d-stage:focus-visible { box-shadow: 0 0 0 3px var(--green) inset; border-radius: 24px; }
+.carousel3d-floor {
+  position: absolute; left: 10%; right: 10%; bottom: 18px; height: 40px; border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(20,17,14,0.16), transparent 72%);
+  filter: blur(1px);
+}
+.carousel3d-ring {
+  position: absolute; left: 50%; top: 46%; width: 1px; height: 1px;
+  transform-style: preserve-3d;
+  transition: transform 650ms cubic-bezier(.22, 1, .36, 1);
+}
+.carousel3d-card {
+  position: absolute; width: 240px; height: 320px; margin: -160px 0 0 -120px;
+  border-radius: 20px; overflow: hidden; cursor: pointer; background: var(--card-alt);
+  box-shadow: 0 24px 50px -18px rgba(20, 17, 14, 0.45);
+  backface-visibility: hidden;
+  transition: transform 500ms cubic-bezier(.22, 1, .36, 1), filter 450ms ease, box-shadow 450ms ease;
+}
+.carousel3d-card img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.carousel3d-card .c3d-label {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 18px;
+  background: linear-gradient(to top, rgba(10,9,7,0.88), rgba(10,9,7,0) 85%);
+  color: #FAF8F3;
+}
+.carousel3d-card .c3d-label .cname { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
+.carousel3d-card .c3d-label .cmeta { font-size: 12px; color: #C9C1B0; margin-top: 2px; }
+.carousel3d-card:not(.is-front) { filter: brightness(0.5) saturate(0.75); }
+.carousel3d-card:not(.is-front):hover { filter: brightness(0.72) saturate(0.9); }
+.carousel3d-card.is-front { box-shadow: 0 34px 70px -16px rgba(20, 17, 14, 0.55), 0 0 0 3px var(--green); }
+
+.carousel3d-nav {
+  position: absolute; top: 50%; margin-top: -24px; width: 48px; height: 48px; border-radius: 999px;
+  border: none; background: rgba(250, 248, 243, 0.92); color: var(--ink); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 20px; z-index: 5;
+  box-shadow: 0 6px 18px -4px rgba(20,17,14,0.3);
+}
+.carousel3d-nav:hover { background: var(--white); }
+.carousel3d-nav.prev { left: 0; }
+.carousel3d-nav.next { right: 0; }
+
+.carousel3d-hint {
+  position: absolute; left: 0; right: 0; bottom: -6px; text-align: center;
+  font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+.selected-boat-panel { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+.selected-boat-panel .sbp-company { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green-deep); font-weight: 600; }
+.selected-boat-panel .sbp-name { font-size: 26px; font-weight: 500; letter-spacing: -0.02em; margin-top: 6px; }
+.selected-boat-panel .sbp-meta { font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
+.selected-boat-panel .sbp-price { font-size: 20px; font-weight: 500; margin-top: 16px; }
+.selected-boat-panel .sbp-actions { display: grid; gap: 10px; margin-top: 20px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel3d-ring { transition: none; }
+  .carousel3d-card { transition: filter 200ms ease; }
+}
