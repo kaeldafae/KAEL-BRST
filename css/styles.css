@@ -507,3 +507,68 @@ h1.h-hero, .h-hero { font-size: clamp(40px, 7vw, 84px); line-height: 0.95; lette
   .carousel3d-ring { transition: none; }
   .carousel3d-card { transition: filter 200ms ease; }
 }
+
+/* ==========================================================================
+   Reveal-on-scroll + interacciones hover
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 600ms cubic-bezier(.22,1,.36,1), transform 600ms cubic-bezier(.22,1,.36,1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; opacity: 1; transform: none; }
+}
+
+/* Boat / result / company cards: lift + photo zoom on hover */
+.boat-card, .result-card, .company-card {
+  transition: transform 320ms cubic-bezier(.22,1,.36,1), box-shadow 320ms ease, border-color 320ms ease;
+}
+.boat-card:hover, .company-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 48px -20px rgba(20,17,14,0.28);
+}
+.result-card:hover {
+  box-shadow: 0 20px 40px -18px rgba(20,17,14,0.22);
+  border-color: var(--green);
+}
+.boat-card .thumb, .result-photo, .company-card, .split-photo, .hero-photo {
+  overflow: hidden;
+}
+.boat-card .thumb img, .result-photo img {
+  transition: transform 550ms cubic-bezier(.22,1,.36,1);
+}
+.boat-card:hover .thumb img, .result-card:hover .result-photo img {
+  transform: scale(1.07);
+}
+.split-photo img, .hero-photo img { transition: transform 900ms cubic-bezier(.22,1,.36,1); }
+.split-photo:hover img { transform: scale(1.04); }
+
+/* Buttons: subtle lift */
+.btn { transition: background .12s, color .12s, border-color .12s, transform 200ms cubic-bezier(.22,1,.36,1), box-shadow 200ms ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary:hover, .btn-dark:hover { box-shadow: 0 10px 22px -10px rgba(20,17,14,0.35); }
+.btn:active { transform: translateY(0); }
+
+/* Nav links: animated underline */
+.main-nav a.nav-link { position: relative; }
+.main-nav a.nav-link::after {
+  content: ''; position: absolute; left: 0; right: 100%; bottom: -4px; height: 2px;
+  background: var(--green-deep); transition: right 260ms cubic-bezier(.22,1,.36,1);
+}
+.main-nav a.nav-link:hover::after, .main-nav a.nav-link.active::after { right: 0; }
+
+/* Chips + stat + step: gentle hover */
+.chip:hover { border-color: var(--ink-soft); transform: translateY(-1px); transition: transform 180ms ease, border-color 180ms ease, background .15s, color .15s; }
+.stat { transition: transform 280ms cubic-bezier(.22,1,.36,1); }
+.stat:hover { transform: translateY(-4px); }
+.step { transition: transform 260ms cubic-bezier(.22,1,.36,1), background 260ms ease; }
+.step:hover { transform: translateX(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .boat-card:hover, .company-card:hover, .result-card:hover, .stat:hover, .step:hover, .btn:hover { transform: none; }
+  .boat-card:hover .thumb img, .result-card:hover .result-photo img, .split-photo:hover img { transform: none; }
+}
