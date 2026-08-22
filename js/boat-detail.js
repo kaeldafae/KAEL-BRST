@@ -1,15 +1,27 @@
-/* KAEL BRST — ficha de embarcación */
+/* KAEL AUT — ficha de embarcación */
 (function () {
   var qs = new URLSearchParams(window.location.search);
   var boat = boatById(qs.get('id')) || BOATS[0];
-  var company = companyOf(boat);
 
-  document.title = boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL BRST';
+  if (!boat) {
+    document.title = 'Embarcación no disponible — KAEL AUT';
+    document.getElementById('boatContent').innerHTML =
+      '<div class="empty-state card" style="grid-column:1/-1;">' +
+        '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">Todavía no hay embarcaciones publicadas.</p>' +
+        '<p style="margin:0 0 16px; color:var(--ink-soft);">Estamos incorporando empresas náuticas verificadas. <a href="barcos.html">Vuelve al listado</a> para ver la disponibilidad actual.</p>' +
+      '</div>';
+    return;
+  }
+
+  var company = companyOf(boat);
+  document.getElementById('boatContent').setAttribute('data-tier', company.tier || 'standard');
+
+  document.title = boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL AUT';
   var pageDesc = boat.name + ': ' + boat.pax + ' personas, ' + boat.length + ', gestionado por ' + company.name + '. Precio orientativo desde ' + euro(boat.price) + '.';
   var descEl = document.getElementById('pageDesc');
   if (descEl) descEl.setAttribute('content', pageDesc);
   var ogTitleEl = document.getElementById('pageOgTitle');
-  if (ogTitleEl) ogTitleEl.setAttribute('content', boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL BRST');
+  if (ogTitleEl) ogTitleEl.setAttribute('content', boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL AUT');
   var ogDescEl = document.getElementById('pageOgDesc');
   if (ogDescEl) ogDescEl.setAttribute('content', pageDesc);
   var ogImageEl = document.getElementById('pageOgImage');
@@ -52,7 +64,7 @@
           '<div><div class="cname">' + company.name + '</div><div class="cnote">Empresa verificada · tiempo medio de respuesta ' + company.sla + '</div></div>' +
           '<a class="btn btn-ghost" href="empresa.html?id=' + company.id + '">Ver empresa</a>' +
         '</div>' +
-        '<p class="legal">Esta embarcación es ofrecida por ' + company.name + '. Las solicitudes realizadas desde KAEL BRST se remiten a la empresa para confirmar disponibilidad, horario, precio y condiciones. El contrato de alquiler y el pago del servicio se realizan directamente con la empresa náutica.</p>' +
+        '<p class="legal">Esta embarcación es ofrecida por ' + company.name + '. Las solicitudes realizadas desde KAEL AUT se remiten a la empresa para confirmar disponibilidad, horario, precio y condiciones. El contrato de alquiler y el pago del servicio se realizan directamente con la empresa náutica.</p>' +
       '</div>' +
 
       '<div class="managed-by" style="margin-bottom:64px;">' +

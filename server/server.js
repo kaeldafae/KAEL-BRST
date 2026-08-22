@@ -1,5 +1,5 @@
 /**
- * KAEL BRST — backend mínimo.
+ * KAEL AUT — backend mínimo.
  *
  * Qué hace:
  *  1. Sirve la web estática (todo lo que hay en la raíz del repo).
@@ -35,13 +35,13 @@ if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(LEADS_FILE)) fs.writeFileSync(LEADS_FILE, '[]', 'utf8');
 
 // ---------------------------------------------------------------------------
-// Datos de empresas (deben coincidir con los ids usados en js/data.js)
+// Datos de empresas (deben coincidir con los ids usados en js/data.js).
+// Vacío a propósito: no hay empresas colaboradoras confirmadas todavía. Al
+// añadir una empresa real en js/data.js (COMPANIES), añade aquí su id con
+// el email al que debe notificarse cada solicitud, p. ej.:
+//   'nombre-empresa': { name: 'Nombre Empresa S.L.', email: process.env.COMPANY_EMAIL_NOMBRE_EMPRESA }
 // ---------------------------------------------------------------------------
-const COMPANIES = {
-  'ibiza-charter': { name: 'Ibiza Charter S.L.', email: process.env.COMPANY_EMAIL_IBIZA_CHARTER },
-  'formentera-nautica': { name: 'Formentera Nàutica S.L.', email: process.env.COMPANY_EMAIL_FORMENTERA_NAUTICA },
-  'blue-marlin': { name: 'Blue Marlin Boats S.L.', email: process.env.COMPANY_EMAIL_BLUE_MARLIN }
-};
+const COMPANIES = {};
 
 // ---------------------------------------------------------------------------
 // Email (nodemailer). Si no hay SMTP configurado, se registra en consola en
@@ -68,7 +68,7 @@ async function sendMail({ to, subject, text }) {
     return;
   }
   try {
-    await transporter.sendMail({ from: process.env.MAIL_FROM || 'KAEL BRST <no-reply@kaelbrst.com>', to, subject, text });
+    await transporter.sendMail({ from: process.env.MAIL_FROM || 'KAEL AUT <no-reply@kaelaut.com>', to, subject, text });
   } catch (err) {
     console.error('[mail] error al enviar a', to, err.message);
   }
@@ -178,9 +178,9 @@ app.post('/api/solicitudes', rateLimited, async (req, res) => {
       if (!company) return Promise.resolve();
       return sendMail({
         to: company.email,
-        subject: `Nueva solicitud de reserva — KAEL BRST — Ref. ${ref}`,
+        subject: `Nueva solicitud de reserva — KAEL AUT — Ref. ${ref}`,
         text: [
-          `Has recibido una nueva solicitud de alquiler generada a través de KAEL BRST.`,
+          `Has recibido una nueva solicitud de alquiler generada a través de KAEL AUT.`,
           ``,
           `Referencia: ${ref}`,
           `Embarcación(es): ${req.body.boatIds.join(', ')}`,
@@ -205,9 +205,9 @@ app.post('/api/solicitudes', rateLimited, async (req, res) => {
 
   await sendMail({
     to: req.body.email,
-    subject: `Hemos recibido tu solicitud — KAEL BRST — Ref. ${ref}`,
+    subject: `Hemos recibido tu solicitud — KAEL AUT — Ref. ${ref}`,
     text: [
-      `Gracias por solicitar tu barco a través de KAEL BRST.`,
+      `Gracias por solicitar tu barco a través de KAEL AUT.`,
       ``,
       `Hemos enviado tu solicitud a: ${companyNames}`,
       `Referencia: ${ref}`,
@@ -215,7 +215,7 @@ app.post('/api/solicitudes', rateLimited, async (req, res) => {
       `Personas: ${req.body.personas}`,
       ``,
       `La empresa náutica se pondrá en contacto contigo para confirmar disponibilidad, horario, precio y condiciones del alquiler.`,
-      `No se ha realizado ningún cobro por parte de KAEL BRST. La contratación y el pago del alquiler se realizarán directamente con la empresa náutica.`
+      `No se ha realizado ningún cobro por parte de KAEL AUT. La contratación y el pago del alquiler se realizarán directamente con la empresa náutica.`
     ].join('\n')
   });
 
@@ -233,12 +233,12 @@ function requireAdminAuth(req, res, next) {
   const header = req.headers.authorization || '';
   const [scheme, encoded] = header.split(' ');
   if (scheme !== 'Basic' || !encoded) {
-    res.set('WWW-Authenticate', 'Basic realm="KAEL BRST admin"');
+    res.set('WWW-Authenticate', 'Basic realm="KAEL AUT admin"');
     return res.status(401).json({ error: 'Autenticación requerida' });
   }
   const [u, p] = Buffer.from(encoded, 'base64').toString('utf8').split(':');
   if (u !== user || p !== pass) {
-    res.set('WWW-Authenticate', 'Basic realm="KAEL BRST admin"');
+    res.set('WWW-Authenticate', 'Basic realm="KAEL AUT admin"');
     return res.status(401).json({ error: 'Credenciales incorrectas' });
   }
   next();
@@ -282,6 +282,6 @@ app.get('*', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`KAEL BRST server escuchando en http://localhost:${PORT}`);
+  console.log(`KAEL AUT server escuchando en http://localhost:${PORT}`);
   if (!transporter) console.warn('[mail] SMTP no configurado: los emails se mostrarán solo en consola. Configura server/.env');
 });

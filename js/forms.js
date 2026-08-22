@@ -1,4 +1,4 @@
-/* KAEL BRST — envío de solicitudes de reserva.
+/* KAEL AUT — envío de solicitudes de reserva.
    Intenta enviar al backend (server/); si no está desplegado, guarda la solicitud
    localmente (modo demo) para que el flujo siga siendo funcional en pruebas. */
 
@@ -12,7 +12,7 @@ function localRef() {
 
 function saveLocalLead(payload, ref) {
   try {
-    var key = 'kael-brst-leads';
+    var key = 'kael-aut-leads';
     var list = JSON.parse(localStorage.getItem(key) || '[]');
     list.unshift(Object.assign({ ref: ref, createdAt: new Date().toISOString(), mode: 'local-demo' }, payload));
     localStorage.setItem(key, JSON.stringify(list.slice(0, 200)));
@@ -66,7 +66,7 @@ function wireSolicitudForm(formEl, opts) {
       comentarios: fd.get('comentarios') || '',
       marketingOptIn: !!fd.get('marketing'),
       privacyAccepted: !!fd.get('privacidad_aceptada'),
-      source: 'kael-brst-web'
+      source: 'kael-aut-web'
     };
 
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }

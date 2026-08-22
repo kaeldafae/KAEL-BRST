@@ -1,4 +1,4 @@
-/* KAEL BRST — animaciones al hacer scroll (reveal-on-scroll) y contador de
+/* KAEL AUT — animaciones al hacer scroll (reveal-on-scroll) y contador de
  * estadísticas. Progressive enhancement: si JS falla o el usuario prefiere
  * menos movimiento, el contenido es visible igualmente (sin depender de la
  * animación para poder leerlo). */

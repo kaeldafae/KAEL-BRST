@@ -1,4 +1,4 @@
-/* KAEL BRST — comportamiento compartido: menú móvil, año de footer, cookies */
+/* KAEL AUT — comportamiento compartido: menú móvil, año de footer, cookies */
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
     var toggle = document.querySelector('[data-nav-toggle]');
@@ -18,7 +18,7 @@
   });
 
   function initCookieBanner() {
-    var KEY = 'kael-brst-cookie-consent';
+    var KEY = 'kael-aut-cookie-consent';
     var banner = document.querySelector('[data-cookie-banner]');
     if (!banner) return;
 

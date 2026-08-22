@@ -6,4 +6,4 @@ Disallow: /confirmacion.html
 Disallow: /admin.html
 Disallow: /server/
 
-Sitemap: https://www.kaelbrst.com/sitemap.xml
+Sitemap: https://www.kaelaut.com/sitemap.xml

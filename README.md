@@ -1,4 +1,4 @@
-# KAEL BRST — plataforma de intermediación de alquiler de barcos (Ibiza y Formentera)
+# KAEL AUT — plataforma de intermediación de alquiler de barcos (varios destinos)
 
 Sitio funcional listo para desplegar: catálogo de embarcaciones, ficha de cada barco,
 formulario de solicitud (individual y a varias empresas a la vez), asistente de
@@ -13,7 +13,7 @@ técnica para lanzar ya.
 
 ## Qué se ha corregido/reconstruido respecto a la versión anterior
 
-- El archivo `KAEL BRST.dc.html` original dependía de un runtime propietario de
+- El archivo `KAEL AUT.dc.html` original dependía de un runtime propietario de
   editor (`support.js`, etiquetas `x-dc`/`sc-if`/`sc-for`) que **no funciona como
   página web normal** una vez publicada — de ahí los errores. Se ha reescrito todo
   como HTML/CSS/JS estándar, sin dependencias externas de frameworks, para que
@@ -33,22 +33,33 @@ técnica para lanzar ya.
   fotorrealistas, que no es algo que se pueda generar de forma fiable sin activos
   3D con licencia o modelado profesional.
 
-## Sobre las imágenes y los datos de empresas (leer antes de publicar)
+## Expansión multi-destino y cómo añadir una empresa real
 
-No fue posible descargar fotografías nuevas (de bancos de imágenes o de las webs
-de empresas náuticas reales) porque este entorno de desarrollo no tiene acceso
-de salida a internet para imágenes — solo para búsquedas de texto. Por eso:
+KAEL AUT está en expansión más allá de Ibiza y Formentera: Canarias, Cancún,
+Phuket y Dubái (ver `MARKETS` en `js/data.js`). `COMPANIES` y `BOATS` están
+**vacíos a propósito** — no hay ninguna empresa de prueba ni placeholder en el
+sitio. Todas las páginas (home, catálogo, ficha de barco/empresa, asistente)
+gestionan este estado vacío mostrando un mensaje de "muy pronto" por destino,
+en vez de datos ficticios.
 
-- Las fotos que ves son las que ya estaban disponibles en el proyecto: son
-  fotografías reales de embarcaciones (no ilustraciones ni renders), simplemente
-  no están vinculadas a ninguna empresa real todavía.
-- `docs/empresas-prospectos-ibiza.md` contiene una investigación real de 10
-  empresas náuticas que operan en Ibiza (ubicación, flota, precios públicos,
-  contacto) para que las contactes y firmes colaboración. **No están publicadas
-  en la web ni tienen ninguna relación con KAEL BRST todavía** — hacerlo sin su
-  autorización sería un problema legal (derechos de imagen, falsa verificación).
-  Una vez firmes con una empresa, sustituye sus datos y sus propias fotos en
-  `js/data.js`.
+Para publicar una empresa en cuanto confirme la colaboración:
+
+1. Añade la empresa en `COMPANIES` (`js/data.js`) con su `marketId` (uno de los
+   ids de `MARKETS`) y su `tier`: `'premium'` para una oferta de lujo (activa un
+   theming oscuro/dorado en su ficha y sus tarjetas — ver sección "Theming por
+   tier" en `css/styles.css`) o `'standard'` para una oferta más accesible
+   (paleta clara por defecto, sin cambios).
+2. Añade sus embarcaciones en `BOATS`, con fotos propias de la empresa (no las
+   fotos de muestra que ya están en `img/boats/`, que no están vinculadas a
+   ninguna empresa real).
+3. Añade su email de notificación en `server/server.js` (objeto `COMPANIES`) y
+   en `server/.env` (`COMPANY_EMAIL_...`), y añade sus URLs a `sitemap.xml`.
+
+`docs/empresas-prospectos-ibiza.md` contiene una investigación real de 10
+empresas náuticas que operan en Ibiza (ubicación, flota, precios públicos,
+contacto) para outreach. **No están publicadas en la web ni tienen ninguna
+relación con KAEL AUT todavía** — hacerlo sin su autorización sería un
+problema legal (derechos de imagen, falsa verificación).
 
 ## Estructura
 
@@ -85,9 +96,10 @@ detecta automáticamente `/api/solicitudes` en el mismo dominio.
 
 1. **Datos reales de tu empresa** en `legal/aviso-legal.html` y `legal/privacidad.html`
    (busca las marcas `[COMPLETAR]`) — razón social, NIF, dirección, email, teléfono.
-2. **Tu flota real** en `js/data.js`: sustituye barcos, empresas, precios y fotos por
-   los tuyos (o de tus empresas colaboradoras verificadas). Empieza contactando a las
-   empresas de `docs/empresas-prospectos-ibiza.md`.
+2. **Tu flota real** en `js/data.js`: añade tus empresas colaboradoras verificadas
+   (`marketId`, `tier`) y sus barcos, con precios y fotos propias — ver "Expansión
+   multi-destino y cómo añadir una empresa real" más arriba. Empieza contactando a
+   las empresas de `docs/empresas-prospectos-ibiza.md`.
 3. **Revisión legal**: haz revisar el aviso legal, la política de privacidad, cookies
    y las condiciones de intermediación con un abogado en Baleares antes de publicar
    (ver la nota al final de cada documento legal).
@@ -109,8 +121,8 @@ servicio Node.js sirve todo el sitio + el formulario funcional.
    - Build command: `cd server && npm install`
    - Start command: `cd server && npm start`
    - Variables de entorno: las mismas que `server/.env.example`.
-3. Cuando tengas la URL (p. ej. `https://kael-brst.onrender.com`), apunta tu dominio
-   propio (`kaelbrst.com`) a ese servicio desde tu registrador de dominios (CNAME).
+3. Cuando tengas la URL (p. ej. `https://kael-aut.onrender.com`), apunta tu dominio
+   propio (`kaelaut.com`) a ese servicio desde tu registrador de dominios (CNAME).
 
 ### Opción alternativa — frontend y backend en sitios distintos
 

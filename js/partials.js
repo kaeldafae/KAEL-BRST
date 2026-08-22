@@ -1,4 +1,4 @@
-/* KAEL BRST — header/footer/cookie-banner compartidos entre páginas.
+/* KAEL AUT — header/footer/cookie-banner compartidos entre páginas.
    Se inyectan en tiempo de carga para evitar duplicar el marcado en cada HTML.
    `prefix` es '' para páginas en la raíz y '../' para páginas en subcarpetas
    (por ejemplo legal/), de modo que todos los enlaces e imágenes apunten al
@@ -14,8 +14,8 @@ function renderHeader(el, active, prefix) {
   el.innerHTML =
     '<div class="container">' +
       '<a class="brand" href="' + prefix + 'index.html">' +
-        '<img src="' + prefix + 'img/logo.png" alt="KAEL BRST">' +
-        '<span class="brand-tag"><strong>BRST</strong><span>Ibiza · Formentera</span></span>' +
+        '<img src="' + prefix + 'img/logo.png" alt="KAEL AUT">' +
+        '<span class="brand-tag"><strong>AUT</strong><span>' + Object.keys(MARKETS).length + ' destinos</span></span>' +
       '</a>' +
       '<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="main-nav">' +
         '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg> Menú' +
@@ -38,15 +38,12 @@ function renderFooter(el, prefix) {
     '<div class="container">' +
       '<div class="footer-grid">' +
         '<div>' +
-          '<div class="footer-brand"><img src="' + prefix + 'img/logo.png" alt="KAEL BRST"><span style="font-weight:600;letter-spacing:.06em;font-size:14px;">BRST</span></div>' +
-          '<p class="footer-note">KAEL BRST es una plataforma de intermediación. No presta el servicio náutico ni cobra el alquiler. Las embarcaciones son ofrecidas por empresas náuticas verificadas de Ibiza y Formentera.</p>' +
+          '<div class="footer-brand"><img src="' + prefix + 'img/logo.png" alt="KAEL AUT"><span style="font-weight:600;letter-spacing:.06em;font-size:14px;">AUT</span></div>' +
+          '<p class="footer-note">KAEL AUT es una plataforma de intermediación. No presta el servicio náutico ni cobra el alquiler. Las embarcaciones son ofrecidas por empresas náuticas verificadas en varios destinos.</p>' +
         '</div>' +
         '<div class="footer-col">' +
-          '<div class="ftitle">Barcos</div>' +
-          '<a href="' + prefix + 'barcos.html?zone=Ibiza">Alquiler de barcos en Ibiza</a>' +
-          '<a href="' + prefix + 'barcos.html?zone=Formentera">Alquiler de barcos en Formentera</a>' +
-          '<a href="' + prefix + 'barcos.html?skipper=Con%20patr%C3%B3n">Barcos con patrón</a>' +
-          '<a href="' + prefix + 'barcos.html?type=Catamar%C3%A1n">Catamaranes</a>' +
+          '<div class="ftitle">Destinos</div>' +
+          Object.values(MARKETS).map(function (m) { return '<a href="' + prefix + 'barcos.html?market=' + m.id + '">' + m.name + '</a>'; }).join('') +
         '</div>' +
         '<div class="footer-col">' +
           '<div class="ftitle">Empresas</div>' +
@@ -64,8 +61,8 @@ function renderFooter(el, prefix) {
         '</div>' +
       '</div>' +
       '<div class="footer-legal-bar">' +
-        '<span>© <span data-year></span> KAEL BRST. Todos los derechos reservados.</span>' +
-        '<span>KAEL BRST no vende barcos ni presta servicios náuticos. Actúa como intermediario digital.</span>' +
+        '<span>© <span data-year></span> KAEL AUT. Todos los derechos reservados.</span>' +
+        '<span>KAEL AUT no vende barcos ni presta servicios náuticos. Actúa como intermediario digital.</span>' +
       '</div>' +
     '</div>';
 }

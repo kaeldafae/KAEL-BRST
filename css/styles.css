@@ -1,6 +1,6 @@
 /* ==========================================================================
-   KAEL BRST — Design system
-   Plataforma de intermediación de alquiler de barcos — Ibiza & Formentera
+   KAEL AUT — Design system
+   Plataforma de intermediación de alquiler de barcos — varios destinos
    ========================================================================== */
 
 :root {
@@ -118,7 +118,7 @@ button { cursor: pointer; }
 .btn-outline { background: transparent; border: 1px solid var(--ink); color: var(--ink); }
 .btn-outline:hover { background: var(--card-alt); color: var(--ink); }
 .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--ink); }
-.btn-ghost:hover { background: #FAF8F3; color: var(--ink); }
+.btn-ghost:hover { background: var(--card-alt); color: var(--ink); }
 .btn-pill { border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 26px; }
 .btn-lg { padding: 17px 30px; font-size: 15px; }
 .btn-block { width: 100%; }
@@ -295,7 +295,7 @@ h1.h-hero, .h-hero { font-size: clamp(40px, 7vw, 84px); line-height: 0.95; lette
 .result-specs .v { font-size: 15px; margin-top: 2px; }
 .result-trust { display: flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 13px; color: var(--ink-soft); }
 .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--green-dot); flex: 0 0 6px; }
-.result-price { grid-column: 1 / -1; background: #FAF8F3; padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px; }
+.result-price { grid-column: 1 / -1; background: var(--card-alt); padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px; }
 .result-price .plabel { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
 .result-price .pval { font-size: 22px; font-weight: 500; margin-top: 2px; }
 .result-price .pnote { font-size: 12px; color: var(--muted); margin-top: 4px; max-width: 32ch; }
@@ -374,7 +374,7 @@ h1.h-hero, .h-hero { font-size: clamp(40px, 7vw, 84px); line-height: 0.95; lette
 .opt .hint { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
 
 .result-mini { display: grid; grid-template-columns: 110px 1fr auto; gap: 18px; align-items: center; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; cursor: pointer; }
-.result-mini:hover { background: #FAF8F3; }
+.result-mini:hover { background: var(--card-alt); }
 .result-mini .thumb-sm { height: 76px; border-radius: 8px; overflow: hidden; background: var(--card-alt); }
 .result-mini .thumb-sm img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -572,4 +572,35 @@ body.has-cookie-banner { padding-bottom: var(--cookie-banner-space, 180px); }
 @media (prefers-reduced-motion: reduce) {
   .boat-card:hover, .company-card:hover, .result-card:hover, .stat:hover, .step:hover, .btn:hover { transform: none; }
   .boat-card:hover .thumb img, .result-card:hover .result-photo img, .split-photo:hover img { transform: none; }
+}
+
+/* ==========================================================================
+   Theming por tier — empresa/embarcación premium vs standard
+   Se aplica con data-tier="premium" | "standard" en el contenedor que
+   renderiza la empresa o el barco (ficha de empresa, ficha de barco,
+   tarjetas .company-card / .boat-card / .result-card / .result-mini).
+   'standard' (oferta accesible) es la paleta clara/desenfadada por
+   defecto del sitio, así que no necesita overrides. 'premium' (oferta de
+   lujo) cambia a un estilo oscuro y dorado para que se distinga de un
+   vistazo, sin tener que leer el precio primero.
+   ========================================================================== */
+[data-tier="premium"] {
+  --white: #1C170F;
+  --card-alt: #241D12;
+  --border: #3D3220;
+  --ink: #F4EFE6;
+  --ink-soft: #D8CCB0;
+  --muted: #A8987A;
+  --green: #C9A227;
+  --green-hover: #B8931E;
+  --green-deep: #D8B44C;
+  --green-on: #1C170F;
+  --green-dot: #C9A227;
+}
+[data-tier="premium"].card,
+[data-tier="premium"].company-card,
+[data-tier="premium"].result-card,
+[data-tier="premium"].managed-by,
+[data-tier="premium"] .boat-card .thumb {
+  box-shadow: 0 22px 48px -22px rgba(0,0,0,0.6);
 }

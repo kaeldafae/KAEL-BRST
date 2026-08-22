@@ -1,4 +1,4 @@
-/* KAEL BRST — selector 3D de embarcaciones estilo "selección de personaje".
+/* KAEL AUT — selector 3D de embarcaciones estilo "selección de personaje".
  * CSS 3D real (perspective + rotateY/translateZ en un anillo), sin librería
  * externa: cada tarjeta es una fotografía real de barco montada en el
  * espacio 3D, no un modelo 3D fotorrealista (no es algo que podamos generar
@@ -93,6 +93,7 @@ function createBoatSelector3D(root, opts) {
 
   function renderPanel(boat) {
     const company = companyOf(boat);
+    panel.setAttribute('data-tier', company.tier || 'standard');
     panel.innerHTML =
       '<div class="sbp-company">' + company.name + '</div>' +
       '<div class="sbp-name">' + boat.name + '</div>' +

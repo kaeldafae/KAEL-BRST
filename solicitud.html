@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solicitud de reserva — KAEL BRST</title>
+<title>Solicitud de reserva — KAEL AUT</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="img/logomark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@
       </label>
 
       <div class="hr"></div>
-      <p style="font-size:13px; line-height:1.55; color:var(--ink-soft); margin:0 0 16px;">Al enviar esta solicitud, tus datos serán tratados por KAEL BRST para gestionar tu solicitud de alquiler y comunicarla a la empresa náutica correspondiente. La empresa podrá utilizar tus datos para contactarte y gestionar la posible contratación del servicio. Consulta nuestra <a href="legal/privacidad.html">Política de Privacidad</a>.</p>
+      <p style="font-size:13px; line-height:1.55; color:var(--ink-soft); margin:0 0 16px;">Al enviar esta solicitud, tus datos serán tratados por KAEL AUT para gestionar tu solicitud de alquiler y comunicarla a la empresa náutica correspondiente. La empresa podrá utilizar tus datos para contactarte y gestionar la posible contratación del servicio. Consulta nuestra <a href="legal/privacidad.html">Política de Privacidad</a>.</p>
       <label class="check-row"><input type="checkbox" name="privacidad_aceptada" required><span>He leído y acepto la Política de Privacidad.</span></label>
       <label class="check-row"><input type="checkbox" name="marketing"><span style="color:var(--ink-soft);">Quiero recibir ofertas y novedades. <span style="color:var(--muted);">(opcional)</span></span></label>
 
@@ -86,6 +86,14 @@
 (function () {
   var qs = new URLSearchParams(window.location.search);
   var boat = boatById(qs.get('id')) || BOATS[0];
+
+  if (!boat) {
+    document.getElementById('solForm').style.display = 'none';
+    document.getElementById('summaryCard').innerHTML =
+      '<div class="empty-state card">Todavía no hay embarcaciones publicadas. <a href="barcos.html">Vuelve al listado</a>.</div>';
+    return;
+  }
+
   var company = companyOf(boat);
   document.getElementById('backLink').href = 'barco.html?id=' + boat.id;
   if (qs.get('fecha')) document.querySelector('[name="fecha"]').value = qs.get('fecha');

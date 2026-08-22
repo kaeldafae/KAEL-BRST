@@ -1,4 +1,4 @@
-/* KAEL BRST — asistente de selección de barco (4 preguntas) */
+/* KAEL AUT — asistente de selección de barco (4 preguntas) */
 (function () {
   var step = 0;
   var answers = {};
@@ -38,13 +38,9 @@
     },
     {
       title: '¿Desde dónde quieres salir?',
-      key: 'zone',
+      key: 'market',
       layout: 'row',
-      options: [
-        { label: 'Ibiza', value: 'Ibiza' },
-        { label: 'Formentera', value: 'Formentera' },
-        { label: 'Indiferente', value: '' }
-      ]
+      options: Object.values(MARKETS).map(function (m) { return { label: m.name, value: m.id }; }).concat([{ label: 'Indiferente', value: '' }])
     }
   ];
 
@@ -53,7 +49,7 @@
     if (answers.pax) list = list.filter(function (b) { return b.pax >= answers.pax; });
     if (answers.mood === 'premium') list = list.filter(function (b) { return b.type === 'Yate'; });
     if (answers.mood === 'catamaran') list = list.filter(function (b) { return b.type === 'Catamarán'; });
-    if (answers.zone) list = list.filter(function (b) { return b.zone === answers.zone || !answers.zone; });
+    if (answers.market) list = list.filter(function (b) { var c = companyOf(b); return c && c.marketId === answers.market; });
     if (!list.length) list = BOATS.slice();
     if (answers.budget) {
       list.sort(function (a, b) { return Math.abs(a.price - answers.budget) - Math.abs(b.price - answers.budget); });
@@ -97,6 +93,17 @@
 
   function renderResult() {
     var card = document.getElementById('wizardCard');
+
+    if (!BOATS.length) {
+      card.innerHTML =
+        '<div class="eyebrow">Resultado</div>' +
+        '<h2 style="font-size:26px; font-weight:500; margin:8px 0 6px;">Todavía no hay embarcaciones publicadas</h2>' +
+        '<p style="font-size:15px; color:var(--ink-soft); margin:0 0 24px;">Estamos incorporando empresas náuticas verificadas. Vuelve pronto para ver propuestas según tus respuestas.</p>' +
+        '<button class="btn btn-outline" id="wizReset">Volver a empezar</button>';
+      document.getElementById('wizReset').addEventListener('click', function () { step = 0; answers = {}; render(); });
+      return;
+    }
+
     var results = rank();
     var html = '<div class="eyebrow">Resultado</div>' +
       '<h2 style="font-size:26px; font-weight:500; margin:8px 0 6px;">Hemos encontrado ' + results.length + ' opciones que podrían encajar contigo</h2>' +
@@ -104,7 +111,7 @@
       '<div style="display:grid; gap:12px;">';
     results.forEach(function (b) {
       var c = companyOf(b);
-      html += '<a class="result-mini" href="barco.html?id=' + b.id + '">' +
+      html += '<a class="result-mini" data-tier="' + (c.tier || 'standard') + '" href="barco.html?id=' + b.id + '">' +
         '<div class="thumb-sm"><img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
         '<div><div style="font-size:17px; font-weight:500;">' + b.name + '</div><div style="font-size:14px; color:var(--ink-soft); margin-top:2px;">' + b.pax + ' personas · ' + b.length + ' · ' + b.skipper.toLowerCase() + '</div><div style="font-size:13px; color:var(--muted); margin-top:6px;">' + c.name + '</div></div>' +
         '<div style="text-align:right; padding-right:8px;"><div style="font-size:18px; font-weight:500;" class="tabular">' + euro(b.price) + '</div><div style="font-size:13px; color:var(--muted);">orientativo</div></div>' +
@@ -117,7 +124,7 @@
     card.innerHTML = html;
 
     document.getElementById('wizGoMulti').addEventListener('click', function () {
-      try { sessionStorage.setItem('kael-brst-multi', JSON.stringify(results.map(function (b) { return b.id; }))); } catch (e) {}
+      try { sessionStorage.setItem('kael-aut-multi', JSON.stringify(results.map(function (b) { return b.id; }))); } catch (e) {}
       window.location.href = 'solicitud-multiple.html';
     });
     document.getElementById('wizReset').addEventListener('click', function () {

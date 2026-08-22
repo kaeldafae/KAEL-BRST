@@ -1,7 +1,7 @@
 # Empresas náuticas reales en Ibiza — lista de prospección
 
 Investigación de mercado (fuentes públicas, agosto 2026) para contactar y firmar
-acuerdos de colaboración reales antes de publicarlas en KAEL BRST. **Ninguna de
+acuerdos de colaboración reales antes de publicarlas en KAEL AUT. **Ninguna de
 estas empresas ha sido contactada ni ha autorizado su inclusión en la
 plataforma** — esto es una lista de prospección comercial, no un directorio de
 socios verificados. No uses sus fotos ni las publiques como "verificadas" hasta

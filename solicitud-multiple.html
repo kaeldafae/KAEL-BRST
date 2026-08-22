@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solicitar a varias empresas — KAEL BRST</title>
+<title>Solicitar a varias empresas — KAEL AUT</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="img/logomark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +58,7 @@
 <script>
 (function () {
   var ids = [];
-  try { ids = JSON.parse(sessionStorage.getItem('kael-brst-multi') || '[]'); } catch (e) {}
+  try { ids = JSON.parse(sessionStorage.getItem('kael-aut-multi') || '[]'); } catch (e) {}
   var boats = ids.map(boatById).filter(Boolean);
 
   if (!boats.length) {
@@ -90,7 +90,7 @@
   });
 
   document.getElementById('multiForm').addEventListener('submit', function () {
-    try { sessionStorage.removeItem('kael-brst-multi'); } catch (e) {}
+    try { sessionStorage.removeItem('kael-aut-multi'); } catch (e) {}
   });
 })();
 </script>

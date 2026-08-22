@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KAEL BRST — Alquiler de barcos en Ibiza y Formentera</title>
-<meta name="description" content="Compara embarcaciones de empresas náuticas verificadas en Ibiza y Formentera y solicita disponibilidad en un paso. Sin pagos por adelantado: el contrato y el cobro son con la empresa náutica.">
-<link rel="canonical" href="https://www.kaelbrst.com/">
+<title>KAEL AUT — Alquiler de barcos en varios destinos</title>
+<meta name="description" content="Compara embarcaciones de empresas náuticas verificadas en Ibiza, Canarias, Cancún, Phuket y Dubái, y solicita disponibilidad en un paso. Sin pagos por adelantado: el contrato y el cobro son con la empresa náutica.">
+<link rel="canonical" href="https://www.kaelaut.com/">
 <link rel="icon" href="img/logomark.svg" type="image/svg+xml">
-<meta property="og:title" content="KAEL BRST — Alquiler de barcos en Ibiza y Formentera">
+<meta property="og:title" content="KAEL AUT — Alquiler de barcos en varios destinos">
 <meta property="og:description" content="Compara embarcaciones de empresas náuticas verificadas y solicita disponibilidad en un paso.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="img/boats/yate-flybridge-fondeado.webp">
+<meta property="og:image" content="img/logomark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -28,28 +28,28 @@
       <div class="hero-frame">
         <div class="hero-copy">
           <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#355C4A; font-weight:600;">
-            <span>Ibiza · Formentera</span>
+            <span id="heroMarkets"></span>
             <span>Plataforma de intermediación náutica</span>
           </div>
           <h1 class="h-hero">Tu día en el mar empieza aquí</h1>
           <p class="hero-note">Compara embarcaciones de empresas náuticas verificadas y solicita disponibilidad en un paso. Sin pagos por adelantado.</p>
-          <div class="hero-cta-row">
+          <div class="hero-cta-row" id="heroCtaRow">
             <a class="btn btn-dark btn-pill" href="barcos.html">Ver la flota</a>
-            <div style="display:flex; align-items:center; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;" id="heroNavBtns">
               <button class="btn btn-ghost" id="heroPrev" aria-label="Barco anterior" style="border-radius:999px; width:44px; height:44px; padding:0;">‹</button>
               <button class="btn btn-ghost" id="heroNext" aria-label="Barco siguiente" style="border-radius:999px; width:44px; height:44px; padding:0;">›</button>
             </div>
           </div>
         </div>
-        <div class="hero-photo">
-          <img id="heroImg" src="img/boats/yate-flybridge-fondeado.webp" alt="Embarcación disponible en Ibiza y Formentera">
+        <div class="hero-photo" id="heroPhotoWrap">
+          <img id="heroImg" src="img/boats/yate-flybridge-fondeado.webp" alt="Embarcación disponible en KAEL AUT">
           <div class="hero-photo-caption">
             <div class="name" id="heroName">Sunseeker Predator 55</div>
             <div class="meta" id="heroMeta">Yate · 12 personas · Marina Botafoch</div>
           </div>
         </div>
       </div>
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-top:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-top:16px;" id="heroThumbsRow">
         <div class="hero-thumbs" id="heroThumbs"></div>
         <a class="btn btn-primary" id="heroOpenBtn" href="barco.html?id=sunseeker-55">Ver esta embarcación</a>
       </div>
@@ -59,8 +59,8 @@
   <!-- MARQUEE -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>Lanchas</span><span>·</span><span>Yates</span><span>·</span><span>Catamaranes</span><span>·</span><span>Con patrón</span><span>·</span><span>Sin patrón</span><span>·</span><span>Ibiza</span><span>·</span><span>Formentera</span><span>·</span>
-      <span>Lanchas</span><span>·</span><span>Yates</span><span>·</span><span>Catamaranes</span><span>·</span><span>Con patrón</span><span>·</span><span>Sin patrón</span><span>·</span><span>Ibiza</span><span>·</span><span>Formentera</span><span>·</span>
+      <span>Lanchas</span><span>·</span><span>Yates</span><span>·</span><span>Catamaranes</span><span>·</span><span>Con patrón</span><span>·</span><span>Sin patrón</span><span>·</span><span>Empresas verificadas</span><span>·</span>
+      <span>Lanchas</span><span>·</span><span>Yates</span><span>·</span><span>Catamaranes</span><span>·</span><span>Con patrón</span><span>·</span><span>Sin patrón</span><span>·</span><span>Empresas verificadas</span><span>·</span>
     </div>
   </div>
 
@@ -96,7 +96,7 @@
       <div class="stat"><div class="num">0 €</div><div class="label">No cobramos nada al solicitar. Pagas a la empresa náutica.</div></div>
       <div class="stat"><div class="num" data-count="2" data-suffix=" h">0 h</div><div class="label">Compromiso de primera respuesta de las empresas.</div></div>
       <div class="stat"><div class="num" data-count="100" data-suffix=" %">0 %</div><div class="label">Empresas verificadas: identidad, habilitación y seguros.</div></div>
-      <div class="stat"><div class="num" data-count="2" data-suffix=" islas">0 islas</div><div class="label">Salidas desde Ibiza y Formentera, todos los puertos.</div></div>
+      <div class="stat"><div class="num" id="statMarkets" data-suffix=" destinos">0 destinos</div><div class="label">Destinos en los que estamos incorporando empresas verificadas.</div></div>
     </div>
   </section>
 
@@ -104,7 +104,7 @@
   <section class="section" id="como-funciona">
     <div class="container split">
       <div class="split-photo">
-        <img src="img/boats/catamaran-grupo.webp" alt="Grupo disfrutando de un día en catamarán en Formentera" loading="lazy">
+        <img src="img/boats/catamaran-grupo.webp" alt="Grupo disfrutando de un día en catamarán" loading="lazy">
       </div>
       <div>
         <div class="eyebrow">Cómo funciona</div>
@@ -133,10 +133,8 @@
         <div class="search-grid">
           <label class="field">
             <span class="flabel">Destino</span>
-            <select name="zone">
-              <option value="">Ibiza y Formentera</option>
-              <option value="Ibiza">Solo Ibiza</option>
-              <option value="Formentera">Solo Formentera</option>
+            <select name="market" id="searchMarket">
+              <option value="">Todos los destinos</option>
             </select>
           </label>
           <label class="field">
@@ -187,7 +185,7 @@
         <div class="compare-row">
           <div></div>
           <div class="compare-head">Por tu cuenta</div>
-          <div class="compare-head brand">KAEL BRST</div>
+          <div class="compare-head brand">KAEL AUT</div>
         </div>
         <div class="compare-row"><div style="font-size:17px;">Comparar embarcaciones</div><div style="color:var(--muted);">Web a web, WhatsApp a WhatsApp</div><div>Seis barcos, una ficha comparable</div></div>
         <div class="compare-row"><div style="font-size:17px;">Saber quién presta el servicio</div><div style="color:var(--muted);">A menudo no aparece</div><div>Empresa identificada en cada ficha</div></div>
@@ -232,7 +230,7 @@
   <section class="section" style="padding-bottom:0;">
     <div class="container">
       <div style="border-top:2px solid var(--ink); padding-top:36px; display:flex; justify-content:space-between; align-items:flex-end; gap:40px; flex-wrap:wrap;">
-        <h2 style="font-size:clamp(34px,6vw,80px); line-height:0.92; letter-spacing:-0.03em; font-weight:500; max-width:16ch; margin:0;">Alquila tu barco en Ibiza y Formentera</h2>
+        <h2 style="font-size:clamp(34px,6vw,80px); line-height:0.92; letter-spacing:-0.03em; font-weight:500; max-width:16ch; margin:0;">Alquila tu barco donde quieras navegar</h2>
         <a class="btn btn-dark btn-pill btn-lg" href="barcos.html">Ver la flota</a>
       </div>
     </div>

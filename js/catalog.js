@@ -1,15 +1,15 @@
-/* KAEL BRST — catálogo con filtros y solicitud múltiple */
+/* KAEL AUT — catálogo con filtros y solicitud múltiple */
 (function () {
   var qs = new URLSearchParams(window.location.search);
   var state = {
     types: qs.get('type') ? [qs.get('type')] : [],
-    zones: qs.get('zone') ? [qs.get('zone')] : [],
+    markets: qs.get('market') ? [qs.get('market')] : [],
     skippers: qs.get('skipper') ? [qs.get('skipper')] : [],
     multi: []
   };
 
   try {
-    var savedMulti = JSON.parse(sessionStorage.getItem('kael-brst-multi') || '[]');
+    var savedMulti = JSON.parse(sessionStorage.getItem('kael-aut-multi') || '[]');
     if (Array.isArray(savedMulti)) state.multi = savedMulti;
   } catch (e) { /* ignore */ }
 
@@ -24,10 +24,10 @@
     options.forEach(function (opt) {
       var chip = document.createElement('button');
       chip.type = 'button';
-      chip.className = 'chip' + (state[key].includes(opt) ? ' active' : '');
-      chip.textContent = opt;
+      chip.className = 'chip' + (state[key].includes(opt.value) ? ' active' : '');
+      chip.textContent = opt.label;
       chip.addEventListener('click', function () {
-        toggle(state[key], opt);
+        toggle(state[key], opt.value);
         renderAll();
       });
       el.appendChild(chip);
@@ -36,14 +36,15 @@
 
   function filtered() {
     return BOATS.filter(function (b) {
+      var market = companyOf(b) && companyOf(b).marketId;
       return (!state.types.length || state.types.includes(b.type)) &&
-             (!state.zones.length || state.zones.includes(b.zone)) &&
+             (!state.markets.length || state.markets.includes(market)) &&
              (!state.skippers.length || state.skippers.includes(b.skipper));
     });
   }
 
   function persistMulti() {
-    try { sessionStorage.setItem('kael-brst-multi', JSON.stringify(state.multi)); } catch (e) { /* ignore */ }
+    try { sessionStorage.setItem('kael-aut-multi', JSON.stringify(state.multi)); } catch (e) { /* ignore */ }
   }
 
   function renderMultiBtn() {
@@ -59,6 +60,17 @@
 
   function renderResults() {
     var list = filtered();
+
+    if (!BOATS.length) {
+      document.getElementById('resultCount').textContent = 'Muy pronto';
+      document.getElementById('resultsList').innerHTML =
+        '<div class="empty-state card">' +
+          '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">Todavía no hay embarcaciones publicadas.</p>' +
+          '<p style="margin:0; color:var(--ink-soft);">Estamos verificando empresas náuticas en ' + Object.values(MARKETS).map(function (m) { return m.name; }).join(', ') + '. En cuanto una empresa confirme su colaboración, sus barcos aparecerán aquí.</p>' +
+        '</div>';
+      return;
+    }
+
     document.getElementById('resultCount').textContent = list.length + ' embarcaci' + (list.length === 1 ? 'ón' : 'ones') + ' disponibles para solicitud';
     var container = document.getElementById('resultsList');
     container.innerHTML = '';
@@ -73,6 +85,7 @@
       var selected = state.multi.includes(b.id);
       var card = document.createElement('div');
       card.className = 'result-card' + (selected ? ' selected' : '');
+      card.setAttribute('data-tier', c.tier || 'standard');
       card.innerHTML =
         '<a class="result-photo" href="barco.html?id=' + b.id + '">' +
           '<img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '">' +
@@ -113,9 +126,13 @@
   }
 
   function renderAll() {
-    renderChips('typeFilters', 'types', ['Lancha', 'Yate', 'Catamarán']);
-    renderChips('zoneFilters', 'zones', ['Ibiza', 'Formentera']);
-    renderChips('skipperFilters', 'skippers', ['Con patrón', 'Sin patrón']);
+    var filtersPanel = document.querySelector('.filters-panel');
+    if (filtersPanel) filtersPanel.hidden = !BOATS.length;
+    if (!BOATS.length) { renderResults(); return; }
+
+    renderChips('typeFilters', 'types', ['Lancha', 'Yate', 'Catamarán'].map(function (v) { return { value: v, label: v }; }));
+    renderChips('marketFilters', 'markets', Object.values(MARKETS).map(function (m) { return { value: m.id, label: m.name }; }));
+    renderChips('skipperFilters', 'skippers', ['Con patrón', 'Sin patrón'].map(function (v) { return { value: v, label: v }; }));
     renderResults();
     renderMultiBtn();
   }
