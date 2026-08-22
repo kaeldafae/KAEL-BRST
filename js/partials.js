@@ -14,7 +14,7 @@ function renderHeader(el, active, prefix) {
   el.innerHTML =
     '<div class="container">' +
       '<a class="brand" href="' + prefix + 'index.html">' +
-        '<img src="' + prefix + 'img/logo.svg" alt="KAEL BRST">' +
+        '<img src="' + prefix + 'img/logo.png" alt="KAEL BRST">' +
         '<span class="brand-tag"><strong>BRST</strong><span>Ibiza · Formentera</span></span>' +
       '</a>' +
       '<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="main-nav">' +
@@ -38,7 +38,7 @@ function renderFooter(el, prefix) {
     '<div class="container">' +
       '<div class="footer-grid">' +
         '<div>' +
-          '<div class="footer-brand"><img src="' + prefix + 'img/logo.svg" alt="KAEL BRST"><span style="font-weight:600;letter-spacing:.06em;font-size:14px;">BRST</span></div>' +
+          '<div class="footer-brand"><img src="' + prefix + 'img/logo.png" alt="KAEL BRST"><span style="font-weight:600;letter-spacing:.06em;font-size:14px;">BRST</span></div>' +
           '<p class="footer-note">KAEL BRST es una plataforma de intermediación. No presta el servicio náutico ni cobra el alquiler. Las embarcaciones son ofrecidas por empresas náuticas verificadas de Ibiza y Formentera.</p>' +
         '</div>' +
         '<div class="footer-col">' +
