@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title id="pageTitle">Empresa náutica — KAEL BRST</title>
+<meta name="description" id="pageDesc" content="Ficha de empresa náutica verificada en Ibiza y Formentera: flota, tiempo de respuesta y valoración de clientes.">
+<meta property="og:title" id="pageOgTitle" content="Empresa náutica verificada — KAEL BRST">
+<meta property="og:description" id="pageOgDesc" content="Ficha de empresa náutica verificada en Ibiza y Formentera: flota, tiempo de respuesta y valoración de clientes.">
+<meta property="og:type" content="profile">
 <link rel="icon" href="img/logomark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +44,10 @@
   var c = COMPANIES[qs.get('id')] || Object.values(COMPANIES)[0];
   document.title = c.name + ' — Empresa náutica verificada — KAEL BRST';
   var boats = boatsByCompany(c.id);
+  var metaDesc = c.name + ': empresa náutica verificada en ' + c.base + '. ' + boats.length + ' embarcaci' + (boats.length === 1 ? 'ón' : 'ones') + ', responde en ' + c.sla + '.';
+  document.getElementById('pageDesc').setAttribute('content', metaDesc);
+  document.getElementById('pageOgTitle').setAttribute('content', c.name + ' — Empresa náutica verificada — KAEL BRST');
+  document.getElementById('pageOgDesc').setAttribute('content', metaDesc);
 
   var boatsHtml = boats.map(function (b) {
     return '<a class="boat-card" href="barco.html?id=' + b.id + '">' +

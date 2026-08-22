@@ -76,7 +76,7 @@
     var row = document.createElement('div');
     row.className = 'result-mini';
     row.innerHTML =
-      '<div class="thumb-sm"><img src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
+      '<div class="thumb-sm"><img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
       '<div><div style="font-size:17px; font-weight:500;">' + b.name + '</div><div style="font-size:14px; color:var(--ink-soft); margin-top:2px;">' + b.type + ' · ' + b.pax + ' personas · ' + b.port + '</div><div style="font-size:13px; color:var(--muted); margin-top:6px;">' + c.name + ' · responde en ' + c.sla + '</div></div>' +
       '<div style="text-align:right; font-size:16px; font-weight:500;" class="tabular">desde ' + euro(b.price) + '</div>';
     list.appendChild(row);

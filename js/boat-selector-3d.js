@@ -56,6 +56,16 @@ function createBoatSelector3D(root, opts) {
           goTo(i);
         }
       });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          if (Number(card.getAttribute('data-index')) === index) {
+            if (opts.onOpen) opts.onOpen(boats[index]);
+          } else {
+            goTo(i);
+          }
+        }
+      });
       ring.appendChild(card);
     });
   }
@@ -143,12 +153,14 @@ function createBoatSelector3D(root, opts) {
     scheduleAuto();
   }
 
-  prevBtn.addEventListener('click', prev);
-  nextBtn.addEventListener('click', next);
-  stage.addEventListener('keydown', (e) => {
+  function onStageKeydown(e) {
     if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
     if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
-  });
+  }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  stage.addEventListener('keydown', onStageKeydown);
   stage.addEventListener('mousedown', onPointerDown);
   window.addEventListener('mousemove', onPointerMove);
   window.addEventListener('mouseup', onPointerUp);
@@ -158,5 +170,20 @@ function createBoatSelector3D(root, opts) {
   stage.addEventListener('mouseenter', stopAuto);
   stage.addEventListener('mouseleave', scheduleAuto);
 
-  return { setBoats, goTo, destroy: stopAuto };
+  function destroy() {
+    stopAuto();
+    prevBtn.removeEventListener('click', prev);
+    nextBtn.removeEventListener('click', next);
+    stage.removeEventListener('keydown', onStageKeydown);
+    stage.removeEventListener('mousedown', onPointerDown);
+    window.removeEventListener('mousemove', onPointerMove);
+    window.removeEventListener('mouseup', onPointerUp);
+    stage.removeEventListener('touchstart', onPointerDown);
+    stage.removeEventListener('touchmove', onPointerMove);
+    stage.removeEventListener('touchend', onPointerUp);
+    stage.removeEventListener('mouseenter', stopAuto);
+    stage.removeEventListener('mouseleave', scheduleAuto);
+  }
+
+  return { setBoats, goTo, destroy };
 }

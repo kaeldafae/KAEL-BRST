@@ -5,8 +5,15 @@
   var company = companyOf(boat);
 
   document.title = boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL BRST';
+  var pageDesc = boat.name + ': ' + boat.pax + ' personas, ' + boat.length + ', gestionado por ' + company.name + '. Precio orientativo desde ' + euro(boat.price) + '.';
   var descEl = document.getElementById('pageDesc');
-  if (descEl) descEl.setAttribute('content', boat.name + ': ' + boat.pax + ' personas, ' + boat.length + ', gestionado por ' + company.name + '. Precio orientativo desde ' + euro(boat.price) + '.');
+  if (descEl) descEl.setAttribute('content', pageDesc);
+  var ogTitleEl = document.getElementById('pageOgTitle');
+  if (ogTitleEl) ogTitleEl.setAttribute('content', boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL BRST');
+  var ogDescEl = document.getElementById('pageOgDesc');
+  if (ogDescEl) ogDescEl.setAttribute('content', pageDesc);
+  var ogImageEl = document.getElementById('pageOgImage');
+  if (ogImageEl && boat.images && boat.images[0]) ogImageEl.setAttribute('content', boat.images[0]);
 
   var included = boat.included.map(function (i) {
     return '<div class="list-dot"><span class="dot"></span><span>' + i + '</span></div>';
@@ -23,8 +30,8 @@
       '<div class="gallery">' +
         '<div class="g-main"><img src="' + boat.images[0] + '" alt="' + boat.name + '"></div>' +
         '<div class="g-side">' +
-          '<div><img src="' + boat.images[1] + '" alt=""></div>' +
-          '<div><img src="' + boat.images[2] + '" alt=""></div>' +
+          '<div><img loading="lazy" src="' + boat.images[1] + '" alt=""></div>' +
+          '<div><img loading="lazy" src="' + boat.images[2] + '" alt=""></div>' +
         '</div>' +
       '</div>' +
       '<div class="eyebrow">' + boat.type + ' · ' + boat.port + '</div>' +

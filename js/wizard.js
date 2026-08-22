@@ -105,7 +105,7 @@
     results.forEach(function (b) {
       var c = companyOf(b);
       html += '<a class="result-mini" href="barco.html?id=' + b.id + '">' +
-        '<div class="thumb-sm"><img src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
+        '<div class="thumb-sm"><img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
         '<div><div style="font-size:17px; font-weight:500;">' + b.name + '</div><div style="font-size:14px; color:var(--ink-soft); margin-top:2px;">' + b.pax + ' personas · ' + b.length + ' · ' + b.skipper.toLowerCase() + '</div><div style="font-size:13px; color:var(--muted); margin-top:6px;">' + c.name + '</div></div>' +
         '<div style="text-align:right; padding-right:8px;"><div style="font-size:18px; font-weight:500;" class="tabular">' + euro(b.price) + '</div><div style="font-size:13px; color:var(--muted);">orientativo</div></div>' +
       '</a>';
