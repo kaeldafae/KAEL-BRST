@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Empresas náuticas verificadas — KAEL AUT</title>
+<meta name="description" content="Empresas náuticas verificadas en Ibiza, Canarias, Cancún, Phuket y Dubái: identidad, habilitación para la actividad, documentación y seguros comprobados.">
+<link rel="icon" href="img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="empresas">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" id="site-header"></header>
+
+<main id="main" class="container" style="padding-top:28px; padding-bottom:96px;">
+  <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em; margin:0 0 6px;">Empresas náuticas verificadas</h1>
+  <p class="lede" style="margin:0 0 32px; max-width:70ch;">Ninguna embarcación se publica en KAEL AUT sin verificar la identidad de la empresa, su habilitación para la actividad de arrendamiento náutico, documentación y seguros. Si tienes una empresa náutica y quieres publicar tu flota, <a href="mailto:empresas@kaelaut.com">escríbenos</a>.</p>
+  <div id="marketsList"></div>
+</main>
+
+<div id="site-footer" style="margin-top:96px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/partials.js"></script>
+<script>
+  renderHeader(document.getElementById('site-header'), 'empresas');
+  renderFooter(document.getElementById('site-footer'));
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'));
+</script>
+<script src="js/main.js"></script>
+<script src="js/reveal.js"></script>
+<script>
+(function () {
+  var wrap = document.getElementById('marketsList');
+  Object.values(MARKETS).forEach(function (m) {
+    var companies = companiesByMarket(m.id);
+    var section = document.createElement('section');
+    section.style.marginBottom = '40px';
+    var grid = companies.length
+      ? '<div class="grid-auto" data-tier-group>' + companies.map(function (c) {
+          var n = boatsByCompany(c.id).length;
+          return '<a href="empresa.html?id=' + c.id + '" class="company-card" data-tier="' + (c.tier || 'standard') + '">' +
+            '<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;"><span class="dot"></span><span style="font-size:13px; color:var(--green-deep); font-weight:500;">Empresa verificada</span></div>' +
+            '<div class="cname">' + c.name + '</div>' +
+            '<div class="cmeta">' + c.base + ' · ' + n + ' embarcaci' + (n === 1 ? 'ón' : 'ones') + '</div>' +
+            '<div class="csla">Responde en ' + c.sla + '</div>' +
+          '</a>';
+        }).join('') + '</div>'
+      : '<div class="empty-state card">Estamos verificando empresas náuticas en ' + m.name + '. Muy pronto aquí.</div>';
+    section.innerHTML =
+      '<div class="eyebrow" style="margin-bottom:14px;">' + m.name + ' · ' + m.country + '</div>' +
+      grid;
+    wrap.appendChild(section);
+  });
+})();
+</script>
+</body>
+</html>

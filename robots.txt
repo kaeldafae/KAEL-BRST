@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /solicitud.html
+Disallow: /solicitud-multiple.html
+Disallow: /confirmacion.html
+Disallow: /admin.html
+Disallow: /server/
+
+Sitemap: https://www.kaelaut.com/sitemap.xml

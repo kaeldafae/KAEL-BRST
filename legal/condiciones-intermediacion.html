@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Condiciones de intermediación — KAEL AUT</title>
+<link rel="icon" href="../img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body data-page="legal">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" id="site-header"></header>
+
+<main id="main" class="container" style="padding-top:28px; padding-bottom:96px;">
+  <div class="legal-nav">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="condiciones-intermediacion.html"><strong>Condiciones de intermediación</strong></a>
+    <a href="reclamaciones.html">Reclamaciones</a>
+  </div>
+
+  <div class="legal-doc">
+    <h1>Condiciones de intermediación</h1>
+    <div class="updated">Última actualización: <span data-year></span></div>
+
+    <h2>1. Qué es KAEL AUT</h2>
+    <p>KAEL AUT es una plataforma digital de <strong>intermediación</strong> para el alquiler de embarcaciones en varios destinos (Ibiza y Formentera, Canarias, Cancún, Phuket, Dubái). Conecta a personas interesadas en alquilar un barco con empresas náuticas verificadas que ofrecen sus embarcaciones en la Plataforma.</p>
+    <p><strong>KAEL AUT no es propietaria de las embarcaciones, no presta el servicio náutico y no cobra el importe del alquiler.</strong> Su función se limita a mostrar la oferta, recoger solicitudes de disponibilidad y transmitirlas a la empresa náutica correspondiente, dejando constancia verificable del origen de cada solicitud.</p>
+
+    <h2>2. Solicitud frente a reserva confirmada</h2>
+    <p>Cuando completas el formulario y pulsas «Solicitar reserva», estás enviando una <strong>solicitud</strong>, no una reserva confirmada. La solicitud queda en estado «pendiente de empresa» hasta que la empresa náutica correspondiente comprueba la disponibilidad real y confirma contigo, directamente, la fecha, el horario, el precio final y las condiciones del alquiler. Solo en ese momento existe una reserva confirmada.</p>
+    <p>Enviar una solicitud a través de KAEL AUT no implica ningún pago a KAEL AUT ni compromiso económico alguno con la Plataforma.</p>
+
+    <h2>3. Quién presta el servicio y quién cobra</h2>
+    <p>El alquiler de la embarcación, su contrato, el cobro del precio, la fianza en su caso, la documentación náutica, la seguridad, la tripulación o patrón cuando corresponda, y la gestión de incidencias, cancelaciones y devoluciones son responsabilidad exclusiva de la <strong>empresa náutica</strong> identificada en la ficha de cada embarcación («Gestionado por»). El pago del alquiler se realiza siempre directamente a la empresa náutica, nunca a KAEL AUT.</p>
+
+    <h2>4. Precio orientativo</h2>
+    <p>Los precios mostrados en la Plataforma son orientativos («desde X €») salvo que la empresa náutica facilite expresamente un precio cerrado. El precio final puede variar en función de la disponibilidad, la temporada, la duración, el combustible, el patrón, la limpieza, la fianza u otros conceptos, que serán detallados por la empresa náutica antes de formalizar el contrato.</p>
+
+    <h2>5. Verificación de empresas náuticas</h2>
+    <p>Antes de publicar sus embarcaciones, cada empresa colaboradora es verificada por KAEL AUT: identidad, CIF/NIF, habilitación para la actividad de arrendamiento náutico y documentación básica. Esta verificación no constituye una certificación jurídica exhaustiva ni exime a la empresa náutica de cumplir con toda la normativa aplicable a su actividad (Ley de Navegación Marítima, normativa de seguridad marítima, seguros obligatorios, etc.).</p>
+
+    <h2>6. Cancelaciones y meteorología</h2>
+    <p>Las condiciones de cancelación son definidas por cada empresa náutica y se comunican antes de formalizar el contrato. Las decisiones relativas a la navegación y a las condiciones meteorológicas corresponden a la empresa responsable de la embarcación y, en su caso, al patrón, conforme a la normativa de seguridad marítima aplicable.</p>
+
+    <h2>7. Responsabilidad de KAEL AUT</h2>
+    <p>KAEL AUT no es responsable de la disponibilidad real, el estado, la seguridad o la prestación efectiva del servicio de las embarcaciones publicadas, ni de los acuerdos económicos alcanzados entre cliente y empresa náutica. KAEL AUT responde, dentro de lo razonable, de la correcta transmisión de las solicitudes generadas a través de la Plataforma y del funcionamiento técnico del servicio de intermediación.</p>
+
+    <h2>8. Reclamaciones</h2>
+    <p>Si tu incidencia se refiere al funcionamiento de la Plataforma (por ejemplo, un fallo al enviar una solicitud), contacta con nosotros según se indica en la página de <a href="reclamaciones.html">reclamaciones</a>. Si tu incidencia se refiere a la prestación del servicio náutico (disponibilidad, estado del barco, patrón, cobro, cancelaciones), debes dirigirte en primer lugar a la empresa náutica gestora, sin perjuicio de que KAEL AUT pueda mediar de buena fe entre las partes.</p>
+
+    <p style="margin-top:32px; font-size:13px; color:var(--muted);">Estas condiciones son una plantilla base pensada para reflejar el modelo de intermediación descrito en la documentación del proyecto. Antes de publicar la web, hazlas revisar por un abogado especializado en Baleares, que debe adaptarlas al contrato real firmado con cada empresa náutica colaboradora.</p>
+  </div>
+</main>
+
+<div id="site-footer" style="margin-top:64px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/partials.js"></script>
+<script>
+  renderHeader(document.getElementById('site-header'), '', '../');
+  renderFooter(document.getElementById('site-footer'), '../');
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'), '../');
+</script>
+<script src="../js/main.js"></script>
+<script src="../js/reveal.js"></script>
+</body>
+</html>

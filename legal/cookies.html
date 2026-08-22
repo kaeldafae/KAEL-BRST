@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de cookies — KAEL AUT</title>
+<link rel="icon" href="../img/logomark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body data-page="legal">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" id="site-header"></header>
+
+<main id="main" class="container" style="padding-top:28px; padding-bottom:96px;">
+  <div class="legal-nav">
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="cookies.html"><strong>Cookies</strong></a>
+    <a href="condiciones-intermediacion.html">Condiciones de intermediación</a>
+    <a href="reclamaciones.html">Reclamaciones</a>
+  </div>
+
+  <div class="legal-doc">
+    <h1>Política de cookies</h1>
+    <div class="updated">Última actualización: <span data-year></span></div>
+
+    <p>Este sitio utiliza cookies propias y, si las aceptas, cookies analíticas de terceros, conforme al artículo 22.2 de la LSSI-CE y a la guía de la Agencia Española de Protección de Datos (AEPD).</p>
+
+    <h2>1. ¿Qué es una cookie?</h2>
+    <p>Una cookie es un pequeño archivo que se almacena en tu navegador al visitar una web y que permite recordar información sobre tu visita.</p>
+
+    <h2>2. Cookies que utilizamos</h2>
+    <ul>
+      <li><strong>Técnicas / necesarias (siempre activas):</strong> permiten el funcionamiento básico de la web, como recordar tu selección para la solicitud múltiple de barcos o tu decisión sobre esta banner de cookies. No requieren consentimiento.</li>
+      <li><strong>Analíticas (solo con tu consentimiento):</strong> nos ayudan a entender cómo se usa la web para mejorarla. Se activan únicamente si pulsas «Aceptar todas».</li>
+      <li><strong>Marketing / remarketing (solo con tu consentimiento, si en el futuro se activan):</strong> permitirían mostrar anuncios relevantes en otras webs. Actualmente no están activas por defecto.</li>
+    </ul>
+
+    <h2>3. Gestionar tu decisión</h2>
+    <p>Al entrar en la web te mostramos un aviso con dos opciones igual de accesibles: <strong>«Aceptar todas»</strong> y <strong>«Rechazar»</strong>. Puedes cambiar tu decisión en cualquier momento borrando las cookies de tu navegador o, en próximas versiones de esta web, desde un panel de preferencias.</p>
+
+    <h2>4. Cookies de terceros</h2>
+    <p>Si en el futuro se incorpora Google Analytics, un píxel de Meta/TikTok u otra herramienta de medición o publicidad, esta política se actualizará detallando cada cookie, su finalidad, duración y el tercero responsable, y su activación quedará condicionada a tu consentimiento previo.</p>
+
+    <p style="margin-top:32px; font-size:13px; color:var(--muted);">Plantilla base a completar por el titular del sitio antes de activar cualquier herramienta de analítica o publicidad de terceros.</p>
+  </div>
+</main>
+
+<div id="site-footer" style="margin-top:64px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
+
+<script src="../js/data.js"></script>
+<script src="../js/partials.js"></script>
+<script>
+  renderHeader(document.getElementById('site-header'), '', '../');
+  renderFooter(document.getElementById('site-footer'), '../');
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'), '../');
+</script>
+<script src="../js/main.js"></script>
+<script src="../js/reveal.js"></script>
+</body>
+</html>
