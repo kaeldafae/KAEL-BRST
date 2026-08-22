@@ -405,6 +405,7 @@ h1.h-hero, .h-hero { font-size: clamp(40px, 7vw, 84px); line-height: 0.95; lette
 .cookie-banner .btn-outline { border-color: #4A443A; color: #FAF8F3; }
 .cookie-banner .btn-outline:hover { background: #211D18; }
 .cookie-banner[hidden] { display: none; }
+body.has-cookie-banner { padding-bottom: var(--cookie-banner-space, 180px); }
 
 /* ---------- Legal pages ---------- */
 .legal-doc { max-width: 820px; }

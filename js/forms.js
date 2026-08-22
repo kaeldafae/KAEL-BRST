@@ -65,6 +65,7 @@ function wireSolicitudForm(formEl, opts) {
       pais: fd.get('pais') || '',
       comentarios: fd.get('comentarios') || '',
       marketingOptIn: !!fd.get('marketing'),
+      privacyAccepted: !!fd.get('privacidad_aceptada'),
       source: 'kael-brst-web'
     };
 

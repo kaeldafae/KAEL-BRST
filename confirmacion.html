@@ -49,12 +49,14 @@
 </main>
 
 <div id="site-footer" style="margin-top:96px;"></div>
+<div class="cookie-banner" data-cookie-banner hidden></div>
 
 <script src="js/data.js"></script>
 <script src="js/partials.js"></script>
 <script>
   renderHeader(document.getElementById('site-header'), '');
   renderFooter(document.getElementById('site-footer'));
+  renderCookieBanner(document.querySelector('[data-cookie-banner]'));
 </script>
 <script src="js/main.js"></script>
 <script src="js/reveal.js"></script>

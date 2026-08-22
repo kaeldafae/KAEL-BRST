@@ -25,7 +25,23 @@
     var saved = null;
     try { saved = localStorage.getItem(KEY); } catch (e) { /* storage blocked */ }
 
-    if (!saved) banner.hidden = false;
+    // El banner es position:fixed y puede tapar el contenido final en páginas
+    // cortas (p.ej. textos legales) que no llegan a tener scroll suficiente
+    // para dejarlo despejado. Reservamos espacio real al final del documento
+    // mientras el banner esté visible, para que siempre se pueda hacer scroll
+    // más allá de él y leer todo el texto.
+    function updateSpacer() {
+      var h = banner.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--cookie-banner-space', (h + 32) + 'px');
+    }
+    function onResize() { if (!banner.hidden) updateSpacer(); }
+
+    if (!saved) {
+      banner.hidden = false;
+      document.body.classList.add('has-cookie-banner');
+      updateSpacer();
+      window.addEventListener('resize', onResize);
+    }
 
     var acceptBtn = banner.querySelector('[data-cookie-accept]');
     var rejectBtn = banner.querySelector('[data-cookie-reject]');
@@ -33,6 +49,8 @@
     function decide(value) {
       try { localStorage.setItem(KEY, value); } catch (e) { /* ignore */ }
       banner.hidden = true;
+      document.body.classList.remove('has-cookie-banner');
+      window.removeEventListener('resize', onResize);
       document.dispatchEvent(new CustomEvent('cookie-consent', { detail: value }));
     }
     if (acceptBtn) acceptBtn.addEventListener('click', function () { decide('accepted'); });

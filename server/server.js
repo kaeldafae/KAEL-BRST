@@ -123,6 +123,7 @@ function validateLeadPayload(body) {
   if (!body.fecha) errors.push('fecha requerida');
   if (!body.personas || Number(body.personas) < 1) errors.push('número de personas inválido');
   if (!Array.isArray(body.boatIds) || !body.boatIds.length) errors.push('debe indicarse al menos una embarcación');
+  if (!body.privacyAccepted) errors.push('debe aceptarse la política de privacidad');
   if (body.company_website) errors.push('spam detectado'); // honeypot
   return errors;
 }
@@ -160,6 +161,8 @@ app.post('/api/solicitudes', rateLimited, async (req, res) => {
     pais: req.body.pais || '',
     comentarios: req.body.comentarios || '',
     marketingOptIn: !!req.body.marketingOptIn,
+    privacyAccepted: !!req.body.privacyAccepted,
+    privacyAcceptedAt: req.body.privacyAccepted ? now : null,
     events: [{ at: now, what: 'solicitud_creada' }]
   };
 
@@ -264,6 +267,14 @@ app.get('/healthz', (req, res) => res.json({ ok: true }));
 // ---------------------------------------------------------------------------
 // Frontend estático
 // ---------------------------------------------------------------------------
+// Bloquea el acceso público a la carpeta server/ ANTES del middleware estático:
+// contiene leads.json (datos personales de clientes — nombre, email, teléfono),
+// las credenciales de administrador y el propio código del backend. Sin este
+// bloqueo, express.static serviría cualquier archivo del repo, incluido ese.
+app.use((req, res, next) => {
+  if (/^\/server(\/|$)/i.test(req.path)) return res.status(404).sendFile(path.join(ROOT_DIR, '404.html'));
+  next();
+});
 app.use(express.static(ROOT_DIR, { extensions: ['html'] }));
 app.get('*', (req, res) => {
   res.status(404).sendFile(path.join(ROOT_DIR, '404.html'));
