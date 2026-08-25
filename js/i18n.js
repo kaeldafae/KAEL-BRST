@@ -742,6 +742,19 @@ const I18N = {
 };
 
 function getLang() {
+  // El parámetro ?lang= en la URL manda si está presente: es la señal que
+  // usa setLang() para que el idioma elegido se aplique de forma fiable en
+  // el propio reload que dispara, sin depender de que localStorage haya
+  // terminado de persistir a tiempo (bajo file:// hemos comprobado que un
+  // reload puede no ver todavía la escritura de la página anterior, aunque
+  // sí funciona siempre sobre http/https).
+  try {
+    var fromUrl = new URLSearchParams(window.location.search).get('lang');
+    if (fromUrl === 'es' || fromUrl === 'en') {
+      try { localStorage.setItem(I18N_LANG_KEY, fromUrl); } catch (e) { /* ignore */ }
+      return fromUrl;
+    }
+  } catch (e) { /* URLSearchParams no disponible */ }
   try {
     var saved = localStorage.getItem(I18N_LANG_KEY);
     if (saved === 'es' || saved === 'en') return saved;
@@ -751,6 +764,16 @@ function getLang() {
 
 function setLang(lang) {
   try { localStorage.setItem(I18N_LANG_KEY, lang); } catch (e) { /* ignore */ }
+  // Fijamos el idioma en la URL con replaceState (no navega) y forzamos
+  // después un reload de verdad: reload() es lo único que garantiza una
+  // recarga real y determinista en todos los protocolos que hemos probado
+  // (incluido file://), mientras que reasignar location.href con un query
+  // string distinto no siempre dispara una recarga completa bajo file://.
+  try {
+    var url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState(null, '', url.toString());
+  } catch (e) { /* ignore */ }
   window.location.reload();
 }
 
