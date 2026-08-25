@@ -1,7 +1,10 @@
 /* KAEL AUT — lógica de la página de inicio */
 (function () {
+  function marketList() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(', '); }
+  function marketListDot() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(' · '); }
+
   // Etiqueta de mercados en la cabecera del hero
-  document.getElementById('heroMarkets').textContent = Object.values(MARKETS).map(function (m) { return m.name; }).join(' · ');
+  document.getElementById('heroMarkets').textContent = marketListDot();
 
   // Estadística "N destinos" (recuento animado por reveal.js)
   var statMarkets = document.getElementById('statMarkets');
@@ -12,7 +15,7 @@
   Object.values(MARKETS).forEach(function (m) {
     var opt = document.createElement('option');
     opt.value = m.id;
-    opt.textContent = m.name;
+    opt.textContent = marketName(m.id);
     searchMarket.appendChild(opt);
   });
 
@@ -29,8 +32,8 @@
     document.getElementById('heroPhotoWrap').innerHTML =
       '<div class="empty-state card" style="height:100%; display:flex; align-items:center; justify-content:center; text-align:center; padding:32px;">' +
         '<div>' +
-          '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">Muy pronto</p>' +
-          '<p style="margin:0; color:var(--ink-soft);">Estamos verificando empresas náuticas en ' + Object.values(MARKETS).map(function (m) { return m.name; }).join(', ') + '.</p>' +
+          '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">' + t('home.heroCardTitle') + '</p>' +
+          '<p style="margin:0; color:var(--ink-soft);">' + t('home.heroEmptyDesc').replace('{markets}', marketList()) + '</p>' +
         '</div>' +
       '</div>';
     document.getElementById('heroNavBtns').hidden = true;
@@ -43,16 +46,16 @@
     var renderHero = function () {
       var b = BOATS[idx];
       heroImg.src = b.images[0];
-      heroImg.alt = b.name + ' — ' + b.type + ' en ' + b.zone;
+      heroImg.alt = b.name + ' — ' + typeName(b.type);
       heroName.textContent = b.name;
-      heroMeta.textContent = b.type + ' · ' + b.pax + ' personas · ' + b.port;
+      heroMeta.textContent = typeName(b.type) + ' · ' + b.pax + ' ' + t('common.personas') + ' · ' + b.port;
       heroOpenBtn.href = 'barco.html?id=' + b.id;
       heroThumbs.innerHTML = '';
       BOATS.forEach(function (bb, i) {
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = i === idx ? 'active' : '';
-        btn.setAttribute('aria-label', 'Ver ' + bb.name);
+        btn.setAttribute('aria-label', bb.name);
         btn.innerHTML = '<img src="' + bb.images[0] + '" alt="">';
         btn.addEventListener('click', function () { idx = i; renderHero(); });
         heroThumbs.appendChild(btn);
@@ -71,7 +74,7 @@
   var selector3dSection = document.querySelector('.selector3d');
   if (!BOATS.length) {
     selector3dSection.querySelector('.carousel3d-wrap').outerHTML =
-      '<div class="empty-state card">Todavía no hay embarcaciones publicadas. Estamos verificando empresas náuticas en ' + Object.values(MARKETS).map(function (m) { return m.name; }).join(', ') + '.</div>';
+      '<div class="empty-state card">' + t('home.selectorEmpty').replace('{markets}', marketList()) + '</div>';
   } else {
     var selector = createBoatSelector3D(document.querySelector('.carousel3d-wrap'), {
       panelEl: document.getElementById('selectedBoatPanel'),
@@ -89,7 +92,7 @@
     var renderCompanyTabs = function () {
       companyTabs.innerHTML = '';
       companyIds.forEach(function (id) {
-        var label = id === 'all' ? 'Todas las empresas' : COMPANIES[id].name;
+        var label = id === 'all' ? t('common.todasLasEmpresas') : COMPANIES[id].name;
         var count = boatsForCompany(id).length;
         var btn = document.createElement('button');
         btn.type = 'button';
@@ -110,7 +113,7 @@
   // Boats grid (featured)
   var grid = document.getElementById('boatsGrid');
   if (!BOATS.length) {
-    grid.outerHTML = '<div class="empty-state card">Todavía no hay embarcaciones publicadas. En cuanto una empresa confirme su colaboración, sus barcos aparecerán aquí.</div>';
+    grid.outerHTML = '<div class="empty-state card">' + t('home.boatsGridEmpty') + '</div>';
   } else {
     BOATS.forEach(function (b) {
       var c = companyOf(b);
@@ -120,10 +123,10 @@
       card.setAttribute('data-tier', c.tier || 'standard');
       card.innerHTML =
         '<div class="thumb"><img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '">' +
-        (b.destacado ? '<div class="badge-featured">Destacado</div>' : '<div class="type-badge">' + b.type + '</div>') +
+        (b.destacado ? '<div class="badge-featured">' + t('common.destacado') + '</div>' : '<div class="type-badge">' + typeName(b.type) + '</div>') +
         '</div>' +
-        '<div class="row"><div class="name">' + b.name + '</div><div class="price tabular">desde ' + euro(b.price) + '</div></div>' +
-        '<div class="summary">' + b.pax + ' personas · ' + b.length + ' · ' + b.skipper.toLowerCase() + '</div>' +
+        '<div class="row"><div class="name">' + b.name + '</div><div class="price tabular">' + t('common.desde') + ' ' + euro(b.price) + '</div></div>' +
+        '<div class="summary">' + b.pax + ' ' + t('common.personas') + ' · ' + b.length + ' · ' + skipperName(b.skipper).toLowerCase() + '</div>' +
         '<div class="company">' + c.name + '</div>';
       grid.appendChild(card);
     });
@@ -132,7 +135,7 @@
   // Companies teaser
   var teaser = document.getElementById('companiesTeaser');
   if (!Object.keys(COMPANIES).length) {
-    teaser.outerHTML = '<div class="empty-state card">Estamos verificando empresas náuticas en ' + Object.values(MARKETS).map(function (m) { return m.name; }).join(', ') + '. <a href="empresas.html">Consulta el estado por destino</a>.</div>';
+    teaser.outerHTML = '<div class="empty-state card">' + t('common.empresasVerificandoPrefix') + marketList() + '. <a href="empresas.html">' + t('home.consultaEstado') + '</a>.</div>';
   } else {
     Object.values(COMPANIES).forEach(function (c) {
       var n = boatsByCompany(c.id).length;
@@ -142,8 +145,8 @@
       el.setAttribute('data-tier', c.tier || 'standard');
       el.innerHTML =
         '<div class="cname">' + c.name + '</div>' +
-        '<div class="cmeta">' + c.base + ' · ' + n + ' embarcaci' + (n === 1 ? 'ón' : 'ones') + '</div>' +
-        '<div class="csla">Responde en ' + c.sla + '</div>';
+        '<div class="cmeta">' + c.base + ' · ' + n + ' ' + (n === 1 ? t('common.embarcacion') : t('common.embarcaciones')) + '</div>' +
+        '<div class="csla">' + t('common.respondeEn') + ' ' + c.sla + '</div>';
       teaser.appendChild(el);
     });
   }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solicitar a varias empresas — KAEL AUT</title>
+<title data-i18n="meta.solicitudMultipleTitle">Solicitar a varias empresas — KAEL AUT</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="img/logomark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,27 +18,27 @@
 <main id="main" class="container" style="padding-top:28px; padding-bottom:80px; max-width:960px;">
   <a class="back-link" href="barcos.html">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
-    Volver a resultados
+    <span data-i18n="solicitudMultiple.volverAResultados">Volver a resultados</span>
   </a>
-  <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em; margin:0 0 4px;">Solicitar disponibilidad a varias empresas</h1>
+  <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em; margin:0 0 4px;" data-i18n="solicitudMultiple.h1">Solicitar disponibilidad a varias empresas</h1>
   <p id="subtitle" style="font-size:15px; color:var(--muted); margin:0 0 28px;"></p>
 
   <div id="selectedList" style="display:grid; gap:12px; margin-bottom:32px;"></div>
 
   <form class="form-card" id="multiForm" novalidate>
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px;">
-      <label class="field"><span class="flabel">Fecha</span><input name="fecha" type="date" value="2026-08-22" required></label>
-      <label class="field"><span class="flabel">Personas</span><input name="personas" type="number" min="1" value="10" required></label>
-      <label class="field"><span class="flabel">Duración</span><select name="duracion"><option>Día completo</option><option>Medio día</option></select></label>
-      <label class="field"><span class="flabel">Nombre y apellidos</span><input name="nombre" required placeholder="Juan García"></label>
-      <label class="field"><span class="flabel">Email</span><input name="email" type="email" required placeholder="juan@email.com"></label>
-      <label class="field"><span class="flabel">Teléfono</span><input name="telefono" required placeholder="+34 600 000 000"></label>
+      <label class="field"><span class="flabel" data-i18n="solicitudMultiple.labelFecha">Fecha</span><input name="fecha" type="date" value="2026-08-22" required></label>
+      <label class="field"><span class="flabel" data-i18n="solicitudMultiple.labelPersonas">Personas</span><input name="personas" type="number" min="1" value="10" required></label>
+      <label class="field"><span class="flabel" data-i18n="solicitudMultiple.labelDuracion">Duración</span><select name="duracion"><option data-i18n="solicitudMultiple.diaCompleto">Día completo</option><option data-i18n="solicitudMultiple.medioDia">Medio día</option></select></label>
+      <label class="field"><span class="flabel" data-i18n="solicitudMultiple.labelNombre">Nombre y apellidos</span><input name="nombre" required placeholder="Juan García"></label>
+      <label class="field"><span class="flabel" data-i18n="solicitudMultiple.labelEmail">Email</span><input name="email" type="email" required placeholder="juan@email.com"></label>
+      <label class="field"><span class="flabel" data-i18n="solicitudMultiple.labelTelefono">Teléfono</span><input name="telefono" required placeholder="+34 600 000 000"></label>
     </div>
-    <label class="hp-field" aria-hidden="true">Empresa <input name="company_website" tabindex="-1" autocomplete="off"></label>
-    <label class="check-row" style="margin-top:24px;"><input type="checkbox" name="privacidad_aceptada" required><span>He leído y acepto la Política de Privacidad. Entiendo que mis datos se comunicarán a las empresas náuticas seleccionadas.</span></label>
+    <label class="hp-field" aria-hidden="true"><span data-i18n="solicitud.empresaHoneypot">Empresa</span> <input name="company_website" tabindex="-1" autocomplete="off"></label>
+    <label class="check-row" style="margin-top:24px;"><input type="checkbox" name="privacidad_aceptada" required><span data-i18n="solicitudMultiple.checkboxPrivacy">He leído y acepto la Política de Privacidad. Entiendo que mis datos se comunicarán a las empresas náuticas seleccionadas.</span></label>
     <button type="submit" class="btn btn-primary btn-block" id="multiSubmitBtn" style="margin-top:24px; padding:15px;">Enviar solicitud</button>
     <div class="form-status" data-form-status></div>
-    <p style="font-size:13px; color:var(--ink-soft); text-align:center; margin:12px 0 0;">Cada empresa responderá por separado. Ninguna solicitud implica pago ni reserva confirmada.</p>
+    <p style="font-size:13px; color:var(--ink-soft); text-align:center; margin:12px 0 0;" data-i18n="solicitudMultiple.cadaEmpresaNota">Cada empresa responderá por separado. Ninguna solicitud implica pago ni reserva confirmada.</p>
   </form>
 </main>
 
@@ -46,6 +46,7 @@
 <div class="cookie-banner" data-cookie-banner hidden></div>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/partials.js"></script>
 <script>
   renderHeader(document.getElementById('site-header'), 'barcos');
@@ -62,27 +63,28 @@
   var boats = ids.map(boatById).filter(Boolean);
 
   if (!boats.length) {
-    document.getElementById('selectedList').innerHTML = '<div class="empty-state card">No has seleccionado ninguna embarcación todavía. <a href="barcos.html">Vuelve al listado</a> y añade hasta 3 barcos a la solicitud múltiple.</div>';
+    document.getElementById('selectedList').innerHTML = '<div class="empty-state card">' + t('solicitudMultiple.emptyMsg') + '<a href="barcos.html">' + t('solicitudMultiple.vuelveAlListado') + '</a>' + t('solicitudMultiple.anadeHastaTres') + '</div>';
     document.getElementById('multiForm').style.display = 'none';
     document.getElementById('subtitle').textContent = '';
     return;
   }
 
-  document.getElementById('subtitle').textContent = 'Una sola solicitud, ' + boats.length + ' empresa' + (boats.length > 1 ? 's' : '') + ' náutica' + (boats.length > 1 ? 's' : '') + '. Cada una responderá con disponibilidad, precio y horario.';
+  document.getElementById('subtitle').textContent = t('solicitudMultiple.unaSolaSolicitudPrefix') + boats.length + ' ' + (boats.length > 1 ? t('solicitudMultiple.empresasNauticas') : t('solicitudMultiple.empresaNautica')) + t('solicitudMultiple.cadaUnaRespondera');
 
   var list = document.getElementById('selectedList');
   boats.forEach(function (b) {
     var c = companyOf(b);
     var row = document.createElement('div');
     row.className = 'result-mini';
+    row.setAttribute('data-tier', c.tier || 'standard');
     row.innerHTML =
       '<div class="thumb-sm"><img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '"></div>' +
-      '<div><div style="font-size:17px; font-weight:500;">' + b.name + '</div><div style="font-size:14px; color:var(--ink-soft); margin-top:2px;">' + b.type + ' · ' + b.pax + ' personas · ' + b.port + '</div><div style="font-size:13px; color:var(--muted); margin-top:6px;">' + c.name + ' · responde en ' + c.sla + '</div></div>' +
-      '<div style="text-align:right; font-size:16px; font-weight:500;" class="tabular">desde ' + euro(b.price) + '</div>';
+      '<div><div style="font-size:17px; font-weight:500;">' + b.name + '</div><div style="font-size:14px; color:var(--ink-soft); margin-top:2px;">' + typeName(b.type) + ' · ' + b.pax + ' ' + t('common.personas') + ' · ' + b.port + '</div><div style="font-size:13px; color:var(--muted); margin-top:6px;">' + c.name + ' · ' + t('solicitudMultiple.responde') + ' ' + c.sla + '</div></div>' +
+      '<div style="text-align:right; font-size:16px; font-weight:500;" class="tabular">' + t('common.desde') + ' ' + euro(b.price) + '</div>';
     list.appendChild(row);
   });
 
-  document.getElementById('multiSubmitBtn').textContent = 'Enviar solicitud a ' + boats.length + ' empresa' + (boats.length > 1 ? 's' : '');
+  document.getElementById('multiSubmitBtn').textContent = t('solicitudMultiple.enviarSolicitudA') + ' ' + boats.length + ' ' + (boats.length > 1 ? t('solicitudMultiple.empresasPlural') : t('solicitudMultiple.empresa'));
 
   wireSolicitudForm(document.getElementById('multiForm'), {
     boatIds: boats.map(function (b) { return b.id; }),

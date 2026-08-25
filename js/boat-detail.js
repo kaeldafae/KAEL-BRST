@@ -4,11 +4,11 @@
   var boat = boatById(qs.get('id')) || BOATS[0];
 
   if (!boat) {
-    document.title = 'Embarcación no disponible — KAEL AUT';
+    document.title = 'KAEL AUT';
     document.getElementById('boatContent').innerHTML =
       '<div class="empty-state card" style="grid-column:1/-1;">' +
-        '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">Todavía no hay embarcaciones publicadas.</p>' +
-        '<p style="margin:0 0 16px; color:var(--ink-soft);">Estamos incorporando empresas náuticas verificadas. <a href="barcos.html">Vuelve al listado</a> para ver la disponibilidad actual.</p>' +
+        '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">' + t('boat.emptyTitle') + '</p>' +
+        '<p style="margin:0 0 16px; color:var(--ink-soft);">' + t('boat.emptyDesc').replace('{link}', '<a href="barcos.html">' + t('boat.volverAlListado') + '</a>') + '</p>' +
       '</div>';
     return;
   }
@@ -16,12 +16,12 @@
   var company = companyOf(boat);
   document.getElementById('boatContent').setAttribute('data-tier', company.tier || 'standard');
 
-  document.title = boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL AUT';
-  var pageDesc = boat.name + ': ' + boat.pax + ' personas, ' + boat.length + ', gestionado por ' + company.name + '. Precio orientativo desde ' + euro(boat.price) + '.';
+  document.title = boat.name + ' — ' + typeName(boat.type) + ' — KAEL AUT';
+  var pageDesc = boat.name + ': ' + boat.pax + ' ' + t('common.personas') + ', ' + boat.length + ', ' + t('boat.gestionadoPor').toLowerCase() + ' ' + company.name + '. ' + t('common.precioOrientativo') + ' ' + t('common.desde') + ' ' + euro(boat.price) + '.';
   var descEl = document.getElementById('pageDesc');
   if (descEl) descEl.setAttribute('content', pageDesc);
   var ogTitleEl = document.getElementById('pageOgTitle');
-  if (ogTitleEl) ogTitleEl.setAttribute('content', boat.name + ' — ' + boat.type + ' en ' + boat.zone + ' — KAEL AUT');
+  if (ogTitleEl) ogTitleEl.setAttribute('content', boat.name + ' — ' + typeName(boat.type) + ' — KAEL AUT');
   var ogDescEl = document.getElementById('pageOgDesc');
   if (ogDescEl) ogDescEl.setAttribute('content', pageDesc);
   var ogImageEl = document.getElementById('pageOgImage');
@@ -46,47 +46,47 @@
           '<div><img loading="lazy" src="' + boat.images[2] + '" alt=""></div>' +
         '</div>' +
       '</div>' +
-      '<div class="eyebrow">' + boat.type + ' · ' + boat.port + '</div>' +
+      '<div class="eyebrow">' + typeName(boat.type) + ' · ' + boat.port + '</div>' +
       '<h1 style="font-size:38px; font-weight:500; letter-spacing:-0.02em; margin:6px 0 0;">' + boat.name + '</h1>' +
       '<p class="lede" style="margin-top:16px; max-width:62ch;">' + boat.description + '</p>' +
 
-      '<h3 style="font-size:22px; font-weight:500; margin:40px 0 16px;">Características</h3>' +
+      '<h3 style="font-size:22px; font-weight:500; margin:40px 0 16px;">' + t('boat.caracteristicas') + '</h3>' +
       '<div class="specs-table">' + specs + '</div>' +
 
       '<div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:40px;">' +
-        '<div><h3 style="font-size:22px; font-weight:500; margin:0 0 14px;">Incluido</h3>' + included + '</div>' +
-        '<div><h3 style="font-size:22px; font-weight:500; margin:0 0 14px;">No incluido</h3>' + excluded + '</div>' +
+        '<div><h3 style="font-size:22px; font-weight:500; margin:0 0 14px;">' + t('boat.incluido') + '</h3>' + included + '</div>' +
+        '<div><h3 style="font-size:22px; font-weight:500; margin:0 0 14px;">' + t('boat.noIncluido') + '</h3>' + excluded + '</div>' +
       '</div>' +
 
       '<div class="managed-by">' +
-        '<div class="eyebrow" style="margin-bottom:12px;">Gestionado por</div>' +
+        '<div class="eyebrow" style="margin-bottom:12px;">' + t('boat.gestionadoPor') + '</div>' +
         '<div class="top">' +
-          '<div><div class="cname">' + company.name + '</div><div class="cnote">Empresa verificada · tiempo medio de respuesta ' + company.sla + '</div></div>' +
-          '<a class="btn btn-ghost" href="empresa.html?id=' + company.id + '">Ver empresa</a>' +
+          '<div><div class="cname">' + company.name + '</div><div class="cnote">' + t('boat.tiempoRespuestaPrefix') + company.sla + '</div></div>' +
+          '<a class="btn btn-ghost" href="empresa.html?id=' + company.id + '">' + t('common.verEmpresa') + '</a>' +
         '</div>' +
-        '<p class="legal">Esta embarcación es ofrecida por ' + company.name + '. Las solicitudes realizadas desde KAEL AUT se remiten a la empresa para confirmar disponibilidad, horario, precio y condiciones. El contrato de alquiler y el pago del servicio se realizan directamente con la empresa náutica.</p>' +
+        '<p class="legal">' + t('boat.legalParagraphPrefix') + company.name + t('boat.legalParagraphSuffix') + '</p>' +
       '</div>' +
 
       '<div class="managed-by" style="margin-bottom:64px;">' +
-        '<h3 style="font-size:22px; font-weight:500; margin:0 0 12px;">Condiciones de cancelación</h3>' +
-        '<p class="legal" style="margin-top:0;">Definidas por ' + company.name + ' y comunicadas antes de formalizar el contrato. Las decisiones sobre navegación y meteorología corresponden a la empresa responsable de la embarcación y al patrón, conforme a la normativa aplicable.</p>' +
+        '<h3 style="font-size:22px; font-weight:500; margin:0 0 12px;">' + t('boat.condicionesCancelacion') + '</h3>' +
+        '<p class="legal" style="margin-top:0;">' + t('boat.cancelacionPrefix') + company.name + t('boat.cancelacionSuffix') + '</p>' +
       '</div>' +
     '</div>' +
 
     '<aside class="booking-card">' +
-      '<div class="eyebrow">Precio orientativo</div>' +
-      '<div class="price-lg tabular">desde ' + euro(boat.price) + '</div>' +
-      '<p style="font-size:13px; line-height:1.45; color:var(--muted); margin-top:8px;">Precio final sujeto a disponibilidad, horario, temporada, duración y condiciones de la empresa. Consulta qué incluye el precio.</p>' +
+      '<div class="eyebrow">' + t('common.precioOrientativo') + '</div>' +
+      '<div class="price-lg tabular">' + t('common.desde') + ' ' + euro(boat.price) + '</div>' +
+      '<p style="font-size:13px; line-height:1.45; color:var(--muted); margin-top:8px;">' + t('boat.precioNota') + '</p>' +
       '<div class="hr"></div>' +
       '<div style="display:grid; gap:14px;">' +
-        '<label class="field"><span class="flabel">Fecha</span><input type="date" id="dFecha" value="2026-08-20"></label>' +
+        '<label class="field"><span class="flabel">' + t('boat.labelFecha') + '</span><input type="date" id="dFecha" value="2026-08-20"></label>' +
         '<div class="field-row">' +
-          '<label class="field"><span class="flabel">Personas</span><input type="number" id="dPersonas" min="1" value="8"></label>' +
-          '<label class="field"><span class="flabel">Duración</span><select id="dDuracion"><option>Día completo</option><option>Medio día — mañana</option><option>Medio día — tarde</option></select></label>' +
+          '<label class="field"><span class="flabel">' + t('boat.labelPersonas') + '</span><input type="number" id="dPersonas" min="1" value="8"></label>' +
+          '<label class="field"><span class="flabel">' + t('boat.labelDuracion') + '</span><select id="dDuracion"><option>' + t('solicitud.diaCompleto') + '</option><option>' + t('solicitud.medioManana') + '</option><option>' + t('solicitud.medioTarde') + '</option></select></label>' +
         '</div>' +
       '</div>' +
-      '<a class="btn btn-primary btn-block" id="dGoSolicitud" style="margin-top:20px;" href="solicitud.html?id=' + boat.id + '">Solicitar reserva</a>' +
-      '<p style="font-size:13px; color:var(--ink-soft); text-align:center; margin-top:12px;">Consultamos disponibilidad. No se realiza ningún pago ahora.</p>' +
+      '<a class="btn btn-primary btn-block" id="dGoSolicitud" style="margin-top:20px;" href="solicitud.html?id=' + boat.id + '">' + t('common.solicitarReserva') + '</a>' +
+      '<p style="font-size:13px; color:var(--ink-soft); text-align:center; margin-top:12px;">' + t('boat.consultamosNota') + '</p>' +
     '</aside>';
 
   var goBtn = document.getElementById('dGoSolicitud');

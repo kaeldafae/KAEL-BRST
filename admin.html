@@ -20,25 +20,26 @@
 <body data-page="admin">
 <header class="site-header" id="site-header"></header>
 <main class="container" style="padding-top:28px; padding-bottom:96px;">
-  <h1 style="font-size:28px; font-weight:500;">Panel interno — solicitudes</h1>
-  <p style="font-size:14px; color:var(--muted); margin:6px 0 24px;">Backoffice mínimo (MVP). Requiere que el servidor de <code>server/</code> esté desplegado y ADMIN_USER/ADMIN_PASS configurados. Tu navegador te pedirá usuario y contraseña.</p>
+  <h1 style="font-size:28px; font-weight:500;" data-i18n="admin.h1">Panel interno — solicitudes</h1>
+  <p style="font-size:14px; color:var(--muted); margin:6px 0 24px;" data-i18n="admin.desc">Backoffice mínimo (MVP). Requiere que el servidor de server/ esté desplegado y ADMIN_USER/ADMIN_PASS configurados. Tu navegador te pedirá usuario y contraseña.</p>
   <div id="statsRow" style="display:flex; gap:24px; margin-bottom:24px; flex-wrap:wrap;"></div>
   <div style="overflow-x:auto;">
     <table id="leadsTable">
       <thead>
         <tr>
-          <th>Referencia</th><th>Fecha creación</th><th>Barco(s)</th><th>Cliente</th><th>Contacto</th>
-          <th>Fecha solicitada</th><th>Personas</th><th>Estado</th><th>Importe</th>
+          <th data-i18n="admin.thRef">Referencia</th><th data-i18n="admin.thFecha">Fecha creación</th><th data-i18n="admin.thBarcos">Barco(s)</th><th data-i18n="admin.thCliente">Cliente</th><th data-i18n="admin.thContacto">Contacto</th>
+          <th data-i18n="admin.thFechaSol">Fecha solicitada</th><th data-i18n="admin.thPersonas">Personas</th><th data-i18n="admin.thEstado">Estado</th><th data-i18n="admin.thImporte">Importe</th>
         </tr>
       </thead>
-      <tbody id="leadsBody"><tr><td colspan="9">Cargando…</td></tr></tbody>
+      <tbody id="leadsBody"><tr><td colspan="9" data-i18n="admin.cargando">Cargando…</td></tr></tbody>
     </table>
   </div>
 </main>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/partials.js"></script>
-<script>renderHeader(document.getElementById('site-header'), '');</script>
+<script>renderHeader(document.getElementById('site-header'), ''); applyI18n();</script>
 <script>
 (function () {
   var base = window.KAEL_API_BASE || '/api';
@@ -47,14 +48,14 @@
     return r.json();
   }).then(function (leads) {
     var body = document.getElementById('leadsBody');
-    if (!leads.length) { body.innerHTML = '<tr><td colspan="9">Todavía no hay solicitudes.</td></tr>'; return; }
+    if (!leads.length) { body.innerHTML = '<tr><td colspan="9">' + t('admin.sinSolicitudes') + '</td></tr>'; return; }
 
     var pending = leads.filter(function (l) { return l.status === 'pendiente_de_empresa'; }).length;
     var confirmed = leads.filter(function (l) { return l.status === 'confirmada'; }).length;
     document.getElementById('statsRow').innerHTML =
-      statCard(leads.length, 'Solicitudes totales') +
-      statCard(pending, 'Pendientes de empresa') +
-      statCard(confirmed, 'Confirmadas');
+      statCard(leads.length, t('admin.statTotales')) +
+      statCard(pending, t('admin.statPendientes')) +
+      statCard(confirmed, t('admin.statConfirmadas'));
 
     body.innerHTML = '';
     leads.forEach(function (l) {
@@ -72,7 +73,7 @@
       body.appendChild(tr);
     });
   }).catch(function (err) {
-    document.getElementById('leadsBody').innerHTML = '<tr><td colspan="9">No se pudo cargar (¿backend desplegado y configurado?): ' + err.message + '</td></tr>';
+    document.getElementById('leadsBody').innerHTML = '<tr><td colspan="9">' + t('admin.errorCarga') + err.message + '</td></tr>';
   });
 
   function statCard(n, label) {

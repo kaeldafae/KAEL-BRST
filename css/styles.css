@@ -92,8 +92,9 @@ button { cursor: pointer; }
 .main-nav a.nav-link { font-size: 15px; color: var(--ink-soft); }
 .main-nav a.nav-link:hover, .main-nav a.nav-link.active { color: var(--ink); }
 .lang-switch { display: flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; font-size: 12px; letter-spacing: 0.04em; }
-.lang-switch span { padding: 5px 11px; color: var(--muted); }
-.lang-switch span.active { background: var(--ink); color: var(--bg); }
+.lang-switch span { padding: 5px 11px; color: var(--muted); cursor: pointer; transition: background .12s, color .12s; }
+.lang-switch span:hover:not(.active) { color: var(--ink); }
+.lang-switch span.active { background: var(--ink); color: var(--bg); cursor: default; }
 .nav-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; }
 
 @media (max-width: 940px) {

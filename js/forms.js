@@ -69,7 +69,7 @@ function wireSolicitudForm(formEl, opts) {
       source: 'kael-aut-web'
     };
 
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = t('common.enviando'); }
     if (statusEl) { statusEl.textContent = ''; statusEl.className = 'form-status'; }
 
     var result = await submitLead(payload);

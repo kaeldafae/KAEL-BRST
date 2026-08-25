@@ -1,6 +1,8 @@
 /* KAEL AUT — comportamiento compartido: menú móvil, año de footer, cookies */
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
+    applyI18n();
+
     var toggle = document.querySelector('[data-nav-toggle]');
     var nav = document.querySelector('[data-main-nav]');
     if (toggle && nav) {

@@ -42,13 +42,16 @@ function boatsByMarket(marketId) { return BOATS.filter(b => { var c = companyOf(
 
 function boatSpecs(b) {
   return [
-    { k: 'Tipo', v: b.type },
-    { k: 'Capacidad autorizada', v: b.pax + ' personas' },
-    { k: 'Eslora', v: b.length },
-    { k: 'Puerto base', v: b.port },
-    { k: 'Patrón', v: b.skipper },
-    { k: 'Camarotes', v: String(b.camarotes) },
-    { k: 'Baños', v: String(b.banos) },
-    { k: 'Combustible', v: 'No incluido, se liquida al regreso' }
+    { k: t('boat.specs.tipo'), v: typeName(b.type) },
+    { k: t('boat.specs.capacidad'), v: b.pax + ' ' + t('common.personas') },
+    { k: t('boat.specs.eslora'), v: b.length },
+    { k: t('boat.specs.puertoBase'), v: b.port },
+    { k: t('boat.specs.patron'), v: skipperName(b.skipper) },
+    { k: t('boat.specs.camarotes'), v: String(b.camarotes) },
+    { k: t('boat.specs.banos'), v: String(b.banos) },
+    { k: t('boat.specs.combustible'), v: t('boat.specs.combustibleValor') }
   ];
 }
+
+function typeName(type) { return t('common.types.' + type) || type; }
+function skipperName(skipper) { return t('catalog.skippers.' + skipper) || skipper; }

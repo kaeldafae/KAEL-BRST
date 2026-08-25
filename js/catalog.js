@@ -50,33 +50,36 @@
   function renderMultiBtn() {
     var btn = document.getElementById('multiBtn');
     if (state.multi.length) {
-      btn.textContent = 'Continuar con ' + state.multi.length + ' barco' + (state.multi.length > 1 ? 's' : '');
+      btn.textContent = t('catalog.continuarCon') + ' ' + state.multi.length + ' ' + (state.multi.length > 1 ? t('catalog.barcos') : t('catalog.barco'));
       btn.className = 'btn btn-dark btn-block';
     } else {
-      btn.textContent = 'Selecciona barcos abajo';
+      btn.textContent = t('catalog.selectBoatsBelow');
       btn.className = 'btn btn-outline btn-block';
     }
   }
+
+  function marketList() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(', '); }
 
   function renderResults() {
     var list = filtered();
 
     if (!BOATS.length) {
-      document.getElementById('resultCount').textContent = 'Muy pronto';
+      document.getElementById('resultCount').textContent = t('catalog.muyPronto');
       document.getElementById('resultsList').innerHTML =
         '<div class="empty-state card">' +
-          '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">Todavía no hay embarcaciones publicadas.</p>' +
-          '<p style="margin:0; color:var(--ink-soft);">Estamos verificando empresas náuticas en ' + Object.values(MARKETS).map(function (m) { return m.name; }).join(', ') + '. En cuanto una empresa confirme su colaboración, sus barcos aparecerán aquí.</p>' +
+          '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">' + t('catalog.emptyAllTitle') + '</p>' +
+          '<p style="margin:0; color:var(--ink-soft);">' + t('catalog.emptyAllDesc').replace('{markets}', marketList()) + '</p>' +
         '</div>';
       return;
     }
 
-    document.getElementById('resultCount').textContent = list.length + ' embarcaci' + (list.length === 1 ? 'ón' : 'ones') + ' disponibles para solicitud';
+    var label = list.length === 1 ? t('common.embarcacion') : t('common.embarcaciones');
+    document.getElementById('resultCount').textContent = t('catalog.resultCount').replace('{n}', list.length).replace('{label}', label);
     var container = document.getElementById('resultsList');
     container.innerHTML = '';
 
     if (!list.length) {
-      container.innerHTML = '<div class="empty-state card">No hay embarcaciones con esos filtros. Prueba a quitar alguno o <a href="asistente.html">usa el asistente</a>.</div>';
+      container.innerHTML = '<div class="empty-state card">' + t('catalog.emptyFiltered') + '<a href="asistente.html">' + t('catalog.usaElAsistente') + '</a>.</div>';
       return;
     }
 
@@ -89,23 +92,23 @@
       card.innerHTML =
         '<a class="result-photo" href="barco.html?id=' + b.id + '">' +
           '<img loading="lazy" src="' + b.images[0] + '" alt="' + b.name + '">' +
-          (b.destacado ? '<div class="badge-featured" style="position:absolute;left:12px;top:12px;">Destacado</div>' : '') +
+          (b.destacado ? '<div class="badge-featured" style="position:absolute;left:12px;top:12px;">' + t('common.destacado') + '</div>' : '') +
         '</a>' +
         '<div class="result-body">' +
           '<a class="rname" href="barco.html?id=' + b.id + '">' + b.name + '</a>' +
-          '<div class="rtype">' + b.type + ' · ' + b.port + '</div>' +
+          '<div class="rtype">' + typeName(b.type) + ' · ' + b.port + '</div>' +
           '<div class="result-specs">' +
-            '<div><div class="k">Capacidad</div><div class="v tabular">' + b.pax + ' personas</div></div>' +
-            '<div><div class="k">Eslora</div><div class="v tabular">' + b.length + '</div></div>' +
-            '<div><div class="k">Patrón</div><div class="v">' + b.skipper + '</div></div>' +
+            '<div><div class="k">' + t('catalog.capacidad') + '</div><div class="v tabular">' + b.pax + ' ' + t('common.personas') + '</div></div>' +
+            '<div><div class="k">' + t('catalog.eslora') + '</div><div class="v tabular">' + b.length + '</div></div>' +
+            '<div><div class="k">' + t('catalog.patron') + '</div><div class="v">' + skipperName(b.skipper) + '</div></div>' +
           '</div>' +
-          '<div class="result-trust"><span class="dot"></span><span>' + c.name + ' · empresa verificada · responde en ' + c.sla + '</span></div>' +
+          '<div class="result-trust"><span class="dot"></span><span>' + c.name + t('catalog.empresaVerificadaTrust') + c.sla + '</span></div>' +
         '</div>' +
         '<div class="result-price">' +
-          '<div><div class="plabel">Precio orientativo</div><div class="pval tabular">desde ' + euro(b.price) + '</div><div class="pnote">Precio final sujeto a disponibilidad, temporada y condiciones de la empresa.</div></div>' +
+          '<div><div class="plabel">' + t('common.precioOrientativo') + '</div><div class="pval tabular">' + t('common.desde') + ' ' + euro(b.price) + '</div><div class="pnote">' + t('catalog.precioFinalNota') + '</div></div>' +
           '<div class="result-actions">' +
-            '<a class="btn btn-primary" href="solicitud.html?id=' + b.id + '">Solicitar reserva</a>' +
-            '<button class="btn btn-ghost" type="button" data-multi-toggle="' + b.id + '">' + (selected ? 'Añadido a la solicitud múltiple' : 'Añadir a solicitud múltiple') + '</button>' +
+            '<a class="btn btn-primary" href="solicitud.html?id=' + b.id + '">' + t('common.solicitarReserva') + '</a>' +
+            '<button class="btn btn-ghost" type="button" data-multi-toggle="' + b.id + '">' + (selected ? t('catalog.anadidoSolicitudMultiple') : t('catalog.anadirSolicitudMultiple')) + '</button>' +
           '</div>' +
         '</div>';
       container.appendChild(card);
@@ -115,7 +118,7 @@
       btn.addEventListener('click', function () {
         var id = btn.getAttribute('data-multi-toggle');
         if (!state.multi.includes(id) && state.multi.length >= 3) {
-          alert('Puedes seleccionar hasta 3 embarcaciones para una solicitud múltiple.');
+          alert(t('catalog.maxTresAlert'));
           return;
         }
         toggle(state.multi, id);
@@ -130,9 +133,9 @@
     if (filtersPanel) filtersPanel.hidden = !BOATS.length;
     if (!BOATS.length) { renderResults(); return; }
 
-    renderChips('typeFilters', 'types', ['Lancha', 'Yate', 'Catamarán'].map(function (v) { return { value: v, label: v }; }));
-    renderChips('marketFilters', 'markets', Object.values(MARKETS).map(function (m) { return { value: m.id, label: m.name }; }));
-    renderChips('skipperFilters', 'skippers', ['Con patrón', 'Sin patrón'].map(function (v) { return { value: v, label: v }; }));
+    renderChips('typeFilters', 'types', ['Lancha', 'Yate', 'Catamarán'].map(function (v) { return { value: v, label: typeName(v) }; }));
+    renderChips('marketFilters', 'markets', Object.values(MARKETS).map(function (m) { return { value: m.id, label: marketName(m.id) }; }));
+    renderChips('skipperFilters', 'skippers', ['Con patrón', 'Sin patrón'].map(function (v) { return { value: v, label: skipperName(v) }; }));
     renderResults();
     renderMultiBtn();
   }

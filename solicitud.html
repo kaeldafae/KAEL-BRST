@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solicitud de reserva — KAEL AUT</title>
+<title data-i18n="meta.solicitudTitle">Solicitud de reserva — KAEL AUT</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="img/logomark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,51 +18,58 @@
 <main id="main" class="container" style="padding-top:28px; padding-bottom:80px; max-width:1080px;">
   <a class="back-link" id="backLink" href="barcos.html">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
-    Volver a la ficha
+    <span data-i18n="solicitud.volverALaFicha">Volver a la ficha</span>
   </a>
-  <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em; margin:0 0 4px;">Solicitud de reserva</h1>
-  <p style="font-size:15px; color:var(--muted); margin:0 0 28px;">Pendiente de confirmación por la empresa náutica. No se realiza ningún pago ahora.</p>
+  <h1 style="font-size:34px; font-weight:500; letter-spacing:-0.01em; margin:0 0 4px;" data-i18n="solicitud.h1">Solicitud de reserva</h1>
+  <p style="font-size:15px; color:var(--muted); margin:0 0 28px;" data-i18n="solicitud.subtitle">Pendiente de confirmación por la empresa náutica. No se realiza ningún pago ahora.</p>
 
   <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,340px); gap:32px; align-items:start;">
     <form class="form-card" id="solForm" novalidate>
-      <div class="eyebrow" style="margin-bottom:18px;">Datos de la reserva</div>
+      <div class="eyebrow" style="margin-bottom:18px;" data-i18n="solicitud.datosReserva">Datos de la reserva</div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-        <label class="field"><span class="flabel">Fecha</span><input class="mt-0" name="fecha" type="date" value="2026-08-20" required></label>
-        <label class="field"><span class="flabel">Número de personas</span><input name="personas" type="number" min="1" value="8" required></label>
-        <label class="field"><span class="flabel">Duración deseada</span>
-          <select name="duracion"><option>Día completo</option><option>Medio día — mañana</option><option>Medio día — tarde</option></select>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelFecha">Fecha</span><input class="mt-0" name="fecha" type="date" value="2026-08-20" required></label>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelPersonas">Número de personas</span><input name="personas" type="number" min="1" value="8" required></label>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelDuracion">Duración deseada</span>
+          <select name="duracion"><option data-i18n="solicitud.diaCompleto">Día completo</option><option data-i18n="solicitud.medioManana">Medio día — mañana</option><option data-i18n="solicitud.medioTarde">Medio día — tarde</option></select>
         </label>
-        <label class="field"><span class="flabel">Horario preferido</span><input name="horario" type="time" value="10:00"></label>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelHorario">Horario preferido</span><input name="horario" type="time" value="10:00"></label>
       </div>
 
       <div class="hr"></div>
-      <div class="eyebrow" style="margin-bottom:18px;">Tus datos</div>
+      <div class="eyebrow" style="margin-bottom:18px;" data-i18n="solicitud.tusDatos">Tus datos</div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-        <label class="field"><span class="flabel">Nombre y apellidos</span><input name="nombre" required placeholder="Juan García"></label>
-        <label class="field"><span class="flabel">Email</span><input name="email" type="email" required placeholder="juan@email.com"></label>
-        <label class="field"><span class="flabel">Teléfono</span><input name="telefono" required placeholder="+34 600 000 000"></label>
-        <label class="field"><span class="flabel">País</span>
-          <select name="pais"><option>España</option><option>Reino Unido</option><option>Italia</option><option>Francia</option><option>Alemania</option><option>Otro</option></select>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelNombre">Nombre y apellidos</span><input name="nombre" required placeholder="Juan García"></label>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelEmail">Email</span><input name="email" type="email" required placeholder="juan@email.com"></label>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelTelefono">Teléfono</span><input name="telefono" required placeholder="+34 600 000 000"></label>
+        <label class="field"><span class="flabel" data-i18n="solicitud.labelPais">País</span>
+          <select name="pais">
+            <option value="España" data-i18n="solicitud.paises.España">España</option>
+            <option value="Reino Unido" data-i18n="solicitud.paises.Reino Unido">Reino Unido</option>
+            <option value="Italia" data-i18n="solicitud.paises.Italia">Italia</option>
+            <option value="Francia" data-i18n="solicitud.paises.Francia">Francia</option>
+            <option value="Alemania" data-i18n="solicitud.paises.Alemania">Alemania</option>
+            <option value="Otro" data-i18n="solicitud.paises.Otro">Otro</option>
+          </select>
         </label>
       </div>
       <label class="field" style="margin-top:16px;">
-        <span class="flabel">Comentarios o preferencias</span>
-        <textarea name="comentarios" rows="3" placeholder="Nos gustaría salir sobre las 10:00 y visitar Formentera."></textarea>
+        <span class="flabel" data-i18n="solicitud.labelComentarios">Comentarios o preferencias</span>
+        <textarea name="comentarios" rows="3" placeholder="Nos gustaría salir sobre las 10:00 y visitar Formentera." data-i18n-placeholder="solicitud.comentariosPlaceholder"></textarea>
       </label>
 
       <!-- honeypot anti-spam -->
       <label class="hp-field" aria-hidden="true">
-        Empresa <input name="company_website" tabindex="-1" autocomplete="off">
+        <span data-i18n="solicitud.empresaHoneypot">Empresa</span> <input name="company_website" tabindex="-1" autocomplete="off">
       </label>
 
       <div class="hr"></div>
-      <p style="font-size:13px; line-height:1.55; color:var(--ink-soft); margin:0 0 16px;">Al enviar esta solicitud, tus datos serán tratados por KAEL AUT para gestionar tu solicitud de alquiler y comunicarla a la empresa náutica correspondiente. La empresa podrá utilizar tus datos para contactarte y gestionar la posible contratación del servicio. Consulta nuestra <a href="legal/privacidad.html">Política de Privacidad</a>.</p>
-      <label class="check-row"><input type="checkbox" name="privacidad_aceptada" required><span>He leído y acepto la Política de Privacidad.</span></label>
-      <label class="check-row"><input type="checkbox" name="marketing"><span style="color:var(--ink-soft);">Quiero recibir ofertas y novedades. <span style="color:var(--muted);">(opcional)</span></span></label>
+      <p style="font-size:13px; line-height:1.55; color:var(--ink-soft); margin:0 0 16px;"><span data-i18n="solicitud.privacyPrefix">Al enviar esta solicitud, tus datos serán tratados por KAEL AUT para gestionar tu solicitud de alquiler y comunicarla a la empresa náutica correspondiente. La empresa podrá utilizar tus datos para contactarte y gestionar la posible contratación del servicio. Consulta nuestra </span><a href="legal/privacidad.html" data-i18n="solicitud.politicaPrivacidad">Política de Privacidad</a>.</p>
+      <label class="check-row"><input type="checkbox" name="privacidad_aceptada" required><span data-i18n="solicitud.checkboxPrivacy">He leído y acepto la Política de Privacidad.</span></label>
+      <label class="check-row"><input type="checkbox" name="marketing"><span style="color:var(--ink-soft);"><span data-i18n="solicitud.checkboxMarketing">Quiero recibir ofertas y novedades. </span><span style="color:var(--muted);" data-i18n="solicitud.opcional">(opcional)</span></span></label>
 
-      <button type="submit" class="btn btn-primary btn-block" style="margin-top:24px; padding:15px;">Solicitar reserva</button>
+      <button type="submit" class="btn btn-primary btn-block" style="margin-top:24px; padding:15px;" data-i18n="common.solicitarReserva">Solicitar reserva</button>
       <div class="form-status" data-form-status></div>
-      <p style="font-size:13px; color:var(--ink-soft); text-align:center; margin:12px 0 0;">Esta solicitud no implica ningún pago ni una reserva confirmada.</p>
+      <p style="font-size:13px; color:var(--ink-soft); text-align:center; margin:12px 0 0;" data-i18n="solicitud.noImplicaPago">Esta solicitud no implica ningún pago ni una reserva confirmada.</p>
     </form>
 
     <aside class="summary-card" id="summaryCard"></aside>
@@ -73,6 +80,7 @@
 <div class="cookie-banner" data-cookie-banner hidden></div>
 
 <script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
 <script src="js/partials.js"></script>
 <script>
   renderHeader(document.getElementById('site-header'), 'barcos');
@@ -90,7 +98,7 @@
   if (!boat) {
     document.getElementById('solForm').style.display = 'none';
     document.getElementById('summaryCard').innerHTML =
-      '<div class="empty-state card">Todavía no hay embarcaciones publicadas. <a href="barcos.html">Vuelve al listado</a>.</div>';
+      '<div class="empty-state card">' + t('solicitud.emptyMsg') + '<a href="barcos.html">' + t('solicitud.volverAlListado') + '</a>.</div>';
     return;
   }
 
@@ -104,11 +112,11 @@
     '<div class="sphoto"><img src="' + boat.images[0] + '" alt="' + boat.name + '"></div>' +
     '<div class="sbody">' +
       '<div style="font-size:19px; font-weight:500;">' + boat.name + '</div>' +
-      '<div style="font-size:14px; color:var(--muted); margin-top:2px;">' + boat.type + ' · ' + boat.port + ' · ' + boat.pax + ' personas</div>' +
+      '<div style="font-size:14px; color:var(--muted); margin-top:2px;">' + typeName(boat.type) + ' · ' + boat.port + ' · ' + boat.pax + ' ' + t('common.personas') + '</div>' +
       '<div class="hr"></div>' +
-      '<div class="kv-row"><span class="k">Empresa</span><span>' + company.name + '</span></div>' +
-      '<div class="kv-row"><span class="k">Precio orientativo</span><span class="tabular">desde ' + euro(boat.price) + '</span></div>' +
-      '<div class="banner-warn" style="margin-top:18px; padding:14px;"><p style="font-size:13px;">Estás enviando una <strong>solicitud</strong>. La reserva no queda confirmada hasta que ' + company.name + ' confirme disponibilidad y condiciones contigo.</p></div>' +
+      '<div class="kv-row"><span class="k">' + t('solicitud.empresaLabel') + '</span><span>' + company.name + '</span></div>' +
+      '<div class="kv-row"><span class="k">' + t('solicitud.precioOrientativo') + '</span><span class="tabular">' + t('common.desde') + ' ' + euro(boat.price) + '</span></div>' +
+      '<div class="banner-warn" style="margin-top:18px; padding:14px;"><p style="font-size:13px;">' + t('solicitud.warnPrefix') + '<strong>' + t('solicitud.warnBold') + '</strong>' + t('solicitud.warnSuffix') + company.name + t('solicitud.warnSuffix2') + '</p></div>' +
     '</div>';
 
   wireSolicitudForm(document.getElementById('solForm'), { boatIds: [boat.id], companyIds: [company.id] });

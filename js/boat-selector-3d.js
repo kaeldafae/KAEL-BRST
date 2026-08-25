@@ -44,11 +44,11 @@ function createBoatSelector3D(root, opts) {
       card.setAttribute('data-index', String(i));
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '-1');
-      card.setAttribute('aria-label', 'Seleccionar ' + b.name);
+      card.setAttribute('aria-label', t('common.seleccionar') + ' ' + b.name);
       const company = companyOf(b);
       card.innerHTML =
         '<img src="' + b.images[0] + '" alt="' + b.name + '" loading="lazy">' +
-        '<div class="c3d-label"><div class="cname">' + b.name + '</div><div class="cmeta">' + b.type + ' · ' + company.name + '</div></div>';
+        '<div class="c3d-label"><div class="cname">' + b.name + '</div><div class="cmeta">' + typeName(b.type) + ' · ' + company.name + '</div></div>';
       card.addEventListener('click', () => {
         if (Number(card.getAttribute('data-index')) === index) {
           if (opts.onOpen) opts.onOpen(boats[index]);
@@ -97,11 +97,11 @@ function createBoatSelector3D(root, opts) {
     panel.innerHTML =
       '<div class="sbp-company">' + company.name + '</div>' +
       '<div class="sbp-name">' + boat.name + '</div>' +
-      '<div class="sbp-meta">' + boat.type + ' · ' + boat.pax + ' personas · ' + boat.port + '</div>' +
-      '<div class="sbp-price tabular">desde ' + euro(boat.price) + '</div>' +
+      '<div class="sbp-meta">' + typeName(boat.type) + ' · ' + boat.pax + ' ' + t('common.personas') + ' · ' + boat.port + '</div>' +
+      '<div class="sbp-price tabular">' + t('common.desde') + ' ' + euro(boat.price) + '</div>' +
       '<div class="sbp-actions">' +
-        '<a class="btn btn-primary btn-block" href="barco.html?id=' + boat.id + '">Ver esta embarcación</a>' +
-        '<a class="btn btn-outline btn-block" href="solicitud.html?id=' + boat.id + '">Solicitar reserva</a>' +
+        '<a class="btn btn-primary btn-block" href="barco.html?id=' + boat.id + '">' + t('common.verEstaEmbarcacion') + '</a>' +
+        '<a class="btn btn-outline btn-block" href="solicitud.html?id=' + boat.id + '">' + t('common.solicitarReserva') + '</a>' +
       '</div>';
   }
 
