@@ -1,4 +1,4 @@
-/* KAEL AUT — envío de solicitudes de reserva.
+/* KAEL — envío de solicitudes de reserva.
    Intenta enviar al backend (server/); si no está desplegado, guarda la solicitud
    localmente (modo demo) para que el flujo siga siendo funcional en pruebas. */
 

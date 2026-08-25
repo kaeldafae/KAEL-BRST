@@ -1,4 +1,4 @@
-/* KAEL AUT — sistema de idiomas (ES/EN).
+/* KAEL — sistema de idiomas (ES/EN).
    getLang()/setLang() persisten el idioma elegido en localStorage. t(key)
    busca la cadena en el idioma activo, con fallback a español si falta.
    applyI18n() traduce el marcado estático marcado con data-i18n /
@@ -14,15 +14,15 @@ const I18N = {
     nav: { barcos: 'Barcos', comoFunciona: 'Cómo funciona', empresas: 'Empresas náuticas', asistente: 'No sé qué barco elegir', solicitarBarco: 'Solicitar barco', menu: 'Menú' },
     header: { destinosSuffix: ' destinos' },
     footer: {
-      note: 'KAEL AUT es una plataforma de intermediación. No presta el servicio náutico ni cobra el alquiler. Las embarcaciones son ofrecidas por empresas náuticas verificadas en varios destinos.',
+      note: 'KAEL es una plataforma de intermediación. No presta el servicio náutico ni cobra el alquiler. Las embarcaciones son ofrecidas por empresas náuticas verificadas en varios destinos.',
       destinosTitle: 'Destinos',
       empresasTitle: 'Empresas',
       legalTitle: 'Legal',
       publicarFlota: 'Publicar tus embarcaciones',
       procesoVerificacion: 'Proceso de verificación',
       accesoPanel: 'Acceso al panel',
-      rightsReserved: 'KAEL AUT. Todos los derechos reservados.',
-      disclaimer: 'KAEL AUT no vende barcos ni presta servicios náuticos. Actúa como intermediario digital.'
+      rightsReserved: 'KAEL. Todos los derechos reservados.',
+      disclaimer: 'KAEL no vende barcos ni presta servicios náuticos. Actúa como intermediario digital.'
     },
     cookie: {
       pre: 'Usamos cookies técnicas necesarias para el funcionamiento de la web y, si lo aceptas, cookies analíticas para entender cómo se usa. Puedes cambiar tu decisión en cualquier momento desde la ',
@@ -121,7 +121,7 @@ const I18N = {
       volverAlListado: 'Vuelve al listado',
       caracteristicas: 'Características', incluido: 'Incluido', noIncluido: 'No incluido',
       gestionadoPor: 'Gestionado por', tiempoRespuestaPrefix: 'Empresa verificada · tiempo medio de respuesta ',
-      legalParagraphPrefix: 'Esta embarcación es ofrecida por ', legalParagraphSuffix: '. Las solicitudes realizadas desde KAEL AUT se remiten a la empresa para confirmar disponibilidad, horario, precio y condiciones. El contrato de alquiler y el pago del servicio se realizan directamente con la empresa náutica.',
+      legalParagraphPrefix: 'Esta embarcación es ofrecida por ', legalParagraphSuffix: '. Las solicitudes realizadas desde KAEL se remiten a la empresa para confirmar disponibilidad, horario, precio y condiciones. El contrato de alquiler y el pago del servicio se realizan directamente con la empresa náutica.',
       condicionesCancelacion: 'Condiciones de cancelación',
       cancelacionPrefix: 'Definidas por ', cancelacionSuffix: ' y comunicadas antes de formalizar el contrato. Las decisiones sobre navegación y meteorología corresponden a la empresa responsable de la embarcación y al patrón, conforme a la normativa aplicable.',
       precioNota: 'Precio final sujeto a disponibilidad, horario, temporada, duración y condiciones de la empresa. Consulta qué incluye el precio.',
@@ -131,7 +131,7 @@ const I18N = {
     },
     companies: {
       h1: 'Empresas náuticas verificadas',
-      lede: 'Ninguna embarcación se publica en KAEL AUT sin verificar la identidad de la empresa, su habilitación para la actividad de arrendamiento náutico, documentación y seguros. Si tienes una empresa náutica y quieres publicar tu flota, ',
+      lede: 'Ninguna embarcación se publica en KAEL sin verificar la identidad de la empresa, su habilitación para la actividad de arrendamiento náutico, documentación y seguros. Si tienes una empresa náutica y quieres publicar tu flota, ',
       escribenos: 'escríbenos',
       emptyMarketSuffix: '. Muy pronto aquí.'
     },
@@ -142,7 +142,7 @@ const I18N = {
       tiempoRespuesta: 'Tiempo medio de respuesta', solicitudesConfirmadas: 'Solicitudes confirmadas', valoracionClientes: 'Valoración de clientes',
       razonSocial: 'Razón social', cif: 'CIF', base: 'Base', actividad: 'Actividad', actividadValor: 'Arrendamiento náutico',
       susEmbarcaciones: 'Sus embarcaciones',
-      infoParagraphPrefix: 'Las solicitudes enviadas desde KAEL AUT se remiten a ', infoParagraphSuffix: ', que confirma disponibilidad, horario, precio y condiciones directamente contigo. El contrato de alquiler y el cobro del servicio corresponden a la empresa náutica.'
+      infoParagraphPrefix: 'Las solicitudes enviadas desde KAEL se remiten a ', infoParagraphSuffix: ', que confirma disponibilidad, horario, precio y condiciones directamente contigo. El contrato de alquiler y el cobro del servicio corresponden a la empresa náutica.'
     },
     wizard: {
       h1: '¿No sabes qué barco elegir?',
@@ -178,7 +178,7 @@ const I18N = {
       paises: { 'España': 'España', 'Reino Unido': 'Reino Unido', 'Italia': 'Italia', 'Francia': 'Francia', 'Alemania': 'Alemania', 'Otro': 'Otro' },
       labelComentarios: 'Comentarios o preferencias', comentariosPlaceholder: 'Nos gustaría salir sobre las 10:00 y visitar Formentera.',
       empresaHoneypot: 'Empresa',
-      privacyPrefix: 'Al enviar esta solicitud, tus datos serán tratados por KAEL AUT para gestionar tu solicitud de alquiler y comunicarla a la empresa náutica correspondiente. La empresa podrá utilizar tus datos para contactarte y gestionar la posible contratación del servicio. Consulta nuestra ',
+      privacyPrefix: 'Al enviar esta solicitud, tus datos serán tratados por KAEL para gestionar tu solicitud de alquiler y comunicarla a la empresa náutica correspondiente. La empresa podrá utilizar tus datos para contactarte y gestionar la posible contratación del servicio. Consulta nuestra ',
       politicaPrivacidad: 'Política de Privacidad',
       checkboxPrivacy: 'He leído y acepto la Política de Privacidad.',
       checkboxMarketing: 'Quiero recibir ofertas y novedades. ', opcional: '(opcional)',
@@ -208,7 +208,7 @@ const I18N = {
       singleLinePrefix: 'Hemos enviado tu solicitud a ', singleLineSuffix: '. La empresa se pondrá en contacto contigo para confirmar disponibilidad, horario, precio y condiciones del alquiler.',
       laEmpresaNautica: 'la empresa náutica',
       referenciaSolicitud: 'Referencia de solicitud',
-      infoBanner: 'Esta solicitud no implica un pago a KAEL AUT ni una reserva confirmada hasta que la empresa náutica confirme directamente el servicio.',
+      infoBanner: 'Esta solicitud no implica un pago a KAEL ni una reserva confirmada hasta que la empresa náutica confirme directamente el servicio.',
       demoNoticePrefix: 'Modo de demostración: ', demoNoticeText: 'el backend de notificaciones aún no está desplegado, así que esta solicitud se ha guardado solo en tu navegador y no se ha enviado ningún email real a la empresa. Despliega server/ (ver README) para activar los envíos.',
       noContactadoTitle: '¿Todavía no te han contactado?',
       noContactadoDesc: 'La empresa se compromete a responder en menos de 2 horas.',
@@ -238,11 +238,12 @@ const I18N = {
       avisoLegal:
         '<h1>Aviso legal</h1>' +
         '<div class="updated">Última actualización: <span data-year></span></div>' +
-        '<p>El presente aviso legal regula el uso del sitio web <strong>KAEL AUT</strong> (en adelante, «la Plataforma»), accesible en kaelaut.com, conforme a la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE).</p>' +
+        '<p>El presente aviso legal regula el uso del sitio web <strong>KAEL</strong> (en adelante, «la Plataforma»), accesible en kaelaut.com, conforme a la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE).</p>' +
         '<h2>1. Datos identificativos del titular</h2>' +
         '<p>En cumplimiento del deber de información recogido en el artículo 10 de la LSSI-CE, se indican a continuación los datos identificativos de la empresa titular de la Plataforma:</p>' +
         '<ul>' +
-          '<li>Razón social: <mark>[COMPLETAR — Nombre S.L.]</mark></li>' +
+          '<li>Denominación social: KAEL AUT</li>' +
+          '<li>Nombre comercial: KAEL</li>' +
           '<li>NIF/CIF: <mark>[COMPLETAR]</mark></li>' +
           '<li>Domicilio social: <mark>[COMPLETAR — dirección, Ibiza/Formentera, Islas Baleares]</mark></li>' +
           '<li>Correo electrónico: <mark>[COMPLETAR — hola@kaelaut.com]</mark></li>' +
@@ -250,16 +251,16 @@ const I18N = {
           '<li>Datos registrales: <mark>[COMPLETAR — Registro Mercantil]</mark></li>' +
         '</ul>' +
         '<h2>2. Objeto y naturaleza de la actividad</h2>' +
-        '<p>KAEL AUT es una <strong>plataforma digital de intermediación</strong> que conecta a personas interesadas en alquilar una embarcación con empresas náuticas verificadas que operan en varios destinos (Ibiza y Formentera, Canarias, Cancún, Phuket, Dubái). La Plataforma no es propietaria de las embarcaciones publicadas, no presta el servicio náutico y no cobra el importe del alquiler.</p>' +
+        '<p>KAEL es una <strong>plataforma digital de intermediación</strong> que conecta a personas interesadas en alquilar una embarcación con empresas náuticas verificadas que operan en varios destinos (Ibiza y Formentera, Canarias, Cancún, Phuket, Dubái). La Plataforma no es propietaria de las embarcaciones publicadas, no presta el servicio náutico y no cobra el importe del alquiler.</p>' +
         '<p>Las solicitudes realizadas a través de la Plataforma son transmitidas a la empresa náutica correspondiente, que confirma disponibilidad, horario, precio final y condiciones directamente con el cliente, y con quien se formaliza el contrato de alquiler y se realiza el pago del servicio.</p>' +
         '<h2>3. Condiciones de uso</h2>' +
         '<p>El acceso y uso de la Plataforma atribuye la condición de usuario y supone la aceptación de este aviso legal, de las <a href="condiciones-intermediacion.html">condiciones de intermediación</a> y de la <a href="privacidad.html">política de privacidad</a>. El usuario se compromete a utilizar la Plataforma conforme a la ley, la buena fe y el orden público, y a facilitar información veraz en los formularios de solicitud.</p>' +
         '<h2>4. Propiedad intelectual e industrial</h2>' +
-        '<p>Los contenidos de la Plataforma (textos, diseño, marcas, logotipos) son titularidad de KAEL AUT o de las empresas náuticas colaboradoras, salvo indicación contraria, y están protegidos por la normativa de propiedad intelectual e industrial. Las fotografías de embarcaciones son proporcionadas por las empresas náuticas y/o utilizadas con su autorización.</p>' +
+        '<p>Los contenidos de la Plataforma (textos, diseño, marcas, logotipos) son titularidad de KAEL o de las empresas náuticas colaboradoras, salvo indicación contraria, y están protegidos por la normativa de propiedad intelectual e industrial. Las fotografías de embarcaciones son proporcionadas por las empresas náuticas y/o utilizadas con su autorización.</p>' +
         '<h2>5. Responsabilidad</h2>' +
-        '<p>KAEL AUT no es responsable de la prestación del servicio náutico, de la disponibilidad real de las embarcaciones, del estado de la embarcación, de la seguridad en la navegación, ni de las condiciones económicas finales acordadas entre el cliente y la empresa náutica. La responsabilidad sobre estos extremos corresponde en exclusiva a la empresa náutica gestora de cada embarcación, según se detalla en las <a href="condiciones-intermediacion.html">condiciones de intermediación</a>.</p>' +
+        '<p>KAEL no es responsable de la prestación del servicio náutico, de la disponibilidad real de las embarcaciones, del estado de la embarcación, de la seguridad en la navegación, ni de las condiciones económicas finales acordadas entre el cliente y la empresa náutica. La responsabilidad sobre estos extremos corresponde en exclusiva a la empresa náutica gestora de cada embarcación, según se detalla en las <a href="condiciones-intermediacion.html">condiciones de intermediación</a>.</p>' +
         '<h2>6. Enlaces externos</h2>' +
-        '<p>La Plataforma puede contener enlaces a sitios de terceros. KAEL AUT no asume responsabilidad por el contenido o funcionamiento de dichos sitios.</p>' +
+        '<p>La Plataforma puede contener enlaces a sitios de terceros. KAEL no asume responsabilidad por el contenido o funcionamiento de dichos sitios.</p>' +
         '<h2>7. Legislación aplicable</h2>' +
         '<p>Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia, las partes se someterán a los juzgados y tribunales que correspondan conforme a la normativa de protección de consumidores.</p>' +
         '<p style="margin-top:32px; font-size:13px; color:var(--muted);">Este documento es una plantilla base y no sustituye el asesoramiento de un abogado. Antes de publicar la web, revisa y completa los datos marcados con <mark>[COMPLETAR]</mark> y valida el contenido con un profesional colegiado en España/Baleares.</p>',
@@ -267,10 +268,10 @@ const I18N = {
       privacidad:
         '<h1>Política de privacidad</h1>' +
         '<div class="updated">Última actualización: <span data-year></span></div>' +
-        '<p>En KAEL AUT tratamos tus datos personales conforme al Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>' +
+        '<p>En KAEL tratamos tus datos personales conforme al Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>' +
         '<h2>1. Responsable del tratamiento</h2>' +
         '<ul>' +
-          '<li>Responsable: <mark>[COMPLETAR — Razón social]</mark></li>' +
+          '<li>Responsable: KAEL AUT (nombre comercial: KAEL)</li>' +
           '<li>NIF: <mark>[COMPLETAR]</mark></li>' +
           '<li>Dirección: <mark>[COMPLETAR]</mark></li>' +
           '<li>Contacto de privacidad: <mark>[COMPLETAR — privacidad@kaelaut.com]</mark></li>' +
@@ -279,7 +280,7 @@ const I18N = {
         '<p>Cuando envías una solicitud de reserva a través de la Plataforma tratamos los siguientes datos, con las finalidades indicadas:</p>' +
         '<ul>' +
           '<li><strong>Gestión de la solicitud:</strong> nombre, email, teléfono, país, fecha, número de personas, duración, horario preferido y comentarios, para generar la solicitud, remitirla a la empresa náutica seleccionada y hacerte seguimiento.</li>' +
-          '<li><strong>Comunicaciones comerciales</strong> (solo si marcas la casilla correspondiente): envío de ofertas y novedades de KAEL AUT.</li>' +
+          '<li><strong>Comunicaciones comerciales</strong> (solo si marcas la casilla correspondiente): envío de ofertas y novedades de KAEL.</li>' +
           '<li><strong>Analítica y mejora del servicio:</strong> si aceptas las cookies analíticas, para entender el uso de la web (ver <a href="cookies.html">política de cookies</a>).</li>' +
         '</ul>' +
         '<p>No solicitamos por defecto DNI, pasaporte, número de tarjeta, IBAN ni dirección postal completa en el formulario de solicitud inicial: aplicamos el principio de minimización de datos desde el diseño.</p>' +
@@ -317,24 +318,24 @@ const I18N = {
       condiciones:
         '<h1>Condiciones de intermediación</h1>' +
         '<div class="updated">Última actualización: <span data-year></span></div>' +
-        '<h2>1. Qué es KAEL AUT</h2>' +
-        '<p>KAEL AUT es una plataforma digital de <strong>intermediación</strong> para el alquiler de embarcaciones en varios destinos (Ibiza y Formentera, Canarias, Cancún, Phuket, Dubái). Conecta a personas interesadas en alquilar un barco con empresas náuticas verificadas que ofrecen sus embarcaciones en la Plataforma.</p>' +
-        '<p><strong>KAEL AUT no es propietaria de las embarcaciones, no presta el servicio náutico y no cobra el importe del alquiler.</strong> Su función se limita a mostrar la oferta, recoger solicitudes de disponibilidad y transmitirlas a la empresa náutica correspondiente, dejando constancia verificable del origen de cada solicitud.</p>' +
+        '<h2>1. Qué es KAEL</h2>' +
+        '<p>KAEL es una plataforma digital de <strong>intermediación</strong> para el alquiler de embarcaciones en varios destinos (Ibiza y Formentera, Canarias, Cancún, Phuket, Dubái). Conecta a personas interesadas en alquilar un barco con empresas náuticas verificadas que ofrecen sus embarcaciones en la Plataforma.</p>' +
+        '<p><strong>KAEL no es propietaria de las embarcaciones, no presta el servicio náutico y no cobra el importe del alquiler.</strong> Su función se limita a mostrar la oferta, recoger solicitudes de disponibilidad y transmitirlas a la empresa náutica correspondiente, dejando constancia verificable del origen de cada solicitud.</p>' +
         '<h2>2. Solicitud frente a reserva confirmada</h2>' +
         '<p>Cuando completas el formulario y pulsas «Solicitar reserva», estás enviando una <strong>solicitud</strong>, no una reserva confirmada. La solicitud queda en estado «pendiente de empresa» hasta que la empresa náutica correspondiente comprueba la disponibilidad real y confirma contigo, directamente, la fecha, el horario, el precio final y las condiciones del alquiler. Solo en ese momento existe una reserva confirmada.</p>' +
-        '<p>Enviar una solicitud a través de KAEL AUT no implica ningún pago a KAEL AUT ni compromiso económico alguno con la Plataforma.</p>' +
+        '<p>Enviar una solicitud a través de KAEL no implica ningún pago a KAEL ni compromiso económico alguno con la Plataforma.</p>' +
         '<h2>3. Quién presta el servicio y quién cobra</h2>' +
-        '<p>El alquiler de la embarcación, su contrato, el cobro del precio, la fianza en su caso, la documentación náutica, la seguridad, la tripulación o patrón cuando corresponda, y la gestión de incidencias, cancelaciones y devoluciones son responsabilidad exclusiva de la <strong>empresa náutica</strong> identificada en la ficha de cada embarcación («Gestionado por»). El pago del alquiler se realiza siempre directamente a la empresa náutica, nunca a KAEL AUT.</p>' +
+        '<p>El alquiler de la embarcación, su contrato, el cobro del precio, la fianza en su caso, la documentación náutica, la seguridad, la tripulación o patrón cuando corresponda, y la gestión de incidencias, cancelaciones y devoluciones son responsabilidad exclusiva de la <strong>empresa náutica</strong> identificada en la ficha de cada embarcación («Gestionado por»). El pago del alquiler se realiza siempre directamente a la empresa náutica, nunca a KAEL.</p>' +
         '<h2>4. Precio orientativo</h2>' +
         '<p>Los precios mostrados en la Plataforma son orientativos («desde X €») salvo que la empresa náutica facilite expresamente un precio cerrado. El precio final puede variar en función de la disponibilidad, la temporada, la duración, el combustible, el patrón, la limpieza, la fianza u otros conceptos, que serán detallados por la empresa náutica antes de formalizar el contrato.</p>' +
         '<h2>5. Verificación de empresas náuticas</h2>' +
-        '<p>Antes de publicar sus embarcaciones, cada empresa colaboradora es verificada por KAEL AUT: identidad, CIF/NIF, habilitación para la actividad de arrendamiento náutico y documentación básica. Esta verificación no constituye una certificación jurídica exhaustiva ni exime a la empresa náutica de cumplir con toda la normativa aplicable a su actividad (Ley de Navegación Marítima, normativa de seguridad marítima, seguros obligatorios, etc.).</p>' +
+        '<p>Antes de publicar sus embarcaciones, cada empresa colaboradora es verificada por KAEL: identidad, CIF/NIF, habilitación para la actividad de arrendamiento náutico y documentación básica. Esta verificación no constituye una certificación jurídica exhaustiva ni exime a la empresa náutica de cumplir con toda la normativa aplicable a su actividad (Ley de Navegación Marítima, normativa de seguridad marítima, seguros obligatorios, etc.).</p>' +
         '<h2>6. Cancelaciones y meteorología</h2>' +
         '<p>Las condiciones de cancelación son definidas por cada empresa náutica y se comunican antes de formalizar el contrato. Las decisiones relativas a la navegación y a las condiciones meteorológicas corresponden a la empresa responsable de la embarcación y, en su caso, al patrón, conforme a la normativa de seguridad marítima aplicable.</p>' +
-        '<h2>7. Responsabilidad de KAEL AUT</h2>' +
-        '<p>KAEL AUT no es responsable de la disponibilidad real, el estado, la seguridad o la prestación efectiva del servicio de las embarcaciones publicadas, ni de los acuerdos económicos alcanzados entre cliente y empresa náutica. KAEL AUT responde, dentro de lo razonable, de la correcta transmisión de las solicitudes generadas a través de la Plataforma y del funcionamiento técnico del servicio de intermediación.</p>' +
+        '<h2>7. Responsabilidad de KAEL</h2>' +
+        '<p>KAEL no es responsable de la disponibilidad real, el estado, la seguridad o la prestación efectiva del servicio de las embarcaciones publicadas, ni de los acuerdos económicos alcanzados entre cliente y empresa náutica. KAEL responde, dentro de lo razonable, de la correcta transmisión de las solicitudes generadas a través de la Plataforma y del funcionamiento técnico del servicio de intermediación.</p>' +
         '<h2>8. Reclamaciones</h2>' +
-        '<p>Si tu incidencia se refiere al funcionamiento de la Plataforma (por ejemplo, un fallo al enviar una solicitud), contacta con nosotros según se indica en la página de <a href="reclamaciones.html">reclamaciones</a>. Si tu incidencia se refiere a la prestación del servicio náutico (disponibilidad, estado del barco, patrón, cobro, cancelaciones), debes dirigirte en primer lugar a la empresa náutica gestora, sin perjuicio de que KAEL AUT pueda mediar de buena fe entre las partes.</p>' +
+        '<p>Si tu incidencia se refiere al funcionamiento de la Plataforma (por ejemplo, un fallo al enviar una solicitud), contacta con nosotros según se indica en la página de <a href="reclamaciones.html">reclamaciones</a>. Si tu incidencia se refiere a la prestación del servicio náutico (disponibilidad, estado del barco, patrón, cobro, cancelaciones), debes dirigirte en primer lugar a la empresa náutica gestora, sin perjuicio de que KAEL pueda mediar de buena fe entre las partes.</p>' +
         '<p style="margin-top:32px; font-size:13px; color:var(--muted);">Estas condiciones son una plantilla base pensada para reflejar el modelo de intermediación descrito en la documentación del proyecto. Antes de publicar la web, hazlas revisar por un abogado especializado en Baleares, que debe adaptarlas al contrato real firmado con cada empresa náutica colaboradora.</p>',
 
       reclamaciones:
@@ -342,7 +343,7 @@ const I18N = {
         '<div class="updated">Última actualización: <span data-year></span></div>' +
         '<p>Queremos que cualquier problema se resuelva rápido y con claridad sobre quién debe responder. Antes de reclamar, es útil saber a quién corresponde tu incidencia:</p>' +
         '<h2>1. Problemas con la Plataforma</h2>' +
-        '<p>Si tu problema es técnico o comercial y está relacionado con el funcionamiento de KAEL AUT — por ejemplo, un formulario que no envía, una ficha con datos incorrectos, o dudas sobre cómo funciona una solicitud — escríbenos indicando tu referencia de solicitud (si la tienes):</p>' +
+        '<p>Si tu problema es técnico o comercial y está relacionado con el funcionamiento de KAEL — por ejemplo, un formulario que no envía, una ficha con datos incorrectos, o dudas sobre cómo funciona una solicitud — escríbenos indicando tu referencia de solicitud (si la tienes):</p>' +
         '<ul>' +
           '<li>Email: <mark>[COMPLETAR — reclamaciones@kaelaut.com]</mark></li>' +
           '<li>Teléfono: <mark>[COMPLETAR]</mark></li>' +
@@ -350,28 +351,28 @@ const I18N = {
         '</ul>' +
         '<h2>2. Problemas con el alquiler del barco</h2>' +
         '<p>Si tu problema se refiere a la prestación del servicio náutico en sí — disponibilidad, estado de la embarcación, patrón, precio finalmente cobrado, cancelaciones o incidencias durante la navegación — debes dirigirte en primer lugar <strong>directamente a la empresa náutica</strong> que gestionó tu alquiler, identificada en la ficha de la embarcación y en tu email de confirmación.</p>' +
-        '<p>Si no obtienes respuesta satisfactoria de la empresa náutica, escríbenos con el detalle de tu solicitud (referencia, fechas, empresa) y mediaremos de buena fe entre las partes, sin que ello implique que KAEL AUT asuma responsabilidad por la prestación del servicio, que corresponde a la empresa náutica.</p>' +
+        '<p>Si no obtienes respuesta satisfactoria de la empresa náutica, escríbenos con el detalle de tu solicitud (referencia, fechas, empresa) y mediaremos de buena fe entre las partes, sin que ello implique que KAEL asuma responsabilidad por la prestación del servicio, que corresponde a la empresa náutica.</p>' +
         '<h2>3. Hojas de reclamaciones</h2>' +
-        '<p>Como consumidor, tienes derecho a solicitar la hoja de reclamaciones oficial. Para incidencias relativas al servicio náutico, la hoja de reclamaciones corresponde a la empresa náutica prestadora del servicio. Para incidencias relativas a la Plataforma, puedes solicitarla a KAEL AUT en los datos de contacto anteriores.</p>' +
+        '<p>Como consumidor, tienes derecho a solicitar la hoja de reclamaciones oficial. Para incidencias relativas al servicio náutico, la hoja de reclamaciones corresponde a la empresa náutica prestadora del servicio. Para incidencias relativas a la Plataforma, puedes solicitarla a KAEL en los datos de contacto anteriores.</p>' +
         '<h2>4. Resolución alternativa de litigios</h2>' +
         '<p>Como consumidor residente en la UE, también puedes acceder a la plataforma europea de resolución de litigios en línea: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>' +
         '<p style="margin-top:32px; font-size:13px; color:var(--muted);">Completa los datos de contacto marcados con <mark>[COMPLETAR]</mark> antes de publicar la web.</p>'
     },
     meta: {
-      indexTitle: 'KAEL AUT — Alquiler de barcos en varios destinos',
+      indexTitle: 'KAEL — Alquiler de barcos en varios destinos',
       indexDesc: 'Compara embarcaciones de empresas náuticas verificadas en Ibiza, Canarias, Cancún, Phuket y Dubái, y solicita disponibilidad en un paso. Sin pagos por adelantado: el contrato y el cobro son con la empresa náutica.',
-      indexOgTitle: 'KAEL AUT — Alquiler de barcos en varios destinos',
+      indexOgTitle: 'KAEL — Alquiler de barcos en varios destinos',
       indexOgDesc: 'Compara embarcaciones de empresas náuticas verificadas y solicita disponibilidad en un paso.',
-      barcosTitle: 'Barcos — KAEL AUT',
+      barcosTitle: 'Barcos — KAEL',
       barcosDesc: 'Filtra embarcaciones por tipo, destino y patrón. Precios orientativos, empresa gestora identificada y solicitud de disponibilidad sin pagos por adelantado.',
-      empresasTitle: 'Empresas náuticas verificadas — KAEL AUT',
+      empresasTitle: 'Empresas náuticas verificadas — KAEL',
       empresasDesc: 'Empresas náuticas verificadas en Ibiza, Canarias, Cancún, Phuket y Dubái: identidad, habilitación para la actividad, documentación y seguros comprobados.',
-      asistenteTitle: '¿No sabes qué barco elegir? — KAEL AUT',
+      asistenteTitle: '¿No sabes qué barco elegir? — KAEL',
       asistenteDesc: 'Responde cuatro preguntas sobre tu grupo, presupuesto y puerto de salida, y te proponemos las embarcaciones que mejor encajan.',
-      solicitudTitle: 'Solicitud de reserva — KAEL AUT',
-      solicitudMultipleTitle: 'Solicitar a varias empresas — KAEL AUT',
-      confirmacionTitle: 'Solicitud enviada — KAEL AUT',
-      notfoundTitle: 'Página no encontrada — KAEL AUT'
+      solicitudTitle: 'Solicitud de reserva — KAEL',
+      solicitudMultipleTitle: 'Solicitar a varias empresas — KAEL',
+      confirmacionTitle: 'Solicitud enviada — KAEL',
+      notfoundTitle: 'Página no encontrada — KAEL'
     }
   },
 
@@ -379,15 +380,15 @@ const I18N = {
     nav: { barcos: 'Boats', comoFunciona: 'How it works', empresas: 'Verified companies', asistente: "Not sure which boat", solicitarBarco: 'Request a boat', menu: 'Menu' },
     header: { destinosSuffix: ' destinations' },
     footer: {
-      note: 'KAEL AUT is an intermediary platform. It does not provide the boating service or charge for the rental. Boats are offered by verified nautical companies in several destinations.',
+      note: 'KAEL is an intermediary platform. It does not provide the boating service or charge for the rental. Boats are offered by verified nautical companies in several destinations.',
       destinosTitle: 'Destinations',
       empresasTitle: 'Companies',
       legalTitle: 'Legal',
       publicarFlota: 'List your boats',
       procesoVerificacion: 'Verification process',
       accesoPanel: 'Partner login',
-      rightsReserved: 'KAEL AUT. All rights reserved.',
-      disclaimer: 'KAEL AUT does not sell boats or provide boating services. It acts as a digital intermediary.'
+      rightsReserved: 'KAEL. All rights reserved.',
+      disclaimer: 'KAEL does not sell boats or provide boating services. It acts as a digital intermediary.'
     },
     cookie: {
       pre: 'We use technical cookies necessary for the site to work and, if you accept, analytics cookies to understand how it is used. You can change your decision at any time from our ',
@@ -486,7 +487,7 @@ const I18N = {
       volverAlListado: 'Go back to the list',
       caracteristicas: 'Features', incluido: 'Included', noIncluido: 'Not included',
       gestionadoPor: 'Managed by', tiempoRespuestaPrefix: 'Verified company · average response time ',
-      legalParagraphPrefix: 'This boat is offered by ', legalParagraphSuffix: '. Requests made from KAEL AUT are sent to the company to confirm availability, schedule, price and terms. The rental contract and payment are made directly with the nautical company.',
+      legalParagraphPrefix: 'This boat is offered by ', legalParagraphSuffix: '. Requests made from KAEL are sent to the company to confirm availability, schedule, price and terms. The rental contract and payment are made directly with the nautical company.',
       condicionesCancelacion: 'Cancellation terms',
       cancelacionPrefix: 'Defined by ', cancelacionSuffix: ' and communicated before formalizing the contract. Decisions about navigation and weather are the responsibility of the company operating the boat and, where applicable, the skipper, in accordance with the applicable regulations.',
       precioNota: "Final price subject to availability, schedule, season, duration and the company's terms. Check what the price includes.",
@@ -496,7 +497,7 @@ const I18N = {
     },
     companies: {
       h1: 'Verified nautical companies',
-      lede: 'No boat is published on KAEL AUT without verifying the identity of the company, its licensing for the nautical rental activity, documentation and insurance. If you run a nautical company and want to list your fleet, ',
+      lede: 'No boat is published on KAEL without verifying the identity of the company, its licensing for the nautical rental activity, documentation and insurance. If you run a nautical company and want to list your fleet, ',
       escribenos: 'write to us',
       emptyMarketSuffix: '. Coming soon here.'
     },
@@ -507,7 +508,7 @@ const I18N = {
       tiempoRespuesta: 'Average response time', solicitudesConfirmadas: 'Confirmed requests', valoracionClientes: 'Customer rating',
       razonSocial: 'Legal name', cif: 'Tax ID', base: 'Base', actividad: 'Activity', actividadValor: 'Nautical rental',
       susEmbarcaciones: 'Its boats',
-      infoParagraphPrefix: 'Requests sent from KAEL AUT are forwarded to ', infoParagraphSuffix: ', who confirms availability, schedule, price and terms directly with you. The rental contract and payment for the service are the responsibility of the nautical company.'
+      infoParagraphPrefix: 'Requests sent from KAEL are forwarded to ', infoParagraphSuffix: ', who confirms availability, schedule, price and terms directly with you. The rental contract and payment for the service are the responsibility of the nautical company.'
     },
     wizard: {
       h1: "Not sure which boat to choose?",
@@ -543,7 +544,7 @@ const I18N = {
       paises: { 'España': 'Spain', 'Reino Unido': 'United Kingdom', 'Italia': 'Italy', 'Francia': 'France', 'Alemania': 'Germany', 'Otro': 'Other' },
       labelComentarios: 'Comments or preferences', comentariosPlaceholder: "We'd like to leave around 10:00 and visit Formentera.",
       empresaHoneypot: 'Company',
-      privacyPrefix: 'By submitting this request, your data will be processed by KAEL AUT to manage your rental request and pass it on to the relevant nautical company. The company may use your data to contact you and arrange the possible service. See our ',
+      privacyPrefix: 'By submitting this request, your data will be processed by KAEL to manage your rental request and pass it on to the relevant nautical company. The company may use your data to contact you and arrange the possible service. See our ',
       politicaPrivacidad: 'Privacy Policy',
       checkboxPrivacy: 'I have read and accept the Privacy Policy.',
       checkboxMarketing: 'I want to receive offers and news. ', opcional: '(optional)',
@@ -573,7 +574,7 @@ const I18N = {
       singleLinePrefix: 'We have sent your request to ', singleLineSuffix: '. The company will get in touch to confirm availability, schedule, price and rental terms.',
       laEmpresaNautica: 'the nautical company',
       referenciaSolicitud: 'Request reference',
-      infoBanner: "This request does not involve a payment to KAEL AUT or a confirmed booking until the nautical company confirms the service directly.",
+      infoBanner: "This request does not involve a payment to KAEL or a confirmed booking until the nautical company confirms the service directly.",
       demoNoticePrefix: 'Demo mode: ', demoNoticeText: "the notifications backend isn't deployed yet, so this request was only saved in your browser and no real email was sent to the company. Deploy server/ (see README) to enable sending.",
       noContactadoTitle: "Haven't they contacted you yet?",
       noContactadoDesc: 'The company commits to responding within 2 hours.',
@@ -603,11 +604,12 @@ const I18N = {
       avisoLegal:
         '<h1>Legal notice</h1>' +
         '<div class="updated">Last updated: <span data-year></span></div>' +
-        '<p>This legal notice governs the use of the <strong>KAEL AUT</strong> website (hereinafter, "the Platform"), accessible at kaelaut.com, in accordance with Spanish Law 34/2002 of 11 July on Information Society Services and Electronic Commerce (LSSI-CE).</p>' +
+        '<p>This legal notice governs the use of the <strong>KAEL</strong> website (hereinafter, "the Platform"), accessible at kaelaut.com, in accordance with Spanish Law 34/2002 of 11 July on Information Society Services and Electronic Commerce (LSSI-CE).</p>' +
         '<h2>1. Identification of the owner</h2>' +
         '<p>In compliance with the duty of information set out in article 10 of the LSSI-CE, the identifying details of the company that owns the Platform are set out below:</p>' +
         '<ul>' +
-          '<li>Legal name: <mark>[TO COMPLETE — Company name S.L.]</mark></li>' +
+          '<li>Legal (registered) name: KAEL AUT</li>' +
+          '<li>Trade name: KAEL</li>' +
           '<li>Tax ID (NIF/CIF): <mark>[TO COMPLETE]</mark></li>' +
           '<li>Registered address: <mark>[TO COMPLETE — address, Ibiza/Formentera, Balearic Islands]</mark></li>' +
           '<li>Email: <mark>[TO COMPLETE — hola@kaelaut.com]</mark></li>' +
@@ -615,16 +617,16 @@ const I18N = {
           '<li>Registration details: <mark>[TO COMPLETE — Companies Register]</mark></li>' +
         '</ul>' +
         '<h2>2. Purpose and nature of the activity</h2>' +
-        '<p>KAEL AUT is a <strong>digital intermediation platform</strong> that connects people interested in renting a boat with verified nautical companies operating in several destinations (Ibiza & Formentera, Canary Islands, Cancún, Phuket, Dubai). The Platform does not own the boats listed, does not provide the boating service, and does not charge for the rental.</p>' +
+        '<p>KAEL is a <strong>digital intermediation platform</strong> that connects people interested in renting a boat with verified nautical companies operating in several destinations (Ibiza & Formentera, Canary Islands, Cancún, Phuket, Dubai). The Platform does not own the boats listed, does not provide the boating service, and does not charge for the rental.</p>' +
         '<p>Requests made through the Platform are sent to the relevant nautical company, which confirms availability, schedule, final price and terms directly with the customer, and with whom the rental contract is formalized and payment for the service is made.</p>' +
         '<h2>3. Terms of use</h2>' +
         '<p>Accessing and using the Platform grants user status and implies acceptance of this legal notice, of the <a href="condiciones-intermediacion.html">intermediation terms</a> and of the <a href="privacidad.html">privacy policy</a>. Users agree to use the Platform in accordance with the law, good faith and public order, and to provide truthful information in the request forms.</p>' +
         '<h2>4. Intellectual and industrial property</h2>' +
-        '<p>The Platform\'s content (text, design, trademarks, logos) belongs to KAEL AUT or to the collaborating nautical companies, unless stated otherwise, and is protected by intellectual and industrial property regulations. Boat photographs are provided by the nautical companies and/or used with their authorization.</p>' +
+        '<p>The Platform\'s content (text, design, trademarks, logos) belongs to KAEL or to the collaborating nautical companies, unless stated otherwise, and is protected by intellectual and industrial property regulations. Boat photographs are provided by the nautical companies and/or used with their authorization.</p>' +
         '<h2>5. Liability</h2>' +
-        '<p>KAEL AUT is not responsible for the provision of the boating service, the real availability of the boats, the condition of the boat, navigation safety, or the final financial terms agreed between the customer and the nautical company. Responsibility for these matters lies exclusively with the nautical company operating each boat, as detailed in the <a href="condiciones-intermediacion.html">intermediation terms</a>.</p>' +
+        '<p>KAEL is not responsible for the provision of the boating service, the real availability of the boats, the condition of the boat, navigation safety, or the final financial terms agreed between the customer and the nautical company. Responsibility for these matters lies exclusively with the nautical company operating each boat, as detailed in the <a href="condiciones-intermediacion.html">intermediation terms</a>.</p>' +
         '<h2>6. External links</h2>' +
-        '<p>The Platform may contain links to third-party sites. KAEL AUT assumes no responsibility for the content or operation of such sites.</p>' +
+        '<p>The Platform may contain links to third-party sites. KAEL assumes no responsibility for the content or operation of such sites.</p>' +
         '<h2>7. Applicable law</h2>' +
         '<p>These terms are governed by Spanish law. Any dispute will be submitted to the courts corresponding under consumer protection regulations.</p>' +
         '<p style="margin-top:32px; font-size:13px; color:var(--muted);">This document is a base template and does not replace legal advice. Before publishing the site, review and complete the fields marked <mark>[TO COMPLETE]</mark> and have the content validated by a licensed lawyer in Spain/the Balearic Islands.</p>',
@@ -632,10 +634,10 @@ const I18N = {
       privacidad:
         '<h1>Privacy policy</h1>' +
         '<div class="updated">Last updated: <span data-year></span></div>' +
-        '<p>At KAEL AUT we process your personal data in accordance with Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 on the Protection of Personal Data and the guarantee of digital rights (LOPDGDD).</p>' +
+        '<p>At KAEL we process your personal data in accordance with Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 on the Protection of Personal Data and the guarantee of digital rights (LOPDGDD).</p>' +
         '<h2>1. Data controller</h2>' +
         '<ul>' +
-          '<li>Controller: <mark>[TO COMPLETE — Legal name]</mark></li>' +
+          '<li>Controller: KAEL AUT (trade name: KAEL)</li>' +
           '<li>Tax ID: <mark>[TO COMPLETE]</mark></li>' +
           '<li>Address: <mark>[TO COMPLETE]</mark></li>' +
           '<li>Privacy contact: <mark>[TO COMPLETE — privacidad@kaelaut.com]</mark></li>' +
@@ -644,7 +646,7 @@ const I18N = {
         '<p>When you submit a booking request through the Platform, we process the following data for the purposes indicated:</p>' +
         '<ul>' +
           '<li><strong>Request management:</strong> name, email, phone, country, date, number of people, duration, preferred time and comments, in order to generate the request, forward it to the selected nautical company and follow up with you.</li>' +
-          '<li><strong>Marketing communications</strong> (only if you tick the relevant box): sending KAEL AUT offers and news.</li>' +
+          '<li><strong>Marketing communications</strong> (only if you tick the relevant box): sending KAEL offers and news.</li>' +
           '<li><strong>Analytics and service improvement:</strong> if you accept analytics cookies, to understand how the site is used (see <a href="cookies.html">cookie policy</a>).</li>' +
         '</ul>' +
         '<p>We do not request ID/passport numbers, card numbers, IBANs or a full postal address by default in the initial request form: we apply the principle of data minimization by design.</p>' +
@@ -682,24 +684,24 @@ const I18N = {
       condiciones:
         '<h1>Intermediation terms</h1>' +
         '<div class="updated">Last updated: <span data-year></span></div>' +
-        '<h2>1. What KAEL AUT is</h2>' +
-        '<p>KAEL AUT is a digital <strong>intermediation</strong> platform for boat rentals in several destinations (Ibiza & Formentera, Canary Islands, Cancún, Phuket, Dubai). It connects people interested in renting a boat with verified nautical companies that offer their boats on the Platform.</p>' +
-        '<p><strong>KAEL AUT does not own the boats, does not provide the boating service, and does not charge for the rental.</strong> Its function is limited to showing the listings, collecting availability requests and forwarding them to the relevant nautical company, keeping a verifiable record of the origin of each request.</p>' +
+        '<h2>1. What KAEL is</h2>' +
+        '<p>KAEL is a digital <strong>intermediation</strong> platform for boat rentals in several destinations (Ibiza & Formentera, Canary Islands, Cancún, Phuket, Dubai). It connects people interested in renting a boat with verified nautical companies that offer their boats on the Platform.</p>' +
+        '<p><strong>KAEL does not own the boats, does not provide the boating service, and does not charge for the rental.</strong> Its function is limited to showing the listings, collecting availability requests and forwarding them to the relevant nautical company, keeping a verifiable record of the origin of each request.</p>' +
         '<h2>2. Request versus confirmed booking</h2>' +
         '<p>When you complete the form and click "Request booking", you are sending a <strong>request</strong>, not a confirmed booking. The request remains in "pending company" status until the relevant nautical company checks real availability and confirms the date, schedule, final price and rental terms directly with you. Only at that point does a confirmed booking exist.</p>' +
-        '<p>Sending a request through KAEL AUT does not involve any payment to KAEL AUT or any financial commitment to the Platform.</p>' +
+        '<p>Sending a request through KAEL does not involve any payment to KAEL or any financial commitment to the Platform.</p>' +
         '<h2>3. Who provides the service and who charges for it</h2>' +
-        '<p>The boat rental, its contract, collecting the price, any deposit, nautical documentation, safety, crew or skipper where applicable, and handling incidents, cancellations and refunds are the exclusive responsibility of the <strong>nautical company</strong> identified on each boat\'s listing ("Managed by"). Payment for the rental is always made directly to the nautical company, never to KAEL AUT.</p>' +
+        '<p>The boat rental, its contract, collecting the price, any deposit, nautical documentation, safety, crew or skipper where applicable, and handling incidents, cancellations and refunds are the exclusive responsibility of the <strong>nautical company</strong> identified on each boat\'s listing ("Managed by"). Payment for the rental is always made directly to the nautical company, never to KAEL.</p>' +
         '<h2>4. Estimated price</h2>' +
         '<p>Prices shown on the Platform are estimates ("from €X") unless the nautical company expressly provides a fixed price. The final price may vary depending on availability, season, duration, fuel, skipper, cleaning, deposit or other items, which will be detailed by the nautical company before formalizing the contract.</p>' +
         '<h2>5. Verification of nautical companies</h2>' +
-        '<p>Before listing their boats, each partner company is verified by KAEL AUT: identity, tax ID, licensing for the nautical rental activity, and basic documentation. This verification does not constitute an exhaustive legal certification and does not exempt the nautical company from complying with all regulations applicable to its activity (Maritime Navigation Law, maritime safety regulations, mandatory insurance, etc.).</p>' +
+        '<p>Before listing their boats, each partner company is verified by KAEL: identity, tax ID, licensing for the nautical rental activity, and basic documentation. This verification does not constitute an exhaustive legal certification and does not exempt the nautical company from complying with all regulations applicable to its activity (Maritime Navigation Law, maritime safety regulations, mandatory insurance, etc.).</p>' +
         '<h2>6. Cancellations and weather</h2>' +
         '<p>Cancellation terms are defined by each nautical company and communicated before formalizing the contract. Decisions regarding navigation and weather conditions are the responsibility of the company operating the boat and, where applicable, the skipper, in accordance with applicable maritime safety regulations.</p>' +
-        '<h2>7. KAEL AUT\'s liability</h2>' +
-        '<p>KAEL AUT is not responsible for the real availability, condition, safety or actual provision of the service of the boats listed, nor for the financial arrangements reached between the customer and the nautical company. KAEL AUT is responsible, within reason, for the correct transmission of requests generated through the Platform and for the technical operation of the intermediation service.</p>' +
+        '<h2>7. KAEL\'s liability</h2>' +
+        '<p>KAEL is not responsible for the real availability, condition, safety or actual provision of the service of the boats listed, nor for the financial arrangements reached between the customer and the nautical company. KAEL is responsible, within reason, for the correct transmission of requests generated through the Platform and for the technical operation of the intermediation service.</p>' +
         '<h2>8. Complaints</h2>' +
-        '<p>If your issue concerns the operation of the Platform (for example, a request that fails to send), contact us as indicated on the <a href="reclamaciones.html">complaints</a> page. If your issue concerns the provision of the boating service (availability, condition of the boat, skipper, charges, cancellations), you should first contact the managing nautical company directly, without prejudice to KAEL AUT being able to mediate in good faith between the parties.</p>' +
+        '<p>If your issue concerns the operation of the Platform (for example, a request that fails to send), contact us as indicated on the <a href="reclamaciones.html">complaints</a> page. If your issue concerns the provision of the boating service (availability, condition of the boat, skipper, charges, cancellations), you should first contact the managing nautical company directly, without prejudice to KAEL being able to mediate in good faith between the parties.</p>' +
         '<p style="margin-top:32px; font-size:13px; color:var(--muted);">These terms are a base template intended to reflect the intermediation model described in the project\'s base documentation. Before publishing the site, have them reviewed by a lawyer specializing in the Balearic Islands, who must adapt them to the actual contract signed with each collaborating nautical company.</p>',
 
       reclamaciones:
@@ -707,7 +709,7 @@ const I18N = {
         '<div class="updated">Last updated: <span data-year></span></div>' +
         '<p>We want any problem to be resolved quickly and with clarity about who should respond. Before filing a complaint, it helps to know who your issue should be directed to:</p>' +
         '<h2>1. Issues with the Platform</h2>' +
-        '<p>If your issue is technical or commercial and relates to how KAEL AUT works — for example, a form that fails to send, a listing with incorrect data, or questions about how a request works — write to us stating your request reference (if you have one):</p>' +
+        '<p>If your issue is technical or commercial and relates to how KAEL works — for example, a form that fails to send, a listing with incorrect data, or questions about how a request works — write to us stating your request reference (if you have one):</p>' +
         '<ul>' +
           '<li>Email: <mark>[TO COMPLETE — reclamaciones@kaelaut.com]</mark></li>' +
           '<li>Phone: <mark>[TO COMPLETE]</mark></li>' +
@@ -715,28 +717,28 @@ const I18N = {
         '</ul>' +
         '<h2>2. Issues with the boat rental</h2>' +
         '<p>If your issue concerns the provision of the boating service itself — availability, condition of the boat, skipper, the price ultimately charged, cancellations or incidents during the trip — you should first contact <strong>the nautical company directly</strong>, identified on the boat\'s listing and in your confirmation email.</p>' +
-        '<p>If you do not get a satisfactory response from the nautical company, write to us with the details of your request (reference, dates, company) and we will mediate in good faith between the parties, without this implying that KAEL AUT assumes responsibility for the provision of the service, which lies with the nautical company.</p>' +
+        '<p>If you do not get a satisfactory response from the nautical company, write to us with the details of your request (reference, dates, company) and we will mediate in good faith between the parties, without this implying that KAEL assumes responsibility for the provision of the service, which lies with the nautical company.</p>' +
         '<h2>3. Official complaint forms</h2>' +
-        '<p>As a consumer, you have the right to request the official complaint form. For issues relating to the boating service, the complaint form is the responsibility of the nautical company providing the service. For issues relating to the Platform, you can request it from KAEL AUT using the contact details above.</p>' +
+        '<p>As a consumer, you have the right to request the official complaint form. For issues relating to the boating service, the complaint form is the responsibility of the nautical company providing the service. For issues relating to the Platform, you can request it from KAEL using the contact details above.</p>' +
         '<h2>4. Alternative dispute resolution</h2>' +
         '<p>As an EU-resident consumer, you can also access the European online dispute resolution platform: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>' +
         '<p style="margin-top:32px; font-size:13px; color:var(--muted);">Complete the contact details marked <mark>[TO COMPLETE]</mark> before publishing the site.</p>'
     },
     meta: {
-      indexTitle: 'KAEL AUT — Boat rentals in several destinations',
+      indexTitle: 'KAEL — Boat rentals in several destinations',
       indexDesc: 'Compare boats from verified nautical companies in Ibiza, the Canary Islands, Cancún, Phuket and Dubai, and request availability in one step. No upfront payments: the contract and payment are with the nautical company.',
-      indexOgTitle: 'KAEL AUT — Boat rentals in several destinations',
+      indexOgTitle: 'KAEL — Boat rentals in several destinations',
       indexOgDesc: 'Compare boats from verified nautical companies and request availability in one step.',
-      barcosTitle: 'Boats — KAEL AUT',
+      barcosTitle: 'Boats — KAEL',
       barcosDesc: "Filter boats by type, destination and skipper. Estimated prices, the managing company clearly identified, and availability requests with no upfront payments.",
-      empresasTitle: 'Verified nautical companies — KAEL AUT',
+      empresasTitle: 'Verified nautical companies — KAEL',
       empresasDesc: 'Verified nautical companies in Ibiza, the Canary Islands, Cancún, Phuket and Dubai: identity, licensing, documentation and insurance checked.',
-      asistenteTitle: 'Not sure which boat to choose? — KAEL AUT',
+      asistenteTitle: 'Not sure which boat to choose? — KAEL',
       asistenteDesc: "Answer four questions about your group, budget and departure port, and we'll suggest the boats that best fit.",
-      solicitudTitle: 'Booking request — KAEL AUT',
-      solicitudMultipleTitle: 'Request from several companies — KAEL AUT',
-      confirmacionTitle: 'Request sent — KAEL AUT',
-      notfoundTitle: 'Page not found — KAEL AUT'
+      solicitudTitle: 'Booking request — KAEL',
+      solicitudMultipleTitle: 'Request from several companies — KAEL',
+      confirmacionTitle: 'Request sent — KAEL',
+      notfoundTitle: 'Page not found — KAEL'
     }
   }
 };

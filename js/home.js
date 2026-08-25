@@ -1,4 +1,4 @@
-/* KAEL AUT — lógica de la página de inicio */
+/* KAEL — lógica de la página de inicio */
 (function () {
   function marketList() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(', '); }
   function marketListDot() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(' · '); }

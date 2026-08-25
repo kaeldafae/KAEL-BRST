@@ -1,4 +1,4 @@
-/* KAEL AUT — catálogo con filtros y solicitud múltiple */
+/* KAEL — catálogo con filtros y solicitud múltiple */
 (function () {
   var qs = new URLSearchParams(window.location.search);
   var state = {

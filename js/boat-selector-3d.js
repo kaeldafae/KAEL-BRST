@@ -1,4 +1,4 @@
-/* KAEL AUT — selector 3D de embarcaciones estilo "selección de personaje".
+/* KAEL — selector 3D de embarcaciones estilo "selección de personaje".
  * CSS 3D real (perspective + rotateY/translateZ en un anillo), sin librería
  * externa: cada tarjeta es una fotografía real de barco montada en el
  * espacio 3D, no un modelo 3D fotorrealista (no es algo que podamos generar

@@ -1,4 +1,4 @@
-# KAEL AUT — plataforma de intermediación de alquiler de barcos (varios destinos)
+# KAEL — plataforma de intermediación de alquiler de barcos (varios destinos)
 
 Sitio funcional listo para desplegar: catálogo de embarcaciones, ficha de cada barco,
 formulario de solicitud (individual y a varias empresas a la vez), asistente de
@@ -35,7 +35,7 @@ técnica para lanzar ya.
 
 ## Expansión multi-destino y cómo añadir una empresa real
 
-KAEL AUT está en expansión más allá de Ibiza y Formentera: Canarias, Cancún,
+KAEL está en expansión más allá de Ibiza y Formentera: Canarias, Cancún,
 Phuket y Dubái (ver `MARKETS` en `js/data.js`). `COMPANIES` y `BOATS` están
 **vacíos a propósito** — no hay ninguna empresa de prueba ni placeholder en el
 sitio. Todas las páginas (home, catálogo, ficha de barco/empresa, asistente)
@@ -58,7 +58,7 @@ Para publicar una empresa en cuanto confirme la colaboración:
 `docs/empresas-prospectos-ibiza.md` contiene una investigación real de 10
 empresas náuticas que operan en Ibiza (ubicación, flota, precios públicos,
 contacto) para outreach. **No están publicadas en la web ni tienen ninguna
-relación con KAEL AUT todavía** — hacerlo sin su autorización sería un
+relación con KAEL todavía** — hacerlo sin su autorización sería un
 problema legal (derechos de imagen, falsa verificación).
 
 ## Estructura

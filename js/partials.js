@@ -1,4 +1,4 @@
-/* KAEL AUT — header/footer/cookie-banner compartidos entre páginas.
+/* KAEL — header/footer/cookie-banner compartidos entre páginas.
    Se inyectan en tiempo de carga para evitar duplicar el marcado en cada HTML.
    `prefix` es '' para páginas en la raíz y '../' para páginas en subcarpetas
    (por ejemplo legal/), de modo que todos los enlaces e imágenes apunten al
@@ -15,8 +15,8 @@ function renderHeader(el, active, prefix) {
   el.innerHTML =
     '<div class="container">' +
       '<a class="brand" href="' + prefix + 'index.html">' +
-        '<img src="' + prefix + 'img/logo.png" alt="KAEL AUT">' +
-        '<span class="brand-tag"><strong>AUT</strong><span>' + Object.keys(MARKETS).length + t('header.destinosSuffix') + '</span></span>' +
+        '<img src="' + prefix + 'img/logo.png" alt="KAEL">' +
+        '<span class="brand-tag"><span>' + Object.keys(MARKETS).length + t('header.destinosSuffix') + '</span></span>' +
       '</a>' +
       '<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="main-nav">' +
         '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg> ' + t('nav.menu') +
@@ -49,7 +49,7 @@ function renderFooter(el, prefix) {
     '<div class="container">' +
       '<div class="footer-grid">' +
         '<div>' +
-          '<div class="footer-brand"><img src="' + prefix + 'img/logo.png" alt="KAEL AUT"><span style="font-weight:600;letter-spacing:.06em;font-size:14px;">AUT</span></div>' +
+          '<div class="footer-brand"><img src="' + prefix + 'img/logo.png" alt="KAEL"><span style="font-weight:600;letter-spacing:.06em;font-size:14px;">KAEL</span></div>' +
           '<p class="footer-note">' + t('footer.note') + '</p>' +
         '</div>' +
         '<div class="footer-col">' +

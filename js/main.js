@@ -1,4 +1,4 @@
-/* KAEL AUT — comportamiento compartido: menú móvil, año de footer, cookies */
+/* KAEL — comportamiento compartido: menú móvil, año de footer, cookies */
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
     applyI18n();

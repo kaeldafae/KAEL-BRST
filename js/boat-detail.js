@@ -1,10 +1,10 @@
-/* KAEL AUT — ficha de embarcación */
+/* KAEL — ficha de embarcación */
 (function () {
   var qs = new URLSearchParams(window.location.search);
   var boat = boatById(qs.get('id')) || BOATS[0];
 
   if (!boat) {
-    document.title = 'KAEL AUT';
+    document.title = 'KAEL';
     document.getElementById('boatContent').innerHTML =
       '<div class="empty-state card" style="grid-column:1/-1;">' +
         '<p style="margin:0 0 6px; font-size:16px; font-weight:500;">' + t('boat.emptyTitle') + '</p>' +
@@ -16,12 +16,12 @@
   var company = companyOf(boat);
   document.getElementById('boatContent').setAttribute('data-tier', company.tier || 'standard');
 
-  document.title = boat.name + ' — ' + typeName(boat.type) + ' — KAEL AUT';
+  document.title = boat.name + ' — ' + typeName(boat.type) + ' — KAEL';
   var pageDesc = boat.name + ': ' + boat.pax + ' ' + t('common.personas') + ', ' + boat.length + ', ' + t('boat.gestionadoPor').toLowerCase() + ' ' + company.name + '. ' + t('common.precioOrientativo') + ' ' + t('common.desde') + ' ' + euro(boat.price) + '.';
   var descEl = document.getElementById('pageDesc');
   if (descEl) descEl.setAttribute('content', pageDesc);
   var ogTitleEl = document.getElementById('pageOgTitle');
-  if (ogTitleEl) ogTitleEl.setAttribute('content', boat.name + ' — ' + typeName(boat.type) + ' — KAEL AUT');
+  if (ogTitleEl) ogTitleEl.setAttribute('content', boat.name + ' — ' + typeName(boat.type) + ' — KAEL');
   var ogDescEl = document.getElementById('pageOgDesc');
   if (ogDescEl) ogDescEl.setAttribute('content', pageDesc);
   var ogImageEl = document.getElementById('pageOgImage');

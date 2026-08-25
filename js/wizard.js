@@ -1,4 +1,4 @@
-/* KAEL AUT — asistente de selección de barco (4 preguntas) */
+/* KAEL — asistente de selección de barco (4 preguntas) */
 (function () {
   var step = 0;
   var answers = {};

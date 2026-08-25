@@ -1,4 +1,4 @@
-/* KAEL AUT — datos de mercados, empresas y embarcaciones.
+/* KAEL — datos de mercados, empresas y embarcaciones.
    Este fichero define la estructura de datos del portal. No contiene
    empresas de ejemplo: se van añadiendo aquí a medida que confirman la
    colaboración, agrupadas por mercado (MARKETS). Para dar de alta una
@@ -7,7 +7,7 @@
 
 const IMG = 'img/boats/';
 
-/* Mercados en los que opera o va a operar KAEL AUT. Añadir un mercado aquí
+/* Mercados en los que opera o va a operar KAEL. Añadir un mercado aquí
    lo hace aparecer automáticamente en los selectores de destino, aunque
    todavía no tenga ninguna empresa cargada. */
 const MARKETS = {
