@@ -102,7 +102,7 @@
             '<div><div class="k">' + t('catalog.eslora') + '</div><div class="v tabular">' + b.length + '</div></div>' +
             '<div><div class="k">' + t('catalog.patron') + '</div><div class="v">' + skipperName(b.skipper) + '</div></div>' +
           '</div>' +
-          '<div class="result-trust"><span class="dot"></span><span>' + c.name + t('catalog.empresaVerificadaTrust') + c.sla + '</span></div>' +
+          '<div class="result-trust"><span class="dot"' + (c.demo ? ' style="background:var(--warn-text);"' : '') + '></span><span>' + c.name + (c.demo ? t('common.demoTrustSuffix') : t('catalog.empresaVerificadaTrust')) + c.sla + '</span></div>' +
         '</div>' +
         '<div class="result-price">' +
           '<div><div class="plabel">' + t('common.precioOrientativo') + '</div><div class="pval tabular">' + t('common.desde') + ' ' + euro(b.price) + '</div><div class="pnote">' + t('catalog.precioFinalNota') + '</div></div>' +

@@ -40,6 +40,22 @@ function renderHeader(el, active, prefix) {
       if (chosen !== getLang()) setLang(chosen);
     });
   });
+
+  renderDemoBanner(el);
+}
+
+/* Aviso fijo de "catálogo de ejemplo": se inserta justo después de la
+   cabecera en todas las páginas (se llama desde renderHeader) mientras
+   DEMO_MODE esté activo en js/data.js. Al pasar DEMO_MODE a false deja de
+   aparecer automáticamente, sin tocar este archivo. */
+function renderDemoBanner(headerEl) {
+  if (typeof DEMO_MODE === 'undefined' || !DEMO_MODE) return;
+  if (document.getElementById('demoBanner')) return;
+  var banner = document.createElement('div');
+  banner.id = 'demoBanner';
+  banner.className = 'demo-banner';
+  banner.innerHTML = '<div class="container">' + t('common.demoBanner') + '</div>';
+  headerEl.insertAdjacentElement('afterend', banner);
 }
 
 function renderFooter(el, prefix) {

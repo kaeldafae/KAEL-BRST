@@ -57,7 +57,7 @@
   document.getElementById('companyContent').setAttribute('data-tier', c.tier || 'standard');
   document.title = c.name + ' — KAEL';
   var boats = boatsByCompany(c.id);
-  var metaDesc = c.name + ': ' + t('common.empresaVerificada').toLowerCase() + ' ' + c.base + '. ' + boats.length + ' ' + (boats.length === 1 ? t('common.embarcacion') : t('common.embarcaciones')) + ', ' + t('common.respondeEn').toLowerCase() + ' ' + c.sla + '.';
+  var metaDesc = c.name + ': ' + (c.demo ? t('common.demoTag').toLowerCase() : t('common.empresaVerificada').toLowerCase()) + ' ' + c.base + '. ' + boats.length + ' ' + (boats.length === 1 ? t('common.embarcacion') : t('common.embarcaciones')) + ', ' + t('common.respondeEn').toLowerCase() + ' ' + c.sla + '.';
   document.getElementById('pageDesc').setAttribute('content', metaDesc);
   document.getElementById('pageOgTitle').setAttribute('content', c.name + ' — KAEL');
   document.getElementById('pageOgDesc').setAttribute('content', metaDesc);
@@ -74,7 +74,9 @@
     '<div class="card" style="padding:40px; margin-bottom:32px;">' +
       '<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:32px; flex-wrap:wrap;">' +
         '<div>' +
-          '<div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;"><span class="dot"></span><span style="font-size:13px; color:var(--green-deep); font-weight:500;">' + t('common.empresaVerificada') + '</span></div>' +
+          (c.demo
+            ? '<div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;"><span class="dot" style="background:var(--warn-text);"></span><span style="font-size:13px; color:var(--warn-text); font-weight:500;">' + t('common.demoTag') + '</span></div>'
+            : '<div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;"><span class="dot"></span><span style="font-size:13px; color:var(--green-deep); font-weight:500;">' + t('common.empresaVerificada') + '</span></div>') +
           '<h1 style="font-size:36px; font-weight:500; letter-spacing:-0.02em; margin:0 0 12px;">' + c.name + '</h1>' +
           '<p class="lede" style="max-width:60ch;">' + c.about + '</p>' +
         '</div>' +

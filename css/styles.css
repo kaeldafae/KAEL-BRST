@@ -88,6 +88,13 @@ button { cursor: pointer; }
 .brand-tag strong { font-size: 15px; letter-spacing: 0.06em; }
 .brand-tag span { font-size: 12px; color: var(--muted); }
 
+.demo-banner {
+  background: var(--warn-bg); border-bottom: 1px solid var(--warn-border);
+}
+.demo-banner .container {
+  padding: 10px 24px; font-size: 13px; line-height: 1.4; color: var(--warn-text); text-align: center;
+}
+
 .main-nav { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .main-nav a.nav-link { font-size: 15px; color: var(--ink-soft); }
 .main-nav a.nav-link:hover, .main-nav a.nav-link.active { color: var(--ink); }

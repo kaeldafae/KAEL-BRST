@@ -41,7 +41,9 @@ const I18N = {
       destacado: 'Destacado', volverAlInicio: 'Volver al inicio', precioOrientativo: 'Precio orientativo',
       embarcacion: 'embarcación', embarcaciones: 'embarcaciones',
       types: { 'Lancha': 'Lancha', 'Yate': 'Yate', 'Catamarán': 'Catamarán' },
-      empresasVerificandoPrefix: 'Estamos verificando empresas náuticas en '
+      empresasVerificandoPrefix: 'Estamos verificando empresas náuticas en ',
+      demoTag: 'Ejemplo', demoTrustSuffix: ' · catálogo de ejemplo · responde en ',
+      demoBanner: 'Estás viendo un catálogo de ejemplo mientras confirmamos las primeras empresas náuticas aliadas. Ninguna de estas empresas ni embarcaciones es real todavía.'
     },
     home: {
       heroCardTitle: 'Muy pronto',
@@ -407,7 +409,9 @@ const I18N = {
       destacado: 'Featured', volverAlInicio: 'Back to home', precioOrientativo: 'Estimated price',
       embarcacion: 'boat', embarcaciones: 'boats',
       types: { 'Lancha': 'Speedboat', 'Yate': 'Yacht', 'Catamarán': 'Catamaran' },
-      empresasVerificandoPrefix: "We're verifying nautical companies in "
+      empresasVerificandoPrefix: "We're verifying nautical companies in ",
+      demoTag: 'Example', demoTrustSuffix: ' · example listing · responds in ',
+      demoBanner: "You're viewing an example catalog while we confirm our first partner nautical companies. None of these companies or boats are real yet."
     },
     home: {
       heroCardTitle: 'Coming soon',

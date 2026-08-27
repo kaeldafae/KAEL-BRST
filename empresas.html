@@ -47,7 +47,9 @@
       ? '<div class="grid-auto" data-tier-group>' + companies.map(function (c) {
           var n = boatsByCompany(c.id).length;
           return '<a href="empresa.html?id=' + c.id + '" class="company-card" data-tier="' + (c.tier || 'standard') + '">' +
-            '<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;"><span class="dot"></span><span style="font-size:13px; color:var(--green-deep); font-weight:500;">' + t('common.empresaVerificada') + '</span></div>' +
+            (c.demo
+              ? '<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;"><span class="dot" style="background:var(--warn-text);"></span><span style="font-size:13px; color:var(--warn-text); font-weight:500;">' + t('common.demoTag') + '</span></div>'
+              : '<div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;"><span class="dot"></span><span style="font-size:13px; color:var(--green-deep); font-weight:500;">' + t('common.empresaVerificada') + '</span></div>') +
             '<div class="cname">' + c.name + '</div>' +
             '<div class="cmeta">' + c.base + ' · ' + n + ' ' + (n === 1 ? t('common.embarcacion') : t('common.embarcaciones')) + '</div>' +
             '<div class="csla">' + t('common.respondeEn') + ' ' + c.sla + '</div>' +
