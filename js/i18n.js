@@ -32,8 +32,16 @@ const I18N = {
       reject: 'Rechazar'
     },
     legalNav: { aviso: 'Aviso legal', privacidad: 'Privacidad', cookies: 'Cookies', condiciones: 'Condiciones de intermediación', reclamaciones: 'Reclamaciones' },
-    markets: { ibiza: 'Ibiza y Formentera', canarias: 'Canarias', cancun: 'Cancún', phuket: 'Phuket', dubai: 'Dubái' },
-    countries: { 'España': 'España', 'México': 'México', 'Tailandia': 'Tailandia', 'EAU': 'EAU' },
+    markets: {
+      ibiza: 'Ibiza y Formentera', canarias: 'Canarias', cancun: 'Cancún', phuket: 'Phuket', dubai: 'Dubái',
+      bahamas: 'Bahamas', maldivas: 'Maldivas', bali: 'Bali', madeira: 'Madeira', croacia: 'Croacia',
+      bahrein: 'Baréin', egipto: 'Egipto', polinesia: 'Polinesia Francesa'
+    },
+    countries: {
+      'España': 'España', 'México': 'México', 'Tailandia': 'Tailandia', 'EAU': 'EAU',
+      'Bahamas': 'Bahamas', 'Maldivas': 'Maldivas', 'Indonesia': 'Indonesia', 'Portugal': 'Portugal',
+      'Croacia': 'Croacia', 'Baréin': 'Baréin', 'Egipto': 'Egipto', 'Polinesia Francesa': 'Polinesia Francesa'
+    },
     common: {
       solicitarReserva: 'Solicitar reserva', verEstaEmbarcacion: 'Ver esta embarcación', verEmpresa: 'Ver empresa',
       empresaVerificada: 'Empresa verificada', respondeEn: 'Responde en', desde: 'desde', personas: 'personas',
@@ -406,8 +414,16 @@ const I18N = {
       reject: 'Reject'
     },
     legalNav: { aviso: 'Legal notice', privacidad: 'Privacy', cookies: 'Cookies', condiciones: 'Intermediation terms', reclamaciones: 'Complaints' },
-    markets: { ibiza: 'Ibiza & Formentera', canarias: 'Canary Islands', cancun: 'Cancún', phuket: 'Phuket', dubai: 'Dubai' },
-    countries: { 'España': 'Spain', 'México': 'Mexico', 'Tailandia': 'Thailand', 'EAU': 'UAE' },
+    markets: {
+      ibiza: 'Ibiza & Formentera', canarias: 'Canary Islands', cancun: 'Cancún', phuket: 'Phuket', dubai: 'Dubai',
+      bahamas: 'Bahamas', maldivas: 'Maldives', bali: 'Bali', madeira: 'Madeira', croacia: 'Croatia',
+      bahrein: 'Bahrain', egipto: 'Egypt', polinesia: 'French Polynesia'
+    },
+    countries: {
+      'España': 'Spain', 'México': 'Mexico', 'Tailandia': 'Thailand', 'EAU': 'UAE',
+      'Bahamas': 'Bahamas', 'Maldivas': 'Maldives', 'Indonesia': 'Indonesia', 'Portugal': 'Portugal',
+      'Croacia': 'Croatia', 'Baréin': 'Bahrain', 'Egipto': 'Egypt', 'Polinesia Francesa': 'French Polynesia'
+    },
     common: {
       solicitarReserva: 'Request booking', verEstaEmbarcacion: 'View this boat', verEmpresa: 'View company',
       empresaVerificada: 'Verified company', respondeEn: 'Responds in', desde: 'from', personas: 'people',

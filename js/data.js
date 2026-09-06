@@ -15,7 +15,17 @@ const MARKETS = {
   'canarias': { id: 'canarias', name: 'Canarias', country: 'España' },
   'cancun': { id: 'cancun', name: 'Cancún', country: 'México' },
   'phuket': { id: 'phuket', name: 'Phuket', country: 'Tailandia' },
-  'dubai': { id: 'dubai', name: 'Dubái', country: 'EAU' }
+  'dubai': { id: 'dubai', name: 'Dubái', country: 'EAU' },
+  /* Destinos de temporada de invierno (Oct-Abr), añadidos como ampliación
+     de los mercados anteriores: uno por región cálida, para empezar. */
+  'bahamas': { id: 'bahamas', name: 'Bahamas', country: 'Bahamas' },
+  'maldivas': { id: 'maldivas', name: 'Maldivas', country: 'Maldivas' },
+  'bali': { id: 'bali', name: 'Bali', country: 'Indonesia' },
+  'madeira': { id: 'madeira', name: 'Madeira', country: 'Portugal' },
+  'croacia': { id: 'croacia', name: 'Croacia', country: 'Croacia' },
+  'bahrein': { id: 'bahrein', name: 'Baréin', country: 'Baréin' },
+  'egipto': { id: 'egipto', name: 'Egipto', country: 'Egipto' },
+  'polinesia': { id: 'polinesia', name: 'Polinesia Francesa', country: 'Polinesia Francesa' }
 };
 
 /* Empresas náuticas colaboradoras verificadas reales. Vacío a propósito:
@@ -75,6 +85,54 @@ const DEMO_COMPANIES = {
     name: 'Ejemplo Dubai Yachts', base: 'Dubai Marina', cif: 'DEMO-00000005',
     sla: '1 h', confirmRate: '97%', rating: '4.9/5',
     about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa premium en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-bahamas-charter': {
+    id: 'demo-bahamas-charter', demo: true, marketId: 'bahamas', tier: 'standard',
+    name: 'Ejemplo Bahamas Charter', base: 'Nassau, New Providence', cif: 'DEMO-00000006',
+    sla: '3 h', confirmRate: '91%', rating: '4.6/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa estándar en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-maldivas-yachts': {
+    id: 'demo-maldivas-yachts', demo: true, marketId: 'maldivas', tier: 'premium',
+    name: 'Ejemplo Maldivas Yachts', base: 'Malé, Atolón de Malé Norte', cif: 'DEMO-00000007',
+    sla: '2 h', confirmRate: '96%', rating: '4.9/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa premium en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-bali-nautica': {
+    id: 'demo-bali-nautica', demo: true, marketId: 'bali', tier: 'standard',
+    name: 'Ejemplo Bali Náutica', base: 'Benoa, Bali', cif: 'DEMO-00000008',
+    sla: '4 h', confirmRate: '89%', rating: '4.5/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa estándar en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-madeira-boats': {
+    id: 'demo-madeira-boats', demo: true, marketId: 'madeira', tier: 'standard',
+    name: 'Ejemplo Madeira Boats', base: 'Funchal, Madeira', cif: 'DEMO-00000009',
+    sla: '3 h', confirmRate: '90%', rating: '4.5/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa estándar en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-croacia-sailing': {
+    id: 'demo-croacia-sailing', demo: true, marketId: 'croacia', tier: 'standard',
+    name: 'Ejemplo Croacia Sailing', base: 'Split, Dalmacia', cif: 'DEMO-00000010',
+    sla: '3 h', confirmRate: '92%', rating: '4.7/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa estándar en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-bahrein-marine': {
+    id: 'demo-bahrein-marine', demo: true, marketId: 'bahrein', tier: 'standard',
+    name: 'Ejemplo Baréin Marine', base: 'Manama', cif: 'DEMO-00000011',
+    sla: '4 h', confirmRate: '87%', rating: '4.3/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa estándar en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-egipto-redsea': {
+    id: 'demo-egipto-redsea', demo: true, marketId: 'egipto', tier: 'standard',
+    name: 'Ejemplo Egipto Red Sea', base: 'Hurghada, Mar Rojo', cif: 'DEMO-00000012',
+    sla: '4 h', confirmRate: '88%', rating: '4.4/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa estándar en la plataforma. No es una empresa real ni presta ningún servicio.'
+  },
+  'demo-polinesia-yachts': {
+    id: 'demo-polinesia-yachts', demo: true, marketId: 'polinesia', tier: 'premium',
+    name: 'Ejemplo Polinesia Yachts', base: 'Bora Bora', cif: 'DEMO-00000013',
+    sla: '2 h', confirmRate: '95%', rating: '4.9/5',
+    about: 'Empresa de ejemplo para mostrar cómo se vería una ficha de empresa premium en la plataforma. No es una empresa real ni presta ningún servicio.'
   }
 };
 
@@ -129,6 +187,78 @@ const DEMO_BOATS = [
     name: 'Ejemplo Majestic 60 (ficha de ejemplo)', type: 'Yate', pax: 14, length: '18 m', port: 'Dubai Marina',
     skipper: 'Con patrón', camarotes: 4, banos: 3, price: 2200,
     images: [IMG + 'yate-deportivo-gris.webp', IMG + 'aerial-cala.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería un yate premium en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional', 'Ejemplo: seguro de responsabilidad civil'],
+    excluded: ['Ejemplo: catering a bordo', 'Ejemplo: extras de combustible por exceso de millas']
+  },
+  {
+    id: 'demo-boat-bahamas-lancha', demo: true, companyId: 'demo-bahamas-charter',
+    name: 'Ejemplo Island Runner 32 (ficha de ejemplo)', type: 'Lancha', pax: 8, length: '10 m', port: 'Nassau',
+    skipper: 'Con patrón', camarotes: 1, banos: 1, price: 480,
+    images: [IMG + 'lancha-bimini-blanca.webp', IMG + 'aerial-lancha-blanca.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería una lancha en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional'],
+    excluded: ['Ejemplo: bebidas a bordo']
+  },
+  {
+    id: 'demo-boat-maldivas-yate', demo: true, companyId: 'demo-maldivas-yachts',
+    name: 'Ejemplo Atoll Explorer 55 (ficha de ejemplo)', type: 'Yate', pax: 12, length: '17 m', port: 'Malé',
+    skipper: 'Con patrón', camarotes: 4, banos: 3, price: 1900,
+    images: [IMG + 'yate-flybridge-fondeado.webp', IMG + 'aerial-cala.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería un yate premium en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional', 'Ejemplo: seguro de responsabilidad civil'],
+    excluded: ['Ejemplo: catering a bordo']
+  },
+  {
+    id: 'demo-boat-bali-cata', demo: true, companyId: 'demo-bali-nautica',
+    name: 'Ejemplo Benoa 40 (ficha de ejemplo)', type: 'Catamarán', pax: 10, length: '12 m', port: 'Benoa',
+    skipper: 'Con patrón', camarotes: 3, banos: 2, price: 780,
+    images: [IMG + 'catamaran-grupo.webp', IMG + 'aerial-cala.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería un catamarán en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional'],
+    excluded: ['Ejemplo: catering a bordo']
+  },
+  {
+    id: 'demo-boat-madeira-lancha', demo: true, companyId: 'demo-madeira-boats',
+    name: 'Ejemplo Atlântico 28 (ficha de ejemplo)', type: 'Lancha', pax: 8, length: '9 m', port: 'Funchal',
+    skipper: 'Con patrón', camarotes: 1, banos: 1, price: 420,
+    images: [IMG + 'lancha-negra-acantilado.webp', IMG + 'aerial-cala.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería una lancha en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional'],
+    excluded: ['Ejemplo: avistamiento de cetáceos guiado']
+  },
+  {
+    id: 'demo-boat-croacia-vela', demo: true, companyId: 'demo-croacia-sailing',
+    name: 'Ejemplo Dalmacia 38 (ficha de ejemplo)', type: 'Catamarán', pax: 10, length: '11 m', port: 'Split',
+    skipper: 'Con patrón', camarotes: 3, banos: 2, price: 690,
+    images: [IMG + 'catamaran-grupo.webp', IMG + 'lancha-perfil-blanca.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería un catamarán en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional'],
+    excluded: ['Ejemplo: catering a bordo']
+  },
+  {
+    id: 'demo-boat-bahrein-lancha', demo: true, companyId: 'demo-bahrein-marine',
+    name: 'Ejemplo Gulf Cruiser 30 (ficha de ejemplo)', type: 'Lancha', pax: 8, length: '9 m', port: 'Manama',
+    skipper: 'Con patrón', camarotes: 1, banos: 1, price: 460,
+    images: [IMG + 'lancha-toldo-azul.webp', IMG + 'aerial-lancha-blanca.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería una lancha en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional'],
+    excluded: ['Ejemplo: bebidas a bordo']
+  },
+  {
+    id: 'demo-boat-egipto-lancha', demo: true, companyId: 'demo-egipto-redsea',
+    name: 'Ejemplo Red Sea Diver 34 (ficha de ejemplo)', type: 'Lancha', pax: 10, length: '10 m', port: 'Hurghada',
+    skipper: 'Con patrón', camarotes: 2, banos: 1, price: 540,
+    images: [IMG + 'lancha-negra-deportiva.webp', IMG + 'aerial-cala.webp', IMG + 'proa-faro.webp'],
+    description: 'Ficha de ejemplo para enseñar cómo se vería una lancha en el catálogo. Ni el barco ni la empresa son reales.',
+    included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional', 'Ejemplo: equipo de esnórquel'],
+    excluded: ['Ejemplo: catering a bordo']
+  },
+  {
+    id: 'demo-boat-polinesia-yate', demo: true, companyId: 'demo-polinesia-yachts',
+    name: 'Ejemplo Lagoon Majesty 58 (ficha de ejemplo)', type: 'Yate', pax: 12, length: '18 m', port: 'Bora Bora',
+    skipper: 'Con patrón', camarotes: 4, banos: 3, price: 2100,
+    images: [IMG + 'yate-flybridge-fondeado.webp', IMG + 'aerial-cala.webp', IMG + 'proa-faro.webp'],
     description: 'Ficha de ejemplo para enseñar cómo se vería un yate premium en el catálogo. Ni el barco ni la empresa son reales.',
     included: ['Ejemplo: combustible para ruta estándar', 'Ejemplo: patrón profesional', 'Ejemplo: seguro de responsabilidad civil'],
     excluded: ['Ejemplo: catering a bordo', 'Ejemplo: extras de combustible por exceso de millas']
