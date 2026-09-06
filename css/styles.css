@@ -216,7 +216,7 @@ h1.h-hero, .h-hero { font-size: clamp(40px, 7vw, 84px); line-height: 0.95; lette
   position: absolute; left: 14px; top: 14px; background: var(--bg); border-radius: 999px; padding: 6px 12px;
   font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;
 }
-.boat-card .badge-featured {
+.badge-featured {
   position: absolute; left: 14px; top: 14px; background: var(--warn-bg); border: 1px solid var(--warn-border);
   border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 500; color: var(--warn-text);
 }
@@ -619,10 +619,103 @@ body.has-cookie-banner { padding-bottom: var(--cookie-banner-space, 180px); }
      por ejemplo, todas las filas de la tabla de características. */
   color: var(--ink);
 }
+[data-tier="premium"] .boat-card .thumb {
+  box-shadow: 0 22px 48px -22px rgba(0,0,0,0.6);
+}
+
+/* ---------- VIP: "destacado" (por barco) y tier premium (por empresa) ----------
+   Ambos ya existían como datos (boat.destacado, company.tier) — lo nuevo es que
+   ahora animan, para que una empresa pueda hacer que el barco que más le
+   interesa promocionar (destacado) o su categoría de lujo (premium) se note de
+   un vistazo, no solo por el color estático. */
+@keyframes vip-shimmer {
+  0% { background-position: -150% 0; }
+  100% { background-position: 250% 0; }
+}
+@keyframes vip-glow {
+  0%, 100% { box-shadow: 0 22px 48px -22px rgba(0,0,0,0.6), 0 0 0 0 rgba(201,162,39,0.45); }
+  50% { box-shadow: 0 22px 48px -22px rgba(0,0,0,0.6), 0 0 16px 3px rgba(201,162,39,0.4); }
+}
+
+.badge-featured {
+  background: linear-gradient(100deg, var(--warn-bg) 25%, #FFE8A3 50%, var(--warn-bg) 75%);
+  background-size: 250% 100%;
+  animation: vip-shimmer 3.2s ease-in-out infinite;
+}
+
 [data-tier="premium"].card,
 [data-tier="premium"].company-card,
 [data-tier="premium"].result-card,
-[data-tier="premium"].managed-by,
-[data-tier="premium"] .boat-card .thumb {
-  box-shadow: 0 22px 48px -22px rgba(0,0,0,0.6);
+[data-tier="premium"].managed-by {
+  animation: vip-glow 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-featured,
+  [data-tier="premium"].card,
+  [data-tier="premium"].company-card,
+  [data-tier="premium"].result-card,
+  [data-tier="premium"].managed-by {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Pantalla de carga (portada, una vez por sesión) — ver js/intro.js
+   ========================================================================== */
+.kael-intro {
+  position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  transition: opacity 450ms ease;
+}
+.kael-intro.is-leaving { opacity: 0; pointer-events: none; }
+
+.kael-intro-stage {
+  position: relative; width: 320px; max-width: 70vw; height: 190px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+}
+
+.kael-intro-water {
+  position: absolute; left: 0; right: 0; bottom: 26%; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.kael-intro-wave { width: 200%; }
+.kael-intro-wave svg { display: block; width: 100%; height: auto; overflow: visible; }
+.kael-intro-wave-1 { animation: kael-water-1 3000ms linear infinite; }
+.kael-intro-wave-2 { animation: kael-water-2 4600ms linear infinite; margin-top: -6px; }
+@keyframes kael-water-1 { from { transform: translateX(0); } to { transform: translateX(-12.5%); } }
+@keyframes kael-water-2 { from { transform: translateX(0); } to { transform: translateX(-16.6667%); } }
+
+.kael-intro-breeze { position: absolute; top: 6px; left: 46%; display: flex; flex-direction: column; gap: 9px; pointer-events: none; }
+.kael-intro-breeze-line { width: 34px; height: 3px; border-radius: 2px; background: #366A8B; opacity: 0; }
+.kael-intro-breeze-a { animation: kael-breeze 2600ms linear infinite; }
+.kael-intro-breeze-b { width: 20px; margin-left: 14px; animation: kael-breeze 3100ms linear infinite 900ms; }
+@keyframes kael-breeze {
+  0% { opacity: 0; transform: translateX(0); }
+  14% { opacity: .7; }
+  58% { opacity: .7; }
+  82% { opacity: 0; }
+  100% { opacity: 0; transform: translateX(-70px); }
+}
+
+.kael-intro-boat { position: absolute; inset: 0; display: grid; place-items: center; will-change: transform, opacity; }
+.kael-intro-boat-bob { width: 58%; animation: kael-bob 1900ms ease-in-out infinite; }
+.kael-intro-boat-bob svg { display: block; width: 100%; height: auto; overflow: visible; }
+@keyframes kael-bob {
+  0% { transform: translateY(0) rotate(-1.4deg); }
+  50% { transform: translateY(-4px) rotate(1.4deg); }
+  100% { transform: translateY(0) rotate(-1.4deg); }
+}
+
+.kael-intro-word {
+  font-family: var(--font-body); font-size: 15px; font-weight: 600; letter-spacing: 0.28em;
+  color: var(--ink-soft); text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kael-intro, .kael-intro-wave-1, .kael-intro-wave-2, .kael-intro-breeze-a, .kael-intro-breeze-b, .kael-intro-boat-bob {
+    animation: none;
+  }
 }

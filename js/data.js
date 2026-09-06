@@ -138,7 +138,7 @@ const DEMO_COMPANIES = {
 
 const DEMO_BOATS = [
   {
-    id: 'demo-boat-ibiza-yate', demo: true, companyId: 'demo-ibiza-charter',
+    id: 'demo-boat-ibiza-yate', demo: true, companyId: 'demo-ibiza-charter', destacado: true,
     name: 'Ejemplo Flybridge 48 (ficha de ejemplo)', type: 'Yate', pax: 10, length: '15 m', port: 'Ibiza',
     skipper: 'Con patrón', camarotes: 3, banos: 2, price: 1200,
     images: [IMG + 'yate-flybridge-fondeado.webp', IMG + 'proa-faro.webp', IMG + 'aerial-cala.webp'],
