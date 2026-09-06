@@ -141,16 +141,10 @@ rápido) y el backend en Render/Railway por separado:
 ## Panel interno (backoffice)
 
 `admin.html` (protegido con usuario/contraseña — `ADMIN_USER`/`ADMIN_PASS` en
-`server/.env`) muestra todas las solicitudes recibidas, su estado y el importe
-final cuando lo registres. Es intencionalmente sencillo (MVP): para cambiar el
-estado de una solicitud usa por ahora la API directamente:
-
-```bash
-curl -X PATCH https://tu-dominio/api/admin/solicitudes/IBZ-2026-123456 \
-  -u admin:tu-contrasena \
-  -H "Content-Type: application/json" \
-  -d '{"status":"confirmada","importeFinal":"1450 €"}'
-```
+`server/.env`) muestra todas las solicitudes recibidas. Cada fila tiene un
+desplegable de estado (pendiente/contactada/confirmada/rechazada/cancelada) y
+un campo de importe con un botón "Guardar" — no hace falta usar la terminal ni
+`curl` para actualizar una solicitud, se hace directamente desde el navegador.
 
 ## Próximos pasos sugeridos (fase 2, según el documento base del proyecto)
 
