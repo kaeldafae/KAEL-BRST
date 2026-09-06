@@ -257,7 +257,7 @@ app.patch('/api/admin/solicitudes/:ref', requireAdminAuth, (req, res) => {
     lead.status = req.body.status;
     lead.events.push({ at: new Date().toISOString(), what: 'status_actualizado', status: req.body.status });
   }
-  if (req.body.importeFinal) lead.importeFinal = req.body.importeFinal;
+  if (req.body.importeFinal !== undefined) lead.importeFinal = req.body.importeFinal;
   writeLeads(leads);
   res.json(lead);
 });

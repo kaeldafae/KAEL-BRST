@@ -15,6 +15,11 @@
   th, td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--border); font-size:13px; vertical-align:top; }
   th { background:#FAF8F3; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
   select.status { font-size:12px; padding:4px 6px; }
+  .importe-cell { display:flex; gap:6px; align-items:center; }
+  .importe-cell input { font-size:12px; padding:4px 6px; width:110px; border:1px solid var(--border); border-radius:6px; }
+  .importe-cell button { font-size:11px; padding:4px 8px; border:1px solid var(--border); border-radius:6px; background:#fff; cursor:pointer; }
+  .importe-cell button:hover { background:var(--card-alt); }
+  .save-status { font-size:11px; color:var(--muted); }
 </style>
 </head>
 <body data-page="admin">
@@ -43,42 +48,92 @@
 <script>
 (function () {
   var base = window.KAEL_API_BASE || '/api';
-  fetch(base + '/admin/solicitudes').then(function (r) {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  }).then(function (leads) {
-    var body = document.getElementById('leadsBody');
-    if (!leads.length) { body.innerHTML = '<tr><td colspan="9">' + t('admin.sinSolicitudes') + '</td></tr>'; return; }
+  var ESTADOS = ['pendiente_de_empresa', 'contactado', 'confirmada', 'rechazada', 'cancelada'];
 
-    var pending = leads.filter(function (l) { return l.status === 'pendiente_de_empresa'; }).length;
-    var confirmed = leads.filter(function (l) { return l.status === 'confirmada'; }).length;
-    document.getElementById('statsRow').innerHTML =
-      statCard(leads.length, t('admin.statTotales')) +
-      statCard(pending, t('admin.statPendientes')) +
-      statCard(confirmed, t('admin.statConfirmadas'));
-
-    body.innerHTML = '';
-    leads.forEach(function (l) {
-      var tr = document.createElement('tr');
-      tr.innerHTML =
-        '<td class="mono">' + l.ref + '</td>' +
-        '<td>' + new Date(l.createdAt).toLocaleString('es-ES') + '</td>' +
-        '<td>' + (l.boatIds || []).join(', ') + '</td>' +
-        '<td>' + l.nombre + '</td>' +
-        '<td>' + l.email + '<br>' + l.telefono + '</td>' +
-        '<td>' + l.fecha + '</td>' +
-        '<td>' + l.personas + '</td>' +
-        '<td>' + l.status + '</td>' +
-        '<td>' + (l.importeFinal || '—') + '</td>';
-      body.appendChild(tr);
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
-  }).catch(function (err) {
-    document.getElementById('leadsBody').innerHTML = '<tr><td colspan="9">' + t('admin.errorCarga') + err.message + '</td></tr>';
-  });
+  }
 
   function statCard(n, label) {
     return '<div class="card card-pad" style="min-width:160px;"><div style="font-size:28px; font-weight:500;">' + n + '</div><div style="font-size:13px; color:var(--muted); margin-top:4px;">' + label + '</div></div>';
   }
+
+  function statusOptions(current) {
+    return ESTADOS.map(function (s) {
+      return '<option value="' + s + '"' + (s === current ? ' selected' : '') + '>' + escapeHtml(t('admin.estados.' + s)) + '</option>';
+    }).join('');
+  }
+
+  function loadLeads() {
+    var body = document.getElementById('leadsBody');
+    return fetch(base + '/admin/solicitudes').then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function (leads) {
+      if (!leads.length) { body.innerHTML = '<tr><td colspan="9">' + t('admin.sinSolicitudes') + '</td></tr>'; return; }
+
+      var pending = leads.filter(function (l) { return l.status === 'pendiente_de_empresa'; }).length;
+      var confirmed = leads.filter(function (l) { return l.status === 'confirmada'; }).length;
+      document.getElementById('statsRow').innerHTML =
+        statCard(leads.length, t('admin.statTotales')) +
+        statCard(pending, t('admin.statPendientes')) +
+        statCard(confirmed, t('admin.statConfirmadas'));
+
+      body.innerHTML = '';
+      leads.forEach(function (l) {
+        var tr = document.createElement('tr');
+        tr.setAttribute('data-ref', l.ref);
+        tr.innerHTML =
+          '<td class="mono">' + escapeHtml(l.ref) + '</td>' +
+          '<td>' + escapeHtml(new Date(l.createdAt).toLocaleString('es-ES')) + '</td>' +
+          '<td>' + escapeHtml((l.boatIds || []).join(', ')) + '</td>' +
+          '<td>' + escapeHtml(l.nombre) + '</td>' +
+          '<td>' + escapeHtml(l.email) + '<br>' + escapeHtml(l.telefono) + '</td>' +
+          '<td>' + escapeHtml(l.fecha) + '</td>' +
+          '<td>' + escapeHtml(l.personas) + '</td>' +
+          '<td><select class="status">' + statusOptions(l.status) + '</select></td>' +
+          '<td><div class="importe-cell">' +
+            '<input type="text" class="importe-input" placeholder="' + escapeHtml(t('admin.importePlaceholder')) + '" value="' + escapeHtml(l.importeFinal || '') + '">' +
+            '<button type="button" class="save-btn">' + escapeHtml(t('admin.guardar')) + '</button>' +
+            '<span class="save-status"></span>' +
+          '</div></td>';
+        body.appendChild(tr);
+      });
+    }).catch(function (err) {
+      body.innerHTML = '<tr><td colspan="9">' + t('admin.errorCarga') + escapeHtml(err.message) + '</td></tr>';
+    });
+  }
+
+  document.getElementById('leadsBody').addEventListener('click', function (e) {
+    var btn = e.target.closest('.save-btn');
+    if (!btn) return;
+    var tr = btn.closest('tr');
+    var ref = tr.getAttribute('data-ref');
+    var status = tr.querySelector('.status').value;
+    var importeFinal = tr.querySelector('.importe-input').value.trim();
+    var statusEl = tr.querySelector('.save-status');
+    btn.disabled = true;
+    statusEl.textContent = t('admin.guardando');
+    fetch(base + '/admin/solicitudes/' + encodeURIComponent(ref), {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: status, importeFinal: importeFinal })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function () {
+      statusEl.textContent = t('admin.guardado');
+      btn.disabled = false;
+      setTimeout(function () { statusEl.textContent = ''; }, 2500);
+    }).catch(function () {
+      statusEl.textContent = t('admin.errorGuardar');
+      btn.disabled = false;
+    });
+  });
+
+  loadLeads();
 })();
 </script>
 </body>

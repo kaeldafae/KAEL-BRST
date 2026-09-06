@@ -231,7 +231,13 @@ const I18N = {
       thFechaSol: 'Fecha solicitada', thPersonas: 'Personas', thEstado: 'Estado', thImporte: 'Importe',
       cargando: 'Cargando…', sinSolicitudes: 'Todavía no hay solicitudes.',
       statTotales: 'Solicitudes totales', statPendientes: 'Pendientes de empresa', statConfirmadas: 'Confirmadas',
-      errorCarga: 'No se pudo cargar (¿backend desplegado y configurado?): '
+      errorCarga: 'No se pudo cargar (¿backend desplegado y configurado?): ',
+      estados: {
+        pendiente_de_empresa: 'Pendiente de empresa', contactado: 'Contactada', confirmada: 'Confirmada',
+        rechazada: 'Rechazada', cancelada: 'Cancelada'
+      },
+      importePlaceholder: 'Importe, ej. 950 €', guardar: 'Guardar', guardando: 'Guardando…', guardado: '✓ Guardado',
+      errorGuardar: 'No se pudo guardar'
     },
     legal: {
       updated: 'Última actualización: '
@@ -599,7 +605,13 @@ const I18N = {
       thFechaSol: 'Requested date', thPersonas: 'People', thEstado: 'Status', thImporte: 'Amount',
       cargando: 'Loading…', sinSolicitudes: 'No requests yet.',
       statTotales: 'Total requests', statPendientes: 'Pending company', statConfirmadas: 'Confirmed',
-      errorCarga: "Couldn't load (is the backend deployed and configured?): "
+      errorCarga: "Couldn't load (is the backend deployed and configured?): ",
+      estados: {
+        pendiente_de_empresa: 'Pending company', contactado: 'Contacted', confirmada: 'Confirmed',
+        rechazada: 'Rejected', cancelada: 'Cancelled'
+      },
+      importePlaceholder: 'Amount, e.g. 950 €', guardar: 'Save', guardando: 'Saving…', guardado: '✓ Saved',
+      errorGuardar: "Couldn't save"
     },
     legal: {
       updated: 'Last updated: '
