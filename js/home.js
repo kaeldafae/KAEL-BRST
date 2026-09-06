@@ -1,7 +1,7 @@
 /* KAEL — lógica de la página de inicio */
 (function () {
-  function marketList() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(', '); }
-  function marketListDot() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(' · '); }
+  function marketList() { return marketSummary(', ', 5, 'common.yMasDestinos'); }
+  function marketListDot() { return marketSummary(' · ', 5, 'common.masDestinos'); }
 
   // Etiqueta de mercados en la cabecera del hero
   document.getElementById('heroMarkets').textContent = marketListDot();

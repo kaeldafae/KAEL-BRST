@@ -272,6 +272,19 @@ function euro(n) {
   return new Intl.NumberFormat('es-ES', { useGrouping: true }).format(n) + ' €';
 }
 
+/* Nombres de mercado listos para mostrar en prosa/eyebrows. Con muchos
+   destinos (13 y subiendo), listarlos todos separados por comas o puntos
+   deja de ser legible y se convierte en una pared de texto — por eso se
+   corta en `max` y se añade un "+N más"/"y N más" en vez de seguir
+   creciendo sin límite cada vez que se da de alta un destino nuevo. */
+function marketSummary(sep, max, moreLabelKey) {
+  var names = Object.values(MARKETS).map(function (m) { return marketName(m.id); });
+  if (!max || names.length <= max) return names.join(sep);
+  var shown = names.slice(0, max);
+  shown.push(t(moreLabelKey).replace('{n}', String(names.length - max)));
+  return shown.join(sep);
+}
+
 function boatById(id) { return BOATS.find(b => b.id === id); }
 function companyOf(boat) { return boat ? COMPANIES[boat.companyId] : undefined; }
 function boatsByCompany(companyId) { return BOATS.filter(b => b.companyId === companyId); }

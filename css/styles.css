@@ -244,13 +244,19 @@ h1.h-hero, .h-hero { font-size: clamp(40px, 7vw, 84px); line-height: 0.95; lette
 
 /* ---------- Search box ---------- */
 .search-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 26px 28px; }
-.search-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; align-items: end; }
+.search-grid {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.4fr) minmax(140px, 1fr) minmax(110px, 0.8fr) minmax(130px, 1fr) minmax(140px, 1fr) auto;
+  gap: 18px; align-items: end;
+}
+@media (max-width: 980px) { .search-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
 .field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 .field .flabel { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
 .field input, .field select, .field textarea {
   height: 46px; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0 12px;
   background: var(--white); color: var(--ink);
 }
+.field select { text-overflow: ellipsis; }
 .field textarea { height: auto; padding: 12px; resize: vertical; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }

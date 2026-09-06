@@ -58,7 +58,7 @@
     }
   }
 
-  function marketList() { return Object.values(MARKETS).map(function (m) { return marketName(m.id); }).join(', '); }
+  function marketList() { return marketSummary(', ', 5, 'common.yMasDestinos'); }
 
   function renderResults() {
     var list = filtered();
