@@ -92,12 +92,25 @@
     var renderCompanyTabs = function () {
       companyTabs.innerHTML = '';
       companyIds.forEach(function (id) {
-        var label = id === 'all' ? t('common.todasLasEmpresas') : COMPANIES[id].name;
         var count = boatsForCompany(id).length;
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'company-tab' + (id === activeCompany ? ' active' : '');
-        btn.innerHTML = label + '<span class="count">' + count + '</span>';
+        if (id === 'all') {
+          btn.innerHTML =
+            '<span class="company-tab-avatar company-tab-avatar-all">' + Object.keys(COMPANIES).length + '</span>' +
+            '<span class="company-tab-name">' + t('common.todasLasEmpresas') + '</span>' +
+            '<span class="count">' + count + '</span>';
+        } else {
+          var company = COMPANIES[id];
+          var firstBoat = boatsByCompany(id)[0];
+          var thumb = firstBoat ? firstBoat.images[0] : '';
+          btn.setAttribute('data-tier', company.tier || 'standard');
+          btn.innerHTML =
+            '<span class="company-tab-avatar"><img src="' + thumb + '" alt=""></span>' +
+            '<span class="company-tab-name">' + company.name + '</span>' +
+            '<span class="count">' + count + '</span>';
+        }
         btn.addEventListener('click', function () {
           activeCompany = id;
           renderCompanyTabs();

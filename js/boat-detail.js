@@ -47,7 +47,7 @@
         '</div>' +
       '</div>' +
       '<div class="eyebrow">' + typeName(boat.type) + ' · ' + boat.port + '</div>' +
-      '<h1 style="font-size:38px; font-weight:500; letter-spacing:-0.02em; margin:6px 0 0;">' + boat.name + '</h1>' +
+      '<h1 style="font-family:var(--font-display); font-size:38px; font-weight:600; letter-spacing:-0.01em; margin:6px 0 0;">' + boat.name + '</h1>' +
       '<p class="lede" style="margin-top:16px; max-width:62ch;">' + boat.description + '</p>' +
 
       '<h3 style="font-size:22px; font-weight:500; margin:40px 0 16px;">' + t('boat.caracteristicas') + '</h3>' +
