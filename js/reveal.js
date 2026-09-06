@@ -5,10 +5,16 @@
 (function () {
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Elementos "de fila" (una línea de tabla, un check de lista, una fila
+     de comparativa) se revelan en bloque junto con su contenedor en vez de
+     uno a uno: animar cada micro-elemento por separado con su propio
+     retraso escalonado se ve recargado y "de plantilla" en vez de
+     elegante, además de arriesgarse a mostrarse a medias si el usuario
+     hace scroll rápido. */
   var SELECTORS = [
     '.section .eyebrow', '.section h1', '.section h2', '.section > .container > p.lede',
-    '.stat', '.step', '.boat-card', '.company-card', '.compare-row',
-    '.result-card', '.specs-row', '.list-dot', '.legal-doc h2', '.legal-doc > p',
+    '.stat-grid', '.step', '.boat-card', '.company-card', '.compare',
+    '.result-card', '.specs-table', '.legal-doc h2', '.legal-doc > p',
     '.dark-panel', '.search-box', '.banner-warn', '.banner-info', '.hero-frame'
   ];
 

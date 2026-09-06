@@ -612,6 +612,12 @@ body.has-cookie-banner { padding-bottom: var(--cookie-banner-space, 180px); }
   --green-deep: #D8B44C;
   --green-on: #1C170F;
   --green-dot: #C9A227;
+  /* `color` es una propiedad heredada: sin este reset, cualquier texto que
+     no fije su propio color (la mayoría) seguía arrastrando el negro
+     `body { color: var(--ink) }` del modo claro en vez de recalcular
+     var(--ink) aquí, dejando texto casi negro sobre fondos oscuros —
+     por ejemplo, todas las filas de la tabla de características. */
+  color: var(--ink);
 }
 [data-tier="premium"].card,
 [data-tier="premium"].company-card,
