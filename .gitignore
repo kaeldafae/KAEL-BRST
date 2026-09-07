@@ -1,6 +1,11 @@
 node_modules/
-server/node_modules/
-server/.env
-server/data/leads.json
+frontend/node_modules/
+frontend/build/
+backend/.env
+frontend/.env
+memory/test_credentials.md
+__pycache__/
+*.pyc
+.pytest_cache/
 .DS_Store
 *.log

@@ -1,155 +1,155 @@
 # KAEL — plataforma de intermediación de alquiler de barcos (varios destinos)
 
-Sitio funcional listo para desplegar: catálogo de embarcaciones, ficha de cada barco,
-formulario de solicitud (individual y a varias empresas a la vez), asistente de
-selección, páginas de empresas náuticas, legales, y un backend mínimo que guarda
-las solicitudes y las notifica por email.
+Plataforma completa: catálogo con carrusel 3D "elige tu barco", tema visual VIP
+(azul medianoche + dorado) para empresas premium, mapa de rutas náuticas,
+calendario de disponibilidad, asistente de chat con IA, panel interno con
+login, portal privado por empresa (reservas, señal, firma de contrato digital)
+y facturación mensual de comisiones en PDF.
 
-**Importante — modelo de negocio:** esta web es un *intermediario*. Nunca cobra el
-alquiler ni gestiona pagos de clientes; solo genera y transmite solicitudes a las
-empresas náuticas, que confirman y cobran directamente. Eso es intencional (ver
-`legal/condiciones-intermediacion.html`) y reduce muchísimo la complejidad legal y
-técnica para lanzar ya.
+**Importante — modelo de negocio:** KAEL es un *intermediario*. Nunca cobra el
+alquiler ni gestiona pagos de clientes: el cliente paga la señal y el resto
+directamente a la empresa náutica, y KAEL factura su comisión pactada a cada
+empresa por cada reserva confirmada (comisión mercantil B2B). Esto está descrito
+en la página `/legal` de la propia app — revísalo con un abogado y un gestor
+antes de operar con empresas reales.
 
-## Qué se ha corregido/reconstruido respecto a la versión anterior
+## Stack
 
-- El archivo `KAEL AUT.dc.html` original dependía de un runtime propietario de
-  editor (`support.js`, etiquetas `x-dc`/`sc-if`/`sc-for`) que **no funciona como
-  página web normal** una vez publicada — de ahí los errores. Se ha reescrito todo
-  como HTML/CSS/JS estándar, sin dependencias externas de frameworks, para que
-  funcione en cualquier hosting.
-- Las "imágenes 3D" del hero eran un canvas WebGL abstracto. Se han sustituido por
-  las **fotografías reales** de barcos que ya tenías subidas (no animadas, resolución
-  nativa cuidada para que no se vean pixeladas), tal y como pediste si el 3D
-  fotorrealista no es viable.
-- El formulario de solicitud ahora **funciona de verdad**: valida datos, genera una
-  referencia única, y si el backend está desplegado, envía email a la empresa y al
-  cliente. Si el backend no está desplegado todavía, el sitio sigue siendo usable en
-  "modo demo" (guarda la solicitud en el navegador) para que puedas probarlo ya.
-- **Selector 3D estilo "selección de personaje"** en la home (`js/boat-selector-3d.js`):
-  las embarcaciones giran en un carrusel 3D real (perspectiva + rotación en CSS,
-  sin librería externa) agrupadas por empresa, con arrastre, flechas y navegación
-  por teclado. Usa las fotografías reales de cada barco — no modelos 3D
-  fotorrealistas, que no es algo que se pueda generar de forma fiable sin activos
-  3D con licencia o modelado profesional.
-
-## Expansión multi-destino y cómo añadir una empresa real
-
-KAEL está en expansión más allá de Ibiza y Formentera: Canarias, Cancún,
-Phuket y Dubái (ver `MARKETS` en `js/data.js`). `COMPANIES` y `BOATS` están
-**vacíos a propósito** — no hay ninguna empresa de prueba ni placeholder en el
-sitio. Todas las páginas (home, catálogo, ficha de barco/empresa, asistente)
-gestionan este estado vacío mostrando un mensaje de "muy pronto" por destino,
-en vez de datos ficticios.
-
-Para publicar una empresa en cuanto confirme la colaboración:
-
-1. Añade la empresa en `COMPANIES` (`js/data.js`) con su `marketId` (uno de los
-   ids de `MARKETS`) y su `tier`: `'premium'` para una oferta de lujo (activa un
-   theming oscuro/dorado en su ficha y sus tarjetas — ver sección "Theming por
-   tier" en `css/styles.css`) o `'standard'` para una oferta más accesible
-   (paleta clara por defecto, sin cambios).
-2. Añade sus embarcaciones en `BOATS`, con fotos propias de la empresa (no las
-   fotos de muestra que ya están en `img/boats/`, que no están vinculadas a
-   ninguna empresa real).
-3. Añade su email de notificación en `server/server.js` (objeto `COMPANIES`) y
-   en `server/.env` (`COMPANY_EMAIL_...`), y añade sus URLs a `sitemap.xml`.
-
-`docs/empresas-prospectos-ibiza.md` contiene una investigación real de 10
-empresas náuticas que operan en Ibiza (ubicación, flota, precios públicos,
-contacto) para outreach. **No están publicadas en la web ni tienen ninguna
-relación con KAEL todavía** — hacerlo sin su autorización sería un
-problema legal (derechos de imagen, falsa verificación).
+- **Frontend**: React 19 + React Router + Tailwind CSS + shadcn/ui (Radix) +
+  framer-motion + Lenis (scroll suave) + react-leaflet (mapa de rutas) + axios.
+  Tipografías Fraunces (display), Hanken Grotesk (texto) y JetBrains Mono (cifras).
+- **Backend**: FastAPI (Python) + Motor/PyMongo (MongoDB async) + PyJWT + bcrypt
+  (auth del panel y de los portales de empresa) + reportlab (facturas PDF) +
+  SDK oficial de OpenAI (chat del asistente).
+- **Base de datos**: MongoDB. Colecciones: `solicitudes`, `notas_internas`,
+  `chat_messages`, `rutas`, `portales` (tokens hasheados), `empresa_config`,
+  `users`, `login_attempts`.
 
 ## Estructura
 
 ```
-index.html, barcos.html, barco.html, solicitud.html, solicitud-multiple.html,
-confirmacion.html, asistente.html, empresas.html, empresa.html, admin.html
-css/styles.css        — sistema de diseño (incluye el carrusel 3D)
-js/data.js             — datos de barcos y empresas (edítalo con tu flota real)
-js/boat-selector-3d.js  — selector 3D de la home
-js/*.js                  — lógica de cada página (sin frameworks)
-img/boats/                — fotografías reales
-legal/                      — aviso legal, privacidad, cookies, condiciones, reclamaciones
-docs/empresas-prospectos-ibiza.md — investigación de empresas reales para contactar
-server/                       — backend Node/Express opcional pero recomendado
+frontend/            — SPA React (create-react-app + craco)
+  src/pages/          — Home, Catalog, BoatDetail, Routes, AdminPanel, Portal, Legal
+  src/components/     — LoadingIntro, BoatWheel3D, ChatWidget, MiniCalendar,
+                        RequestForm, CompanyLogo, Header, Footer, Reveal...
+  src/data/           — catalog.js (empresas/barcos DEMO) y routes.js (rutas de respaldo)
+  public/img/          — fotografías de las embarcaciones de ejemplo
+backend/
+  server.py            — toda la API (prefijo /api)
+  seed_routes.json      — rutas náuticas base que se cargan en el primer arranque
+memory/PRD.md            — documento de producto original
+scripts/generar_informe.py — genera un PDF con el estado del proyecto
+design_guidelines.json      — paleta, tipografía y tokens de diseño
+docs/empresas-prospectos-ibiza.md — investigación de empresas reales para outreach
 ```
+
+El catálogo (`frontend/src/data/catalog.js`) es de **EJEMPLO** — ninguna
+empresa ni barco es real todavía. Las rutas en `backend/seed_routes.json` son
+sugerencias editoriales hasta que las empresas confirmen las suyas.
 
 ## Poner en marcha en local
 
-Puedes abrir `index.html` directamente en el navegador para ver el diseño, pero
-para que el formulario envíe emails de verdad necesitas el backend:
+Necesitas Node.js 18+, Python 3.11+ y una instancia de MongoDB (local o
+[Atlas](https://www.mongodb.com/atlas), capa gratuita de sobra para empezar).
 
 ```bash
-cd server
-cp .env.example .env
-# Edita .env: SMTP, ADMIN_USER/ADMIN_PASS y el email de cada empresa náutica
-npm install
-npm start
+# Backend
+cd backend
+cp .env.example .env      # rellena MONGO_URL, JWT_SECRET, ADMIN_EMAIL/PASSWORD, OPENAI_API_KEY
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn server:app --reload --port 8000
+
+# Frontend (otra terminal)
+cd frontend
+cp .env.example .env      # REACT_APP_BACKEND_URL=http://localhost:8000
+yarn install
+yarn start
 ```
 
-Esto sirve la web completa **y** la API en `http://localhost:3000`. El formulario
-detecta automáticamente `/api/solicitudes` en el mismo dominio.
+La web queda en `http://localhost:3000` y la API en `http://localhost:8000/api`.
 
-## Antes de vender: checklist
+### Variables de entorno
 
-1. **Datos reales de tu empresa** en `legal/aviso-legal.html` y `legal/privacidad.html`
-   (busca las marcas `[COMPLETAR]`) — razón social, NIF, dirección, email, teléfono.
-2. **Tu flota real** en `js/data.js`: añade tus empresas colaboradoras verificadas
-   (`marketId`, `tier`) y sus barcos, con precios y fotos propias — ver "Expansión
-   multi-destino y cómo añadir una empresa real" más arriba. Empieza contactando a
-   las empresas de `docs/empresas-prospectos-ibiza.md`.
-3. **Revisión legal**: haz revisar el aviso legal, la política de privacidad, cookies
-   y las condiciones de intermediación con un abogado en Baleares antes de publicar
-   (ver la nota al final de cada documento legal).
-4. **Contrato de colaboración** firmado con cada empresa náutica antes de publicar
-   sus embarcaciones (identidad, CIF, seguros, comisión, cuándo nace la comisión).
-5. **Dominio y hosting**: ver siguiente sección.
-6. **Email**: configura un proveedor SMTP real (Gmail con contraseña de aplicación,
-   o mejor un transaccional como Brevo/Resend/SendGrid — todos tienen plan gratuito).
+**`backend/.env`** (nunca lo subas al repo — ya está en `.gitignore`):
+
+| Variable | Para qué |
+|---|---|
+| `MONGO_URL`, `DB_NAME` | Conexión a MongoDB |
+| `CORS_ORIGINS` | Dominios permitidos a llamar a la API |
+| `OPENAI_API_KEY` | Clave de OpenAI para el chat del asistente (déjala vacía para desactivarlo sin que falle el resto de la app) |
+| `OPENAI_CHAT_MODEL` | Modelo a usar (por defecto `gpt-4o-mini`) |
+| `JWT_SECRET` | Firma de los tokens del panel `/admin` |
+| `ADMIN_EMAIL`, `ADMIN_PASSWORD` | Login del panel interno |
+
+**`frontend/.env`**: `REACT_APP_BACKEND_URL` apuntando a tu backend desplegado.
+
+## ⚠️ Antes de publicar: rota las credenciales de prueba
+
+Este proyecto se generó inicialmente en Emergent (otra plataforma de IA) y su
+`.env` de pruebas traía una `EMERGENT_LLM_KEY`, un `JWT_SECRET` y un
+`ADMIN_PASSWORD` ya usados en una demo pública. Esos archivos **no se han
+subido a este repositorio** (están en `.gitignore`), pero como han pasado por
+varias herramientas, genera credenciales nuevas antes de operar en real:
+
+1. Nuevo `JWT_SECRET` (una cadena aleatoria larga, p. ej. `openssl rand -hex 32`).
+2. Nuevo `ADMIN_PASSWORD` para el panel `/admin`.
+3. Una `OPENAI_API_KEY` propia (el chat usaba la "clave universal" de Emergent,
+   que ya no existe en este proyecto — ver siguiente sección).
+
+## El chat con IA ya no depende de Emergent
+
+El asistente de chat (`backend/server.py`, sección "Chat IA") usaba
+`emergentintegrations`, un paquete privado de la plataforma Emergent que **no
+está disponible fuera de ahí** — por eso `pip install` fallaba al mover el
+proyecto. Se ha sustituido por el SDK oficial de `openai`, manteniendo el mismo
+comportamiento (streaming, detección de quejas). Solo necesitas tu propia
+`OPENAI_API_KEY` en `backend/.env`. Si prefieres otro proveedor (Anthropic,
+etc.), el cambio está aislado en las dos funciones que usan `_get_openai_client()`.
+
+También se ha quitado `@emergentbase/visual-edits` del frontend (herramienta de
+edición visual solo disponible dentro de Emergent; `craco.config.js` ya la
+trataba como opcional).
 
 ## Desplegar en producción
 
-### Opción sencilla — todo en un mismo servicio (recomendado para empezar)
+Frontend y backend son servicios independientes:
 
-El backend (`server/server.js`) ya sirve la web estática, así que un único
-servicio Node.js sirve todo el sitio + el formulario funcional.
+1. **Backend**: [Render](https://render.com) o [Railway](https://railway.app) —
+   Build command `pip install -r backend/requirements.txt`, start command
+   `uvicorn server:app --host 0.0.0.0 --port $PORT` (ejecutado dentro de `backend/`),
+   variables de entorno como en `backend/.env.example`.
+2. **Base de datos**: [MongoDB Atlas](https://www.mongodb.com/atlas) (capa
+   gratuita) — usa esa URL como `MONGO_URL`.
+3. **Frontend**: [Vercel](https://vercel.com) o [Netlify](https://netlify.com) —
+   root `frontend/`, build command `yarn build`, publish directory `frontend/build`,
+   variable `REACT_APP_BACKEND_URL` apuntando a la URL del backend.
+4. Apunta tu dominio propio al servicio del frontend.
 
-1. Crea una cuenta en [Render](https://render.com) o [Railway](https://railway.app).
-2. Nuevo "Web Service" apuntando a este repositorio, con:
-   - Build command: `cd server && npm install`
-   - Start command: `cd server && npm start`
-   - Variables de entorno: las mismas que `server/.env.example`.
-3. Cuando tengas la URL (p. ej. `https://kael-aut.onrender.com`), apunta tu dominio
-   propio (`kaelaut.com`) a ese servicio desde tu registrador de dominios (CNAME).
+## Antes de vender: checklist
 
-### Opción alternativa — frontend y backend en sitios distintos
+1. **Datos reales de tu empresa** en la página `/legal` (razón social, NIF,
+   dirección, email, teléfono).
+2. **Tu flota real**: sustituye `frontend/src/data/catalog.js` por tus empresas
+   colaboradoras verificadas y sus barcos, con precios y fotos propias. Empieza
+   contactando a las empresas de `docs/empresas-prospectos-ibiza.md`.
+3. **Revisión legal**: haz revisar el aviso legal, la política de privacidad,
+   cookies y las condiciones de intermediación/comisión con un abogado y un
+   gestor antes de publicar y de firmar contratos con empresas náuticas.
+4. **Contrato de comisión** firmado con cada empresa (el portal ya tiene un
+   flujo de firma digital con checkbox + timestamp + IP).
+5. **Credenciales**: rota `JWT_SECRET`/`ADMIN_PASSWORD` y usa una `OPENAI_API_KEY`
+   propia (ver sección de arriba).
+6. **Emails automáticos**: la app aún no envía emails al recibir una solicitud
+   o factura; es el próximo paso natural (ver `memory/PRD.md`).
 
-Si prefieres alojar el HTML/CSS/JS en Netlify/Vercel/GitHub Pages (gratis y muy
-rápido) y el backend en Render/Railway por separado:
+## Panel interno y portal de empresa
 
-1. Despliega `server/` en Render/Railway como arriba.
-2. Despliega el resto de la carpeta (todo salvo `server/`) en Netlify/Vercel.
-3. Antes de `</body>` en cada página, añade:
-   ```html
-   <script>window.KAEL_API_BASE = 'https://tu-backend.onrender.com/api';</script>
-   ```
-   (o edita `js/forms.js` y `admin.html`, cambiando `API_BASE`/`base` por la URL fija).
-4. En `server/.env`, pon `ALLOWED_ORIGIN=https://tu-dominio-frontend.com`.
+- `/admin` (usuario/contraseña) — solicitudes, quejas del chat, comisiones por
+  empresa, enlaces de portal, facturas PDF mensuales y export CSV de contabilidad.
+- `/portal/<token>` — acceso privado por empresa (enlace de un solo uso por
+  empresa, generado desde `/admin`): bandeja de reservas, calendario de
+  ocupación, marcar señal pagada y firmar el contrato de comisión.
 
-## Panel interno (backoffice)
-
-`admin.html` (protegido con usuario/contraseña — `ADMIN_USER`/`ADMIN_PASS` en
-`server/.env`) muestra todas las solicitudes recibidas. Cada fila tiene un
-desplegable de estado (pendiente/contactada/confirmada/rechazada/cancelada) y
-un campo de importe con un botón "Guardar" — no hace falta usar la terminal ni
-`curl` para actualizar una solicitud, se hace directamente desde el navegador.
-
-## Próximos pasos sugeridos (fase 2, según el documento base del proyecto)
-
-- Panel propio para que cada empresa náutica gestione sus solicitudes sin depender
-  solo del email.
-- Migrar `leads.json` a una base de datos real (PostgreSQL) cuando crezca el volumen.
-- Pasarela de pago solo si decides cobrar una señal directamente (no es necesario
-  para lanzar: el modelo actual de comisión sobre reservas confirmadas es más simple).
+`memory/PRD.md` recoge el documento de producto original con el histórico de
+funcionalidades añadidas.
