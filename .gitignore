@@ -1,0 +1,13 @@
+node_modules/
+frontend/node_modules/
+frontend/build/
+backend/.venv-run/
+backend/.venv/
+backend/.env
+frontend/.env
+memory/test_credentials.md
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+*.log

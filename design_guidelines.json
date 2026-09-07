@@ -1,0 +1,254 @@
+{
+  "project_name": "KAEL - Platforma de Intermediación de Alquiler de Barcos",
+  "app_type": "marketing_site + catalog hybrid (React SPA)",
+  "language": "Spanish (es)",
+  "theme_strategy": {
+    "default_mode": "Light Editorial Warm Cream with Dynamic VIP Midnight Blue & Gold Tier Switching",
+    "base_palette": {
+      "bg_primary": "#FAF8F3",
+      "bg_secondary": "#F3EFE6",
+      "surface": "#FFFFFF",
+      "surface_border": "rgba(54, 106, 139, 0.12)",
+      "text_primary": "#1C2D37",
+      "text_secondary": "#4B6170",
+      "text_muted": "#7A8F9E",
+      "brand_blue": "#366A8B",
+      "brand_blue_dark": "#234A63",
+      "brand_blue_light": "#EAF2F7",
+      "accent_gold": "#C5A059"
+    },
+    "vip_palette": {
+      "bg_primary": "#0A1128",
+      "bg_secondary": "#0F1A3A",
+      "surface": "#121E42",
+      "surface_border": "rgba(212, 175, 55, 0.35)",
+      "text_primary": "#F7F5F0",
+      "text_secondary": "#C8D3E0",
+      "text_muted": "#8A9BAE",
+      "gold_primary": "#D4AF37",
+      "gold_secondary": "#E5C158",
+      "gold_glow": "rgba(212, 175, 55, 0.25)",
+      "shimmer_gradient": "linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(229,193,88,0.3) 50%, rgba(197,160,89,0.15) 100%)"
+    }
+  },
+  "typography": {
+    "display_serif": {
+      "font_family": "Fraunces, Georgia, serif",
+      "usage": "H1 Hero Headlines, Section Titles, VIP Cards Headings, Featured Boat Names",
+      "weights": ["300", "400", "600", "700"],
+      "font_variation_settings": "'SOFT' 100, 'WONK' 50",
+      "letter_spacing": "tracking-tight (-0.02em)"
+    },
+    "body_sans": {
+      "font_family": "Hanken Grotesk, system-ui, -apple-system, sans-serif",
+      "usage": "Navigation, Body Paragraphs, Specifications, Form Labels, Badges",
+      "weights": ["400", "500", "600", "700"]
+    },
+    "technical_mono": {
+      "font_family": "JetBrains Mono, Courier New, monospace",
+      "usage": "Prices, Technical Specs (Length, Beam, Capacity, Engines), Dates, Badges"
+    },
+    "scale": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight leading-[1.1]",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-serif tracking-tight leading-snug",
+      "h3_card": "text-xl sm:text-2xl font-serif leading-snug",
+      "subtitle": "text-base sm:text-lg text-slate-600 dark:text-slate-300 font-sans leading-relaxed",
+      "body": "text-sm sm:text-base font-sans leading-relaxed",
+      "caption": "text-xs font-mono uppercase tracking-widest text-slate-500"
+    }
+  },
+  "key_features_and_components": {
+    "cinematic_loading_intro": {
+      "description": "Custom Sailboat SVG Floating Intro with dynamic loading speed acceleration",
+      "behavior": "Displays once per session (check sessionStorage). While loading assets/data, sailboat floats gracefully in waves at slow speed (2.5s cycle). When loaded, sailboat accelerates forward (0.6s exit animation with wave wake particles) and dissolves into main page.",
+      "visuals": "Minimalist geometric sailboat logomark in #366A8B with glowing gold water reflection, progress ring, and elegant text 'KAEL • Náutica de Excepción'.",
+      "testid": "loading-intro-screen"
+    },
+    "kinetic_hero_section": {
+      "description": "Editorial Hero section with masked line-by-line headline reveal, filter quick search, and interactive boat background carousel.",
+      "headline_es": "Descubre la Libertad de Navegar las Mejoress Calas del Mediterráneo y el Caribe",
+      "components": ["MaskedTextAnimation", "QuickSearchFilterBox", "HeroBackgroundCarousel", "TrustBadgesMarquee"],
+      "testid": "hero-section"
+    },
+    "3d_boat_carousel_la_rueda": {
+      "description": "Rebuilt and enhanced 3D rotating boat carousel ('La Rueda de Embarcaciones') with perspective rotation, drag controls, company grouping, and VIP tier glow.",
+      "tech_stack": "Framer Motion 3D / CSS 3D Transforms with perspective, touch drag, and arrow navigation.",
+      "behavior": "3D cylindrical ring showing boats grouped by verified nautical company. Clicking a boat rotates it to center stage with depth-of-field scaling and detailed floating badge.",
+      "vip_enhancement": "When a VIP/Premium company boat is centered, the wheel backdrop seamlessly shifts to Midnight Blue & Gold aura with glowing particle trails.",
+      "testid": "3d-boat-carousel-la-rueda"
+    },
+    "vip_tier_switching_system": {
+      "description": "Dynamic visual switch when viewing or filtering Premium Company Boats vs Standard Company Boats.",
+      "vip_style_rules": "Card background transforms to Midnight Blue (#0A1128), text turns crisp off-white (#F7F5F0), borders shimmer in Metallic Gold (#D4AF37), price badge gets a gold gradient pill, and a 'VIP Partner' crowned badge is rendered.",
+      "animation": "Glow shimmer effect on hover with subtle gold shadow blur (`shadow-[0_10px_30px_rgba(212,175,55,0.18)]`).",
+      "toggle_selector": "Allow user to filter 'Solo Empresas VIP' or toggle VIP view mode on catalog and carousel.",
+      "testid": "vip-tier-badge"
+    },
+    "catalog_and_filter_system": {
+      "description": "Comprehensive Boat Catalog with real-time filtering, layout view switches (Grid vs Map/3D Wheel), and dynamic VIP sorting.",
+      "filters": [
+        "Destino (Ibiza, Formentera, Cancún, Dubai, Mallorca)",
+        "Tipo de Barco (Yate, Catamarán, Velero, Lancha, Superyate)",
+        "Eslora / Capacidad de Pasajeros",
+        "Empresa Verificada (Con/Sin filtro VIP)",
+        "Rango de Precio por Día (€)",
+        "Con / Sin Patrón"
+      ],
+      "testid": "catalog-filter-bar"
+    },
+    "boat_detail_page_and_modal": {
+      "description": "Full-featured Boat Detail view showcasing high-res image gallery, technical specs, company verifications, included services, and Availability Request Form.",
+      "features": ["Image Gallery Carousel", "Specs Grid", "Interactive Route Suggestions", "Empresa Náutica Partner Card", "Solicitud de Disponibilidad Form (no direct payment)"],
+      "testid": "boat-detail-view"
+    },
+    "availability_request_form": {
+      "description": "No-online-payment inquiry form sending requests directly to backend API (`/api/requests` or `/api/disponibilidad`).",
+      "fields": ["Nombre y Apellidos", "Correo Electrónico", "Teléfono / WhatsApp", "Fecha de Inicio y Fin", "Número de Pasajeros", "Comentarios / Peticiones Especiales"],
+      "api_endpoint": "POST /api/requests",
+      "toast_notification": "Sonner toast notification on success with confirmation code",
+      "testid": "availability-request-form"
+    }
+  },
+  "layout_and_spacing": {
+    "container_padding": "px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto",
+    "section_spacing": "py-16 sm:py-24 lg:py-32",
+    "bento_grid_mode": "MODE A: TETRIS GRID for Marketing showcases and VIP highlights. Asymmetric 12-column grid with gap-8 to gap-12.",
+    "card_padding": "p-6 sm:p-8",
+    "border_radius": {
+      "standard": "rounded-2xl",
+      "button": "rounded-full",
+      "badge": "rounded-full",
+      "modal": "rounded-3xl"
+    }
+  },
+  "image_urls": {
+    "hero_backgrounds": [
+      {
+        "url": "https://images.unsplash.com/photo-1623419988909-c60092c8bd6a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHxfHxsdXh1cnklMjB5YWNodCUyMGNhdGFtYXJhbiUyMHNhaWxib2F0JTIwaWJpemElMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwwfHx8fDE3ODg3OTIwNDN8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Velero de lujo en cala turquesa de Ibiza",
+        "category": "hero_slider"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1759135695910-0a6aaaab6b14?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjB5YWNodCUyMGFlcmlhbCUyMHZpZXclMjBvY2VhbnxlbnwwfHx8fDE3ODg3OTIwNTJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Vista aérea de Yate de Lujo en mar calmo",
+        "category": "hero_slider"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1787945834401-85de815a5bcd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHw0fHxsdXh1cnklMjB5YWNodCUyMGFlcmlhbCUyMHZpZXclMjBvY2VhbnxlbnwwfHx8fDE3ODg3OTIwNTJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Superyate velero con tres mastiles en aguas cristalinas",
+        "category": "hero_slider"
+      }
+    ],
+    "boats": [
+      {
+        "id": "boat-1",
+        "name": "Pershing 7X - 'Eclipse'",
+        "company": "Ibiza Marine VIP Charter",
+        "is_vip": true,
+        "type": "Yate a Motor",
+        "price_per_day": 3400,
+        "length": "21m",
+        "capacity": 12,
+        "location": "Ibiza, España",
+        "url": "https://images.unsplash.com/photo-1672939113767-eb78926d5a08?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjB5YWNodCUyMGFlcmlhbCUyMHZpZXclMjBvY2VhbnxlbnwwfHx8fDE3ODg3OTIwNTJ8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "id": "boat-2",
+        "name": "Lagoon 52 - 'Aura Sky'",
+        "company": "Cancún Catamarans & Co.",
+        "is_vip": true,
+        "type": "Catamarán",
+        "price_per_day": 2100,
+        "length": "15.8m",
+        "capacity": 18,
+        "location": "Cancún, México",
+        "url": "https://images.unsplash.com/photo-1593860718760-6d81748637be?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjB5YWNodCUyMGNhdGFtYXJhbiUyMHNhaWxib2F0JTIwaWJpemElMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwwfHx8fDE3ODg3OTIwNDN8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "id": "boat-3",
+        "name": "Riva 56' Rivale - 'Velocita'",
+        "company": "Dubai Yachts Select",
+        "is_vip": true,
+        "type": "Lancha de Lujo",
+        "price_per_day": 2800,
+        "length": "17.2m",
+        "capacity": 10,
+        "location": "Dubai Marina, EAU",
+        "url": "https://images.pexels.com/photos/10955648/pexels-photo-10955648.jpeg"
+      },
+      {
+        "id": "boat-4",
+        "name": "Bavaria C45 - 'Maresía'",
+        "company": "Nautica Balear",
+        "is_vip": false,
+        "type": "Velero Clásico",
+        "price_per_day": 1250,
+        "length": "13.9m",
+        "capacity": 8,
+        "location": "Mallorca, España",
+        "url": "https://images.unsplash.com/photo-1687977424018-a8f4394bb604"
+      },
+      {
+        "id": "boat-5",
+        "name": "Sunseeker Predator 68",
+        "company": "Ibiza Marine VIP Charter",
+        "is_vip": true,
+        "type": "Yate a Motor",
+        "price_per_day": 4200,
+        "length": "22.5m",
+        "capacity": 12,
+        "location": "Formentera, España",
+        "url": "https://images.unsplash.com/photo-1672939113905-b02ef5db7203?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjB5YWNodCUyMGFlcmlhbCUyMHZpZXclMjBvY2VhbnxlbnwwfHx8fDE3ODg3OTIwNTJ8MA&ixlib=rb-4.1.0&q=85"
+      }
+    ],
+    "destinations": [
+      {
+        "name": "Ibiza & Formentera",
+        "boats_count": 48,
+        "image": "https://images.unsplash.com/photo-1764067281581-880adbc64319?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjB5YWNodCUyMGNhdGFtYXJhbiUyMHNhaWxib2F0JTIwaWJpemElMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwwfHx8fDE3ODg3OTIwNDN8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "name": "Cancún & Isla Mujeres",
+        "boats_count": 32,
+        "image": "https://images.pexels.com/photos/10955646/pexels-photo-10955646.jpeg"
+      }
+    ]
+  },
+  "testing_and_accessibility": {
+    "data_testid_rules": "All interactive elements (buttons, links, search inputs, filters, tabs, modal triggers, form controls) and key metrics MUST include explicit data-testid attributes in kebab-case.",
+    "required_testids": [
+      "loading-intro-screen",
+      "nav-brand-logo",
+      "nav-link-inicio",
+      "nav-link-barcos",
+      "nav-link-empresas",
+      "nav-link-destinos",
+      "nav-cta-solicitar",
+      "hero-title",
+      "hero-search-input-destination",
+      "hero-search-select-type",
+      "hero-search-submit-btn",
+      "wheel-3d-container",
+      "wheel-boat-card-active",
+      "wheel-prev-btn",
+      "wheel-next-btn",
+      "vip-filter-toggle",
+      "catalog-grid",
+      "boat-card-pershing-7x",
+      "boat-card-request-btn",
+      "availability-modal",
+      "request-form-name-input",
+      "request-form-email-input",
+      "request-form-phone-input",
+      "request-form-submit-btn"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Verify and import Google Fonts ('Fraunces' and 'Hanken Grotesk') in public/index.html or src/index.css.",
+    "Create the LoadingIntro component in src/components/LoadingIntro.jsx with sessionStorage persistence and smooth speed acceleration when resources are ready.",
+    "Rebuild 'La Rueda' (3D Carousel) in src/components/BoatWheel3D.jsx with 3D perspective rotation, company badges, drag support, and VIP background aura shift.",
+    "Implement VIP styling switch logic (Midnight Blue #0A1128 + Gold #D4AF37) for premium company cards and sections.",
+    "Ensure all API form submissions for availability requests call POST /api/requests and trigger Sonner toast notifications.",
+    "Strictly follow JavaScript React conventions (.js and .jsx files, direct Tailwind class names, Sonner toast notifications)."
+  ]
+}
